@@ -1,0 +1,718 @@
+{
+  "schema_version": 1,
+  "prepared_date": "2026-11-14",
+  "provider": "ambientCG",
+  "license": "CC0-1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "provider_license_url": "https://docs.ambientcg.com/license/",
+  "provider_license_sha256": "86d690c1384e979c84fcb607c66dcd4802ff75f917a2fbef1658add632d1b11b",
+  "rights_verification": "Global ambientCG license page and each selected asset page explicitly declare CC0; asset pages and archive licenses retained where present.",
+  "attribution_required": false,
+  "source_upload": false,
+  "preparation_command": "python -I scripts/prepare_peak_assets.py prepare --workspace <absolute-temporary-workspace>",
+  "script_sha256": "6490eeff64fcd4088cd53bdbd0380e2a5c774e53794fd79b4d2d202a81977fbb",
+  "tool_versions": {
+    "python": "3.13.14",
+    "pillow": "12.3.0",
+    "numpy": "2.5.0"
+  },
+  "source_api": {
+    "url": "https://ambientcg.com/api/v2/full_json?id=Rock059,Grass004,Ground048,Bark014,Plaster001,Bricks097,RoofingTiles013B&include=tagData,displayData,dimensionsData,downloadData,previewData,mapData",
+    "effective_url": "https://ambientcg.com/api/v2/full_json?id=Rock059,Grass004,Ground048,Bark014,Plaster001,Bricks097,RoofingTiles013B&include=tagData,displayData,dimensionsData,downloadData,previewData,mapData",
+    "bytes": 90010,
+    "sha256": "297151ddd8c272b1e5b7a47075f71218ab0e0f9d73d3e9afe7df657fad11aba4"
+  },
+  "budget_bytes": 15000000,
+  "runtime_semantics": {
+    "albedo": {
+      "color_space": "sRGB",
+      "channels": "RGB",
+      "encoding": "lossless PNG",
+      "usage": "base color / map; no AO or lighting added"
+    },
+    "normal": {
+      "color_space": "linear / NoColorSpace",
+      "channels": "RGB = signed tangent XYZ mapped from [-1,1] to [0,1]",
+      "convention": "OpenGL (+Y / NormalGL), not DirectX",
+      "encoding": "lossless PNG",
+      "usage": "tangent-space normal map; XY scaled then vectors renormalized"
+    },
+    "roughness": {
+      "color_space": "linear / NoColorSpace",
+      "channels": "R (8-bit grayscale PNG; replicate into RGB when packing; Three.js roughnessMap samples G)",
+      "range": "0=smooth, 1=rough (not glossiness)",
+      "encoding": "lossless PNG",
+      "usage": "roughness map; RGB replication also supports engines that sample G"
+    }
+  },
+  "integration": {
+    "url_root": "/assets/3d/environment/peak/surfaces/",
+    "wrapping": "RepeatWrapping U and V; retain original UV orientation",
+    "uv_orientation": "Original source orientation, no flip/rotate/crop; bark grain follows source V; rectangular Bricks097 source repeats twice in V before square resampling",
+    "normal_scale": [
+      1,
+      1
+    ],
+    "metalness": 0,
+    "roughness_multiplier": 1,
+    "mipmaps": "Generate at runtime; all sizes are powers of two",
+    "world_unit": "meters",
+    "displacement": "Not included; texture normals do not alter silhouette or collision",
+    "next_public_doc": "node_modules/next/dist/docs/01-app/03-api-reference/03-file-conventions/public-folder.md"
+  },
+  "materials": [
+    {
+      "name": "rock",
+      "asset_id": "Rock059",
+      "source_page_url": "https://ambientcg.com/a/Rock059",
+      "license": "CC0-1.0",
+      "source_archive": {
+        "url": "https://ambientcg.com/get?file=Rock059_1K-PNG.zip",
+        "effective_url": "https://acg-download.struffelproductions.com/file/ambientCG-Web/download/Rock059_Xicdshkw/Rock059_1K-PNG.zip",
+        "bytes": 16853373,
+        "sha256": "82e37975999f6e818747b952c9b9dc65393541b885da989febaed491e4b20b5e"
+      },
+      "api_reported_archive_bytes": 16853373,
+      "archive_attribute": "1K-PNG",
+      "source_creation_method": "PBRProcedural",
+      "provider_dimensions_cm": [
+        0,
+        0
+      ],
+      "tile_size_m": [
+        2.0,
+        2.0
+      ],
+      "tile_size_basis": "artist recommendation; provider reports unknown size (0)",
+      "uv_repeats_per_meter": [
+        0.5,
+        0.5
+      ],
+      "grade": {
+        "saturation": 0.9,
+        "contrast_about_srgb_0_5": 1.05,
+        "rgb_multiplier": [
+          1.0,
+          1.035,
+          0.96
+        ],
+        "normal_xy_strength_baked": 0.85,
+        "style": "Restrained warm/green palette, reduced photographic saturation, retained high-frequency material detail"
+      },
+      "maps": {
+        "albedo": {
+          "file": "rock/albedo.png",
+          "url": "/assets/3d/environment/peak/surfaces/rock/albedo.png",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 391053,
+          "sha256": "69a4e5a47c24000074a104c3501a1f51ccf0c8ba97959fce0e0eaba406dea7d6",
+          "source_member": "Rock059_1K-PNG_Color.png",
+          "source_member_sha256": "c7f3254b231f033a21a81e57a00a4a1df32891411a959aa746d970f068f51617",
+          "source_dimensions": [
+            1024,
+            1024
+          ]
+        },
+        "normal": {
+          "file": "rock/normal.png",
+          "url": "/assets/3d/environment/peak/surfaces/rock/normal.png",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 512056,
+          "sha256": "015fac94888a260be5ecd9436b582922816077b634a055c2a64fea1feb9ad29c",
+          "source_member": "Rock059_1K-PNG_NormalGL.png",
+          "source_member_sha256": "2de73fb310a92171e5ea59229c30082c696428f398963719931648d9395ba5be",
+          "source_dimensions": [
+            1024,
+            1024
+          ]
+        },
+        "roughness": {
+          "file": "rock/roughness.png",
+          "url": "/assets/3d/environment/peak/surfaces/rock/roughness.png",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 147948,
+          "sha256": "cb61f49f9bd0fb46267eecf3adda44b80987374c05a3c14d75c955a332289e28",
+          "source_member": "Rock059_1K-PNG_Roughness.png",
+          "source_member_sha256": "800ac3e63f0d0a92908f07780fa43d4b40824c67a01e0580fc1c20b27ed8b242",
+          "source_dimensions": [
+            1024,
+            1024
+          ]
+        }
+      },
+      "source_tile_repeat_uv": [
+        1,
+        1
+      ]
+    },
+    {
+      "name": "grass",
+      "asset_id": "Grass004",
+      "source_page_url": "https://ambientcg.com/a/Grass004",
+      "license": "CC0-1.0",
+      "source_archive": {
+        "url": "https://ambientcg.com/get?file=Grass004_1K-PNG.zip",
+        "effective_url": "https://acg-download.struffelproductions.com/file/ambientCG-Web/download/Grass004_8f7ZrdgN/Grass004_1K-PNG.zip",
+        "bytes": 19597533,
+        "sha256": "9bdb8a28536f437e910824096dd8a3d8276d5186a27ad067dea4e2e762a6981b"
+      },
+      "api_reported_archive_bytes": 19597533,
+      "archive_attribute": "1K-PNG",
+      "source_creation_method": "PBRProcedural",
+      "provider_dimensions_cm": [
+        140,
+        140
+      ],
+      "tile_size_m": [
+        1.4,
+        1.4
+      ],
+      "tile_size_basis": "provider measured dimensions",
+      "uv_repeats_per_meter": [
+        0.714286,
+        0.714286
+      ],
+      "grade": {
+        "saturation": 0.9,
+        "contrast_about_srgb_0_5": 1.04,
+        "rgb_multiplier": [
+          0.96,
+          1.035,
+          0.94
+        ],
+        "normal_xy_strength_baked": 0.72,
+        "style": "Restrained warm/green palette, reduced photographic saturation, retained high-frequency material detail"
+      },
+      "maps": {
+        "albedo": {
+          "file": "grass/albedo.png",
+          "url": "/assets/3d/environment/peak/surfaces/grass/albedo.png",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 595157,
+          "sha256": "245453a30ced4d233ef22d7db5cf52397d8ff067c83410f41811e717374c864f",
+          "source_member": "Grass004_1K-PNG_Color.png",
+          "source_member_sha256": "1c504b956e5550fedd8822e7e2135fe45f513bc1212f72ed67885de1002fabb6",
+          "source_dimensions": [
+            1024,
+            1024
+          ]
+        },
+        "normal": {
+          "file": "grass/normal.png",
+          "url": "/assets/3d/environment/peak/surfaces/grass/normal.png",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 587449,
+          "sha256": "2caa86a18809cf67984f3dbd3a30f31156b945bbb4ca054f199fdfabd9ccfc9d",
+          "source_member": "Grass004_1K-PNG_NormalGL.png",
+          "source_member_sha256": "a6fce3c4f2c5d486b5c993bf47b47ce9d4c1dbb04ecef424ad2c0b703715c3c6",
+          "source_dimensions": [
+            1024,
+            1024
+          ]
+        },
+        "roughness": {
+          "file": "grass/roughness.png",
+          "url": "/assets/3d/environment/peak/surfaces/grass/roughness.png",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 198866,
+          "sha256": "200bce928839e437378d3ef222602c651dadf7b6d19fb747512a28cf1d8ce9b7",
+          "source_member": "Grass004_1K-PNG_Roughness.png",
+          "source_member_sha256": "c3bac30c64d246019e80dd6448544ac381706d43eb583e5ac875cb4f6eece6d8",
+          "source_dimensions": [
+            1024,
+            1024
+          ]
+        }
+      },
+      "source_tile_repeat_uv": [
+        1,
+        1
+      ]
+    },
+    {
+      "name": "soil",
+      "asset_id": "Ground048",
+      "source_page_url": "https://ambientcg.com/a/Ground048",
+      "license": "CC0-1.0",
+      "source_archive": {
+        "url": "https://ambientcg.com/get?file=Ground048_1K-PNG.zip",
+        "effective_url": "https://acg-download.struffelproductions.com/file/ambientCG-Web/download/Ground048_JGyYoD4h/Ground048_1K-PNG.zip",
+        "bytes": 19519933,
+        "sha256": "81e18d5227b5f985be71aff7e46cced7cf2437cef6952bcea83d640f09ee256e"
+      },
+      "api_reported_archive_bytes": 19519933,
+      "archive_attribute": "1K-PNG",
+      "source_creation_method": "PBRPhotogrammetry",
+      "provider_dimensions_cm": [
+        140,
+        140
+      ],
+      "tile_size_m": [
+        1.4,
+        1.4
+      ],
+      "tile_size_basis": "provider measured dimensions",
+      "uv_repeats_per_meter": [
+        0.714286,
+        0.714286
+      ],
+      "grade": {
+        "saturation": 0.84,
+        "contrast_about_srgb_0_5": 1.04,
+        "rgb_multiplier": [
+          1.035,
+          1.0,
+          0.96
+        ],
+        "normal_xy_strength_baked": 0.82,
+        "style": "Restrained warm/green palette, reduced photographic saturation, retained high-frequency material detail"
+      },
+      "maps": {
+        "albedo": {
+          "file": "soil/albedo.png",
+          "url": "/assets/3d/environment/peak/surfaces/soil/albedo.png",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 613205,
+          "sha256": "81b1430b0ee3e6ff884e2e39b3866f138741dc8982559aef0fa9e96f5a866d8a",
+          "source_member": "Ground048_1K-PNG_Color.png",
+          "source_member_sha256": "6e24580b495fbb006bfaeb9261cf3ef093ff20147a984cc1fedea328b33406ec",
+          "source_dimensions": [
+            1024,
+            1024
+          ]
+        },
+        "normal": {
+          "file": "soil/normal.png",
+          "url": "/assets/3d/environment/peak/surfaces/soil/normal.png",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 571069,
+          "sha256": "b7cefa599072fb18073a3d71bf46a467fc9cd631b893e2becd9e2113dd4cad7b",
+          "source_member": "Ground048_1K-PNG_NormalGL.png",
+          "source_member_sha256": "1eee1b97886083e6cb5c22aa7b10c2295260efbe0545024432ec4cb2f1cea274",
+          "source_dimensions": [
+            1024,
+            1024
+          ]
+        },
+        "roughness": {
+          "file": "soil/roughness.png",
+          "url": "/assets/3d/environment/peak/surfaces/soil/roughness.png",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 162156,
+          "sha256": "cad4a586f540bdd8a608491823211f8bd3b4bc2f0e7199af3d909b0b9908d5e3",
+          "source_member": "Ground048_1K-PNG_Roughness.png",
+          "source_member_sha256": "3525f5ba02b709e65e5236201b8ac8d4a9a9221165764762fe08857bb08653d3",
+          "source_dimensions": [
+            1024,
+            1024
+          ]
+        }
+      },
+      "source_tile_repeat_uv": [
+        1,
+        1
+      ]
+    },
+    {
+      "name": "bark",
+      "asset_id": "Bark014",
+      "source_page_url": "https://ambientcg.com/a/Bark014",
+      "license": "CC0-1.0",
+      "source_archive": {
+        "url": "https://ambientcg.com/get?file=Bark014_1K-PNG.zip",
+        "effective_url": "https://acg-download.struffelproductions.com/file/ambientCG-Web/download/Bark014_EGP4wVso/Bark014_1K-PNG.zip",
+        "bytes": 17756190,
+        "sha256": "57b041e2b2494d7a044405317716db21accc9c876e0dfbc1480a6f0554a564ed"
+      },
+      "api_reported_archive_bytes": 17756190,
+      "archive_attribute": "1K-PNG",
+      "source_creation_method": "PBRPhotogrammetry",
+      "provider_dimensions_cm": [
+        120,
+        120
+      ],
+      "tile_size_m": [
+        1.2,
+        1.2
+      ],
+      "tile_size_basis": "provider measured dimensions",
+      "uv_repeats_per_meter": [
+        0.833333,
+        0.833333
+      ],
+      "grade": {
+        "saturation": 0.82,
+        "contrast_about_srgb_0_5": 1.06,
+        "rgb_multiplier": [
+          1.035,
+          1.0,
+          0.965
+        ],
+        "normal_xy_strength_baked": 0.9,
+        "style": "Restrained warm/green palette, reduced photographic saturation, retained high-frequency material detail"
+      },
+      "maps": {
+        "albedo": {
+          "file": "bark/albedo.png",
+          "url": "/assets/3d/environment/peak/surfaces/bark/albedo.png",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 554883,
+          "sha256": "a5f9ce0da52d28b0d369a0f7e3305c249fcdfe45f037ff16bb776657a59f9975",
+          "source_member": "Bark014_1K-PNG_Color.png",
+          "source_member_sha256": "6a4bdc1b737cb5886c64495b3c9b7cd2a1ae568550c87594537319edc66819c6",
+          "source_dimensions": [
+            1024,
+            1024
+          ]
+        },
+        "normal": {
+          "file": "bark/normal.png",
+          "url": "/assets/3d/environment/peak/surfaces/bark/normal.png",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 428980,
+          "sha256": "d0703c51c73f05ca9f80717b4b85dd9c71f55828bd6e81c585263a79cc9a74bf",
+          "source_member": "Bark014_1K-PNG_NormalGL.png",
+          "source_member_sha256": "efc1cc84fbbe018651a8b57147b7078a1e316cbeebf42ba6572ca7786a4771f9",
+          "source_dimensions": [
+            1024,
+            1024
+          ]
+        },
+        "roughness": {
+          "file": "bark/roughness.png",
+          "url": "/assets/3d/environment/peak/surfaces/bark/roughness.png",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 190650,
+          "sha256": "8af1914e140f8e4185bdd8d006127675494725dee308e8e36cddb637dfddc1d0",
+          "source_member": "Bark014_1K-PNG_Roughness.png",
+          "source_member_sha256": "0675f21938dfca7db5632745e6ae42b3d38bd518ecff7d16e86c42f853bf90f1",
+          "source_dimensions": [
+            1024,
+            1024
+          ]
+        }
+      },
+      "source_tile_repeat_uv": [
+        1,
+        1
+      ]
+    },
+    {
+      "name": "plaster",
+      "asset_id": "Plaster001",
+      "source_page_url": "https://ambientcg.com/a/Plaster001",
+      "license": "CC0-1.0",
+      "source_archive": {
+        "url": "https://ambientcg.com/get?file=Plaster001_1K-PNG.zip",
+        "effective_url": "https://acg-download.struffelproductions.com/file/ambientCG-Web/download/Plaster001_SLyYfa9J/Plaster001_1K-PNG.zip",
+        "bytes": 16614092,
+        "sha256": "080f62f6a8b052e4963dfbdaed8b6da86c002d5b1aeea7f82dc27a9a11400aba"
+      },
+      "api_reported_archive_bytes": 16614092,
+      "archive_attribute": "1K-PNG",
+      "source_creation_method": "PBRProcedural",
+      "provider_dimensions_cm": [
+        0,
+        0
+      ],
+      "tile_size_m": [
+        2.0,
+        2.0
+      ],
+      "tile_size_basis": "artist recommendation; provider reports unknown size (0)",
+      "uv_repeats_per_meter": [
+        0.5,
+        0.5
+      ],
+      "grade": {
+        "saturation": 0.65,
+        "contrast_about_srgb_0_5": 0.96,
+        "rgb_multiplier": [
+          1.04,
+          1.015,
+          0.96
+        ],
+        "normal_xy_strength_baked": 0.55,
+        "style": "Restrained warm/green palette, reduced photographic saturation, retained high-frequency material detail"
+      },
+      "maps": {
+        "albedo": {
+          "file": "plaster/albedo.png",
+          "url": "/assets/3d/environment/peak/surfaces/plaster/albedo.png",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 302909,
+          "sha256": "6896f7d330cebc00ca47c01eb2fb9e1819963ac5dcb00d4e2764e5f9d720cebb",
+          "source_member": "Plaster001_1K-PNG_Color.png",
+          "source_member_sha256": "ecf4f5e9a877f942f67292cb43ebdc960a321aea97baf28ab41a2f6d61585612",
+          "source_dimensions": [
+            1024,
+            1024
+          ]
+        },
+        "normal": {
+          "file": "plaster/normal.png",
+          "url": "/assets/3d/environment/peak/surfaces/plaster/normal.png",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 422599,
+          "sha256": "8b37a54404307f72eba9a3f90f230446fd3fcf393ca9b8dad9fd8910cd999dfd",
+          "source_member": "Plaster001_1K-PNG_NormalGL.png",
+          "source_member_sha256": "e48b8f1744819de3acd6e9696da7c71d83c62a3e721050f4112bdfa88eae3ab8",
+          "source_dimensions": [
+            1024,
+            1024
+          ]
+        },
+        "roughness": {
+          "file": "plaster/roughness.png",
+          "url": "/assets/3d/environment/peak/surfaces/plaster/roughness.png",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 104335,
+          "sha256": "bda3a0ef666a91a663af88d5293df6a7ed66a0bfa3981fa74951b4ba5e37fe61",
+          "source_member": "Plaster001_1K-PNG_Roughness.png",
+          "source_member_sha256": "ade29ec97652165aa49ba24cd2f90cb27750c91d498298ebcd6e0ebad366c665",
+          "source_dimensions": [
+            1024,
+            1024
+          ]
+        }
+      },
+      "source_tile_repeat_uv": [
+        1,
+        1
+      ]
+    },
+    {
+      "name": "brick",
+      "asset_id": "Bricks097",
+      "source_page_url": "https://ambientcg.com/a/Bricks097",
+      "license": "CC0-1.0",
+      "source_archive": {
+        "url": "https://ambientcg.com/get?file=Bricks097_1K-PNG.zip",
+        "effective_url": "https://acg-download.struffelproductions.com/file/ambientCG-Web/download/Bricks097_Me9gjfCa/Bricks097_1K-PNG.zip",
+        "bytes": 9529516,
+        "sha256": "b90e8180f59be0c03ccc958073d400845a75d45fada05f95fc10618a01b0760a"
+      },
+      "api_reported_archive_bytes": 9529516,
+      "archive_attribute": "1K-PNG",
+      "source_creation_method": "PBRPhotogrammetry",
+      "provider_dimensions_cm": [
+        0,
+        0
+      ],
+      "tile_size_m": [
+        2.4,
+        2.4
+      ],
+      "tile_size_basis": "artist recommendation; provider reports unknown size (0)",
+      "uv_repeats_per_meter": [
+        0.416667,
+        0.416667
+      ],
+      "grade": {
+        "saturation": 0.82,
+        "contrast_about_srgb_0_5": 1.06,
+        "rgb_multiplier": [
+          1.035,
+          1.0,
+          0.955
+        ],
+        "normal_xy_strength_baked": 0.9,
+        "style": "Restrained warm/green palette, reduced photographic saturation, retained high-frequency material detail"
+      },
+      "maps": {
+        "albedo": {
+          "file": "brick/albedo.png",
+          "url": "/assets/3d/environment/peak/surfaces/brick/albedo.png",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 540862,
+          "sha256": "94608d84cf9107ece35a198d2d529d8aaefee87c73ad600213c7955d5986212a",
+          "source_member": "Bricks097_1K-PNG_Color.png",
+          "source_member_sha256": "32b55e841088c5705fe632210106e5ab8e1ff42c88844b08d10dedc662b5d49d",
+          "source_dimensions": [
+            1024,
+            512
+          ]
+        },
+        "normal": {
+          "file": "brick/normal.png",
+          "url": "/assets/3d/environment/peak/surfaces/brick/normal.png",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 427225,
+          "sha256": "e4dbf149fc6139518120d8c4944155bcf9ce9dcc13d59796759fd4b08df7b8f4",
+          "source_member": "Bricks097_1K-PNG_NormalGL.png",
+          "source_member_sha256": "1d26a16230695e733a92c82119cc9f759e74976664a6d78ab8f13ed7f6da545c",
+          "source_dimensions": [
+            1024,
+            512
+          ]
+        },
+        "roughness": {
+          "file": "brick/roughness.png",
+          "url": "/assets/3d/environment/peak/surfaces/brick/roughness.png",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 180586,
+          "sha256": "73ba52f4b8355fd14b898e2b329cb8552e81459e80c18de6fba1ba8f56985764",
+          "source_member": "Bricks097_1K-PNG_Roughness.png",
+          "source_member_sha256": "2ebd2f9563a3f8d65fd7c740b6254c497063e7bec362b0b091f7bd730b6cf0f0",
+          "source_dimensions": [
+            1024,
+            512
+          ]
+        }
+      },
+      "source_tile_repeat_uv": [
+        1,
+        2
+      ]
+    },
+    {
+      "name": "roof",
+      "asset_id": "RoofingTiles013B",
+      "source_page_url": "https://ambientcg.com/a/RoofingTiles013B",
+      "license": "CC0-1.0",
+      "source_archive": {
+        "url": "https://ambientcg.com/get?file=RoofingTiles013B_1K-PNG.zip",
+        "effective_url": "https://acg-download.struffelproductions.com/file/ambientCG-Web/download/RoofingTiles013B_4M1ALT6c/RoofingTiles013B_1K-PNG.zip",
+        "bytes": 14706194,
+        "sha256": "ae6f85b76381900af52d1c9130c43da47ca77d3748a00bbb7885887512ad30ae"
+      },
+      "api_reported_archive_bytes": 14706194,
+      "archive_attribute": "1K-PNG",
+      "source_creation_method": "PBRProcedural",
+      "provider_dimensions_cm": [
+        290,
+        290
+      ],
+      "tile_size_m": [
+        2.9,
+        2.9
+      ],
+      "tile_size_basis": "provider measured dimensions",
+      "uv_repeats_per_meter": [
+        0.344828,
+        0.344828
+      ],
+      "grade": {
+        "saturation": 0.84,
+        "contrast_about_srgb_0_5": 1.04,
+        "rgb_multiplier": [
+          1.02,
+          1.0,
+          0.97
+        ],
+        "normal_xy_strength_baked": 0.88,
+        "style": "Restrained warm/green palette, reduced photographic saturation, retained high-frequency material detail"
+      },
+      "maps": {
+        "albedo": {
+          "file": "roof/albedo.png",
+          "url": "/assets/3d/environment/peak/surfaces/roof/albedo.png",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 319679,
+          "sha256": "5b3b20c8787bf414491322696dbce65c2677d5fe2f634d96a59702c2f49cd33b",
+          "source_member": "RoofingTiles013B_1K-PNG_Color.png",
+          "source_member_sha256": "1ddddca10948f9a874e73ec24b6adaa4b09b54c2f1c04bb1b4e464a7ea6428d9",
+          "source_dimensions": [
+            1024,
+            1024
+          ]
+        },
+        "normal": {
+          "file": "roof/normal.png",
+          "url": "/assets/3d/environment/peak/surfaces/roof/normal.png",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 305699,
+          "sha256": "9c28559855aa06cda39ee14e2db68c56c809a5f51204d9679238c047570dbcdb",
+          "source_member": "RoofingTiles013B_1K-PNG_NormalGL.png",
+          "source_member_sha256": "301960b6fe3ee13886ff1df2703e1965a98bdd830b5a1d337212a98c97768d4f",
+          "source_dimensions": [
+            1024,
+            1024
+          ]
+        },
+        "roughness": {
+          "file": "roof/roughness.png",
+          "url": "/assets/3d/environment/peak/surfaces/roof/roughness.png",
+          "dimensions": [
+            512,
+            512
+          ],
+          "bytes": 156641,
+          "sha256": "c45932017577a2e818cc8277292f57704f040d427d16b44f7cfc08fe34d8d100",
+          "source_member": "RoofingTiles013B_1K-PNG_Roughness.png",
+          "source_member_sha256": "839fb34d1f2d98e0404ca26e0191823d95fe072b802f10fa18e47c67bce4b24a",
+          "source_dimensions": [
+            1024,
+            1024
+          ]
+        }
+      },
+      "source_tile_repeat_uv": [
+        1,
+        1
+      ]
+    }
+  ],
+  "texture_bytes": 7714007,
+  "total_files": 37
+}

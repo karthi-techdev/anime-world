@@ -1,0 +1,50 @@
+Peak foliage license/provenance record
+
+Bark albedo and OpenGL normal texture
+  Work: Bark Brown 02, Rob Tuytel, Poly Haven (published 2018-12-22).
+  Asset page: https://polyhaven.com/a/bark_brown_02
+  Authoritative license: https://polyhaven.com/license
+  License: CC0 1.0 Universal, https://creativecommons.org/publicdomain/zero/1.0/
+  Public-domain dedication; commercial games and redistribution permitted;
+  attribution not required. Website preview/branding is NOT included.
+  Source albedo (1K JPEG):
+    https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/bark_brown_02/bark_brown_02_diff_1k.jpg
+    SHA256 920fa0bed0c9d78c1d530e99795113afd532d7db746de440f4a85d7c83ed0f1a
+  Source OpenGL normal (1K JPEG):
+    https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/bark_brown_02/bark_brown_02_nor_gl_1k.jpg
+    SHA256 0d5e691e8ad8bcd093a3587887fda2a6b4a948b5708a4f256f7919584c6eb857
+  Retrieved 2026-11-14. Each file downloaded into its own fresh empty temp
+  directory; only Pillow image decoding via python -I in the owned prep script.
+  Output derivatives re-encoded at JPEG quality 89, RGB, 1024x1024.
+
+Original botanical meshes, leaf-atlas.png and tree-views.png
+  Authored for Island Explorer by scripts/prepare_peak_foliage.py.
+  Independently generated branching geometry and serrated/lobed/needle leaf,
+  vein and flower pixels; no imported or copied leaf/model data.
+  These original generated assets are dedicated to the public domain under
+  CC0 1.0 Universal: https://creativecommons.org/publicdomain/zero/1.0/
+  To the extent possible under law, the author has waived all copyright and
+  related or neighboring rights to these original assets. Provided as-is,
+  without warranty. Commercial game use and redistribution permitted.
+  tree-views.png incorporates the CC0 bark derivative; same license applies.
+
+Existing trees_grass_rocks and stylized_tree are NOT re-licensed by this record.
+They remain loaded only to preserve original deterministic generation dimensions
+and the unchanged Low/Medium/fallback rendering. No unknown-license asset was
+copied into this foliage directory.
+
+Model research
+  Poly Haven CC0 full Fir Tree 01 had a 478,462,204-byte glTF geometry binary
+  (https://api.polyhaven.com/files/fir_tree_01); Pine Tree 01 FBX was
+  648,483,964 bytes. Not downloaded/executed; rejected as unsuitable for this
+  game's 6,800-tree budget. Quaternius Ultimate Nature offers CC0 but is stylized,
+  not claimed as realistic. Existing Birch/Maple geometry has actual alpha leaf
+  quads and bark/normal maps, but the inspected leaf atlases have flat color and
+  the original distant representation is a faceted icosahedron.
+
+Reproduction
+  python -I scripts/prepare_peak_foliage.py --out <this-directory>
+    --bark-albedo <isolated-source-bark.jpg> --bark-normal <isolated-source-normal.jpg>
+  Run from the trusted project, never from a download/extraction directory.
+  Requires trusted Pillow and numpy installations. Script has no downloads or
+  code evaluation. Manifest contains seed, geometry budgets and output hashes.

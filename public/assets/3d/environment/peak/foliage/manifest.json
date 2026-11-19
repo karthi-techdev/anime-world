@@ -1,0 +1,184 @@
+{
+  "generator": "scripts/prepare_peak_foliage.py",
+  "seed": 1346715979,
+  "license": "CC0-1.0",
+  "sourceInputs": [
+    {
+      "output": "bark-albedo.jpg",
+      "sourceSha256": "920fa0bed0c9d78c1d530e99795113afd532d7db746de440f4a85d7c83ed0f1a"
+    },
+    {
+      "output": "bark-normal.jpg",
+      "sourceSha256": "0d5e691e8ad8bcd093a3587887fda2a6b4a948b5708a4f256f7919584c6eb857"
+    }
+  ],
+  "assets": {
+    "oak-hero": {
+      "triangles": 6874,
+      "vertices": 11331,
+      "geometryBytes": 581052
+    },
+    "oak-mid": {
+      "triangles": 1218,
+      "vertices": 1437,
+      "geometryBytes": 77844
+    },
+    "birch-hero": {
+      "triangles": 6006,
+      "vertices": 9873,
+      "geometryBytes": 506484
+    },
+    "birch-mid": {
+      "triangles": 1070,
+      "vertices": 1257,
+      "geometryBytes": 68148
+    },
+    "pine-hero": {
+      "triangles": 3464,
+      "vertices": 5246,
+      "geometryBytes": 272392
+    },
+    "pine-mid": {
+      "triangles": 1096,
+      "vertices": 1213,
+      "geometryBytes": 66524
+    },
+    "bush": {
+      "triangles": 1804,
+      "vertices": 3366,
+      "geometryBytes": 169752
+    },
+    "flowers": {
+      "triangles": 456,
+      "vertices": 589,
+      "geometryBytes": 31388
+    },
+    "tree-far": {
+      "triangles": 2,
+      "vertices": 4,
+      "geometryBytes": 200
+    }
+  },
+  "impostors": {
+    "azimuths": 8,
+    "elevationsDegrees": [
+      0,
+      35,
+      70
+    ],
+    "tilePixels": [
+      128,
+      192
+    ],
+    "atlasPixels": [
+      1024,
+      2048
+    ],
+    "treeWidthAndHeight": 1.05
+  },
+  "runtimeLimits": {
+    "heroInstances": 96,
+    "midInstances": 512,
+    "farInstances": "original tree count (6800 scatter plus accepted belt trees)",
+    "bushInstances": 96,
+    "flowerInstances": 256,
+    "heroTransitionMeters": [
+      70,
+      90
+    ],
+    "midTransitionMeters": [
+      240,
+      300
+    ]
+  },
+  "outputs": {
+    "bark-albedo.jpg": {
+      "bytes": 446004,
+      "sha256": "a8207bed5cd28bfdfd125b4e6952cfd442b23624727c597dd2e4f0915f7ba8a1"
+    },
+    "bark-normal.jpg": {
+      "bytes": 627780,
+      "sha256": "a29e8e143532d807bc44293d37890c219f0180e917c23291ddce1bdd72ada354"
+    },
+    "birch-hero.bin": {
+      "bytes": 506484,
+      "sha256": "8481b2524301e298b2a7a717440be806e673d125efcc213eef38db2b46bbacf0"
+    },
+    "birch-hero.gltf": {
+      "bytes": 3008,
+      "sha256": "a45c539044a691bd7b34e5e0ff3ff2585188578c4f63277e1798f41b2043f3ca"
+    },
+    "birch-mid.bin": {
+      "bytes": 68148,
+      "sha256": "02d9b92dea815d10c3fe685f4ccf267a4a71c4781fd1856aea55ce9d5a9ffff9"
+    },
+    "birch-mid.gltf": {
+      "bytes": 3014,
+      "sha256": "8d58e5975485148a687025137e1ee15c79ba10a0f6b043f97b14281d83dbdca7"
+    },
+    "bush.bin": {
+      "bytes": 169752,
+      "sha256": "c72d134010796f8403936d28523fb7812a501efa4d5445262688c6fc0b4d1370"
+    },
+    "bush.gltf": {
+      "bytes": 3003,
+      "sha256": "dead03c47b8d68c0aa43c4f7358586aac6ee0ca2c2b876aa79f749b57a478479"
+    },
+    "flowers.bin": {
+      "bytes": 31388,
+      "sha256": "6839070587ebedde3e668f58d182a48ee0ba3ea4cb3a454418c43d7a1fd9edee"
+    },
+    "flowers.gltf": {
+      "bytes": 2924,
+      "sha256": "ec8cfa885e60337ea8d7ddec8b9788d1b1dcb54ecfa0337ffdb045cd94a752de"
+    },
+    "leaf-atlas.png": {
+      "bytes": 202033,
+      "sha256": "26bdd1ecb9f397b89bfd3d014c9ad04ab22e25407150fd128fe5218ba4926b61"
+    },
+    "oak-hero.bin": {
+      "bytes": 581052,
+      "sha256": "a68601fb5272682c06d7daad2d7382dd9d69a0fe45874f9e25f39150b725687b"
+    },
+    "oak-hero.gltf": {
+      "bytes": 3010,
+      "sha256": "6606e99f06732a9777f6d9b3425419e7dfa9f4d2d123968b8c36b9057bedb5d2"
+    },
+    "oak-mid.bin": {
+      "bytes": 77844,
+      "sha256": "f917a84726df080888735bd2d22ee40ecc0a0ceee6cd36f042ed7e49560d609b"
+    },
+    "oak-mid.gltf": {
+      "bytes": 3016,
+      "sha256": "c2aebfc179ee1bfbad4eae0343866e2708b237170783189ab93adafa09e3bc33"
+    },
+    "pine-hero.bin": {
+      "bytes": 272392,
+      "sha256": "b9f42c9ebd7718def4e3d0762e69f76ce7a3c3b4af603432a2d85bdfc2d199e8"
+    },
+    "pine-hero.gltf": {
+      "bytes": 2983,
+      "sha256": "ef5677d60824eb02ed882cff484fbd62c9e96bc7e80982a99a4c1df24c842262"
+    },
+    "pine-mid.bin": {
+      "bytes": 66524,
+      "sha256": "7199cb381bc40fa1382a7b5df21fc08a70db18757405926fd75da99d1b90bf1d"
+    },
+    "pine-mid.gltf": {
+      "bytes": 2853,
+      "sha256": "efb156204efed2938442597ab774554c2da7112bd24eda773c6178195ed2200a"
+    },
+    "tree-far.bin": {
+      "bytes": 200,
+      "sha256": "cb20420ec504b2f610ca189236cc0e0e426184e8c31029e054772b1756fb8424"
+    },
+    "tree-far.gltf": {
+      "bytes": 1486,
+      "sha256": "98f68bdc9bb29d64ea9c3672881d3d7b0d53cd83b1735cf71d897ec02203348c"
+    },
+    "tree-views.png": {
+      "bytes": 886875,
+      "sha256": "f6f2f59ef812bebfdd6ed896eacad5c68c671f576c6adfc954c864e520f8b0a3"
+    }
+  }
+}

@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# tooling and temporary files
+.claude/
+.zcode/
+tmp/
+tmp_runjump/
+cand_jump/
+*.log

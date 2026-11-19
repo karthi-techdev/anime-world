@@ -1,0 +1,5245 @@
+{
+ "pivot": "Blender Z-up, metres, rot_z radians; parts relative to the prefab pivot at the lot corner",
+ "prefabs": [
+  {
+   "name": "PF_Narrow_Garage455_Win_Gable_White_01",
+   "lot": [
+    5.5,
+    10.0
+   ],
+   "tris": 4270,
+   "parts": [
+    {
+     "mesh": "SM_Floor_NarrowGarage_455_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Door08423_WoodOrange_01",
+     "loc": [
+      4.175,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_CanopyD08423_01",
+     "loc": [
+      4.175,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Garage25_Closed_01",
+     "loc": [
+      2.025,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperWindow_White_455_Back_01",
+     "loc": [
+      0.475,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window25611_Shutter_01",
+     "loc": [
+      2.75,
+      0.905,
+      4.03
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Roof_NarrowGable_White_455_01",
+     "loc": [
+      0.475,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window11907_01",
+     "loc": [
+      2.75,
+      0.905,
+      6.31
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DownpipeFoot_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_GutterGable_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DownpipeFoot_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_GutterGable_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_ElecMeter_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_WaterHeater_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      0.222,
+      1.2975,
+      0.0
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcCover_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_ServiceBoxSide_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AntennaPanel_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_VentCap150_01",
+     "loc": [
+      0.475,
+      4.105,
+      5.2
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window03613_BlackFrost_01",
+     "loc": [
+      1.875,
+      9.095,
+      3.83
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      2.5275,
+      9.095,
+      5.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiWallAc_Bracket_01",
+     "loc": [
+      4.025,
+      9.34,
+      4.0
+     ],
+     "rot_z": 3.141593
+    }
+   ]
+  },
+  {
+   "name": "PF_Narrow_Garage455_BalWin_Flat_White_01",
+   "lot": [
+    5.5,
+    10.0
+   ],
+   "tris": 4612,
+   "parts": [
+    {
+     "mesh": "SM_Floor_NarrowGarage_455_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Door08423_WoodBrown_01",
+     "loc": [
+      4.175,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_CanopyD08423_01",
+     "loc": [
+      4.175,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Lot_FunctionPost_Silver_R_01",
+     "loc": [
+      4.175,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Garage25_Closed_01",
+     "loc": [
+      2.025,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperBalcony_White_455_Back_01",
+     "loc": [
+      0.475,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window25620_01",
+     "loc": [
+      2.75,
+      0.905,
+      3.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_BalconyShort25620_AluPanel_01",
+     "loc": [
+      2.75,
+      0.905,
+      3.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperWindow_White_455_Back_01",
+     "loc": [
+      0.475,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window25611_01",
+     "loc": [
+      2.75,
+      0.905,
+      7.03
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Roof_NarrowFlatPlain_White_455_01",
+     "loc": [
+      0.475,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DownpipeFoot_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DrainFlat_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_ElecMeter_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_WaterHeater_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      5.278,
+      1.2975,
+      0.0
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      5.278,
+      1.2975,
+      1.8
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcBracket_01",
+     "loc": [
+      5.278,
+      1.2975,
+      1.8
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_ServiceBoxFront_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AntennaYagi_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      2.225,
+      9.095,
+      4.23
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      3.04,
+      9.095,
+      5.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Opening_Window03613_BlackFrost_01",
+     "loc": [
+      1.875,
+      9.095,
+      6.83
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      2.5275,
+      9.095,
+      8.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiWallAc_Bracket_01",
+     "loc": [
+      4.025,
+      9.34,
+      7.0
+     ],
+     "rot_z": 3.141593
+    }
+   ]
+  },
+  {
+   "name": "PF_Narrow_Garage455_BalWin_Flat_White_EndL_01",
+   "lot": [
+    5.5,
+    10.0
+   ],
+   "tris": 5722,
+   "parts": [
+    {
+     "mesh": "SM_Floor_NarrowGarage_455_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Door08423_WoodBrown_01",
+     "loc": [
+      4.175,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_CanopyD08423_01",
+     "loc": [
+      4.175,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Lot_FunctionPost_Silver_R_01",
+     "loc": [
+      4.175,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Garage25_Closed_01",
+     "loc": [
+      2.025,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperBalconyEndL_White_455_Back_01",
+     "loc": [
+      0.475,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window25620_01",
+     "loc": [
+      2.75,
+      0.905,
+      3.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_BalconyShort25620_AluPanel_01",
+     "loc": [
+      2.75,
+      0.905,
+      3.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperWindowEndL_White_455_Back_01",
+     "loc": [
+      0.475,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window25611_01",
+     "loc": [
+      2.75,
+      0.905,
+      7.03
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Roof_NarrowFlatPlain_White_455_01",
+     "loc": [
+      0.475,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DownpipeFoot_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DrainFlat_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_ElecMeter_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_WaterHeater_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      5.278,
+      1.2975,
+      0.0
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      5.278,
+      1.2975,
+      1.8
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcBracket_01",
+     "loc": [
+      5.278,
+      1.2975,
+      1.8
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_ServiceBoxFront_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AntennaYagi_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window03613_Black_01",
+     "loc": [
+      0.475,
+      5.105,
+      3.83
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window03609_Black_01",
+     "loc": [
+      0.475,
+      7.205,
+      4.23
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_RangeHood_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window11907_01",
+     "loc": [
+      0.475,
+      5.505,
+      7.43
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window03603_Black_01",
+     "loc": [
+      0.475,
+      7.205,
+      7.83
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_VentCap100_01",
+     "loc": [
+      0.475,
+      6.555,
+      8.2
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      0.222,
+      8.4725,
+      0.0
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcCover_EndL_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      2.225,
+      9.095,
+      4.23
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Opening_Window03613_BlackFrost_01",
+     "loc": [
+      1.875,
+      9.095,
+      6.83
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      2.5275,
+      9.095,
+      8.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiWallAc_Bracket_01",
+     "loc": [
+      4.025,
+      9.34,
+      7.0
+     ],
+     "rot_z": 3.141593
+    }
+   ]
+  },
+  {
+   "name": "PF_Narrow_Garage546_WinBal_ShedL_Yellow_01",
+   "lot": [
+    6.5,
+    10.0
+   ],
+   "tris": 4852,
+   "parts": [
+    {
+     "mesh": "SM_Floor_NarrowGarage_546_01",
+     "loc": [
+      0.52,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Door08423_WoodBrown_01",
+     "loc": [
+      4.32,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_CanopyD08423_01",
+     "loc": [
+      4.32,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Garage25_Closed_01",
+     "loc": [
+      2.17,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window03613_Black_01",
+     "loc": [
+      5.37,
+      0.905,
+      1.23
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperWindow_Yellow_546_Back_01",
+     "loc": [
+      0.52,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window25611_01",
+     "loc": [
+      3.25,
+      0.905,
+      4.03
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperBalcony_Yellow_546_Back_01",
+     "loc": [
+      0.52,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window25620_01",
+     "loc": [
+      3.25,
+      0.905,
+      6.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_BalconyShort25620_Charcoal_01",
+     "loc": [
+      3.25,
+      0.905,
+      6.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Roof_NarrowShedLeft_Yellow_546_01",
+     "loc": [
+      0.52,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DownpipeFoot_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_GutterShedSide_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_ElecMeter_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      0.267,
+      1.2975,
+      0.0
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcCover_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      4.4175,
+      0.652,
+      6.1
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_ServiceBoxSide_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AntennaPanel_R_01",
+     "loc": [
+      5.98,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_VentCap150_01",
+     "loc": [
+      0.52,
+      4.105,
+      5.2
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_VentCap100_01",
+     "loc": [
+      5.98,
+      3.305,
+      5.2
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window03613_BlackFrost_01",
+     "loc": [
+      2.42,
+      9.095,
+      3.83
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      3.0725,
+      9.095,
+      5.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      2.82,
+      9.095,
+      7.23
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      3.635,
+      9.095,
+      8.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiWallAc_Bracket_01",
+     "loc": [
+      4.82,
+      9.34,
+      4.0
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_NarrowWaterHeater_01",
+     "loc": [
+      1.47,
+      9.095,
+      0.0
+     ],
+     "rot_z": 3.141593
+    }
+   ]
+  },
+  {
+   "name": "PF_Narrow_Garage546_BalWin_ShedL_White_01",
+   "lot": [
+    6.5,
+    10.0
+   ],
+   "tris": 4990,
+   "parts": [
+    {
+     "mesh": "SM_Floor_NarrowGarage_546_01",
+     "loc": [
+      0.52,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Door08423_WoodOrange_01",
+     "loc": [
+      4.32,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_CanopyD08423_01",
+     "loc": [
+      4.32,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Lot_FunctionPost_Silver_R_01",
+     "loc": [
+      4.32,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window03613_Black_01",
+     "loc": [
+      5.37,
+      0.905,
+      1.23
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperBalcony_White_546_Back_01",
+     "loc": [
+      0.52,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window25620_01",
+     "loc": [
+      3.25,
+      0.905,
+      3.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_BalconyShort25620_AluPanel_01",
+     "loc": [
+      3.25,
+      0.905,
+      3.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperWindow_White_546_Back_01",
+     "loc": [
+      0.52,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window25611_01",
+     "loc": [
+      3.25,
+      0.905,
+      7.03
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Roof_NarrowShedLeft_White_546_01",
+     "loc": [
+      0.52,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DownpipeFoot_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_GutterShedSide_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_ElecMeter_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_WaterHeater_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      0.267,
+      1.2975,
+      0.0
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      6.233,
+      1.2975,
+      1.8
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcBracket_01",
+     "loc": [
+      6.233,
+      1.2975,
+      1.8
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_ServiceBoxFront_R_01",
+     "loc": [
+      5.98,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AntennaYagi_R_01",
+     "loc": [
+      5.98,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_VentCap100_01",
+     "loc": [
+      5.98,
+      3.305,
+      5.2
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      2.82,
+      9.095,
+      4.23
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      3.635,
+      9.095,
+      5.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Opening_Window03613_BlackFrost_01",
+     "loc": [
+      2.42,
+      9.095,
+      6.83
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      3.0725,
+      9.095,
+      8.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiWallAc_Bracket_01",
+     "loc": [
+      4.82,
+      9.34,
+      7.0
+     ],
+     "rot_z": 3.141593
+    }
+   ]
+  },
+  {
+   "name": "PF_Narrow_Garage546_BalWin_ShedR_Yellow_EndL_01",
+   "lot": [
+    6.5,
+    10.0
+   ],
+   "tris": 5352,
+   "parts": [
+    {
+     "mesh": "SM_Floor_NarrowGarage_546_01",
+     "loc": [
+      0.52,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Door08423_Black_01",
+     "loc": [
+      4.32,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_CanopyD08423_01",
+     "loc": [
+      4.32,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Garage25_Open_01",
+     "loc": [
+      2.17,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window03613_Black_01",
+     "loc": [
+      5.37,
+      0.905,
+      1.23
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperBalconyEndL_Yellow_546_Back_01",
+     "loc": [
+      0.52,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window25620_Shutter_01",
+     "loc": [
+      3.25,
+      0.905,
+      3.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_BalconyShort25620_Yellow_01",
+     "loc": [
+      3.25,
+      0.905,
+      3.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperWindowEndL_Yellow_546_Back_01",
+     "loc": [
+      0.52,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window25611_Shutter_01",
+     "loc": [
+      3.25,
+      0.905,
+      7.03
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Roof_NarrowShedRight_Yellow_546_01",
+     "loc": [
+      0.52,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DownpipeFoot_R_01",
+     "loc": [
+      5.98,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_R_01",
+     "loc": [
+      5.98,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_R_01",
+     "loc": [
+      5.98,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_GutterShedSide_R_01",
+     "loc": [
+      5.98,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_ElecMeter_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      0.267,
+      1.2975,
+      0.0
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      6.233,
+      1.2975,
+      0.0
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AntennaPanel_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_VentCap150_01",
+     "loc": [
+      0.52,
+      4.105,
+      5.2
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window03613_Black_01",
+     "loc": [
+      0.52,
+      5.105,
+      3.83
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window03609_Black_01",
+     "loc": [
+      0.52,
+      7.205,
+      4.23
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_RangeHood_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window11907_01",
+     "loc": [
+      0.52,
+      5.505,
+      7.43
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window03603_Black_01",
+     "loc": [
+      0.52,
+      7.205,
+      7.83
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_VentCap100_01",
+     "loc": [
+      0.52,
+      6.555,
+      8.2
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      0.267,
+      8.4725,
+      0.0
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcCover_EndL_01",
+     "loc": [
+      0.52,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      2.82,
+      9.095,
+      4.23
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Opening_Window03613_BlackFrost_01",
+     "loc": [
+      2.42,
+      9.095,
+      6.83
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      3.0725,
+      9.095,
+      8.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiWallAc_Bracket_01",
+     "loc": [
+      4.82,
+      9.34,
+      7.0
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_NarrowWaterHeater_01",
+     "loc": [
+      1.47,
+      9.095,
+      0.0
+     ],
+     "rot_z": 3.141593
+    }
+   ]
+  },
+  {
+   "name": "PF_Narrow_Garage546_ScSc_Strip_White_01",
+   "lot": [
+    6.5,
+    10.0
+   ],
+   "tris": 4632,
+   "parts": [
+    {
+     "mesh": "SM_Floor_NarrowGarage_546_01",
+     "loc": [
+      0.52,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Door08423_WoodOrange_01",
+     "loc": [
+      4.32,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_CanopyD08423_01",
+     "loc": [
+      4.32,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Lot_FunctionPost_Bronze_R_01",
+     "loc": [
+      4.32,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Garage25_Closed_01",
+     "loc": [
+      2.17,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window03613_Black_01",
+     "loc": [
+      5.37,
+      0.905,
+      1.23
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperScatterLow_White_546_Back_01",
+     "loc": [
+      0.52,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window03613_Black_01",
+     "loc": [
+      2.92,
+      0.905,
+      3.83
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window03613_Black_01",
+     "loc": [
+      4.41,
+      0.905,
+      3.83
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperScatterHigh_White_546_Back_01",
+     "loc": [
+      0.52,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window03603_Black_01",
+     "loc": [
+      1.89,
+      0.905,
+      7.83
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window03613_Black_01",
+     "loc": [
+      4.12,
+      0.905,
+      6.83
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Roof_NarrowFlatStrip_White_546_01",
+     "loc": [
+      0.52,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DownpipeFoot_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DrainFlat_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_ElecMeter_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_WaterHeater_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      6.233,
+      1.2975,
+      0.0
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      6.233,
+      1.2975,
+      1.8
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcBracket_01",
+     "loc": [
+      6.233,
+      1.2975,
+      1.8
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_ServiceBoxFront_R_01",
+     "loc": [
+      5.98,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AntennaPanel_R_01",
+     "loc": [
+      5.98,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_VentCap150_01",
+     "loc": [
+      0.52,
+      4.105,
+      5.2
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_VentCap100_01",
+     "loc": [
+      5.98,
+      3.305,
+      5.2
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      2.82,
+      9.095,
+      4.23
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      3.635,
+      9.095,
+      5.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Opening_Window03613_BlackFrost_01",
+     "loc": [
+      2.42,
+      9.095,
+      6.83
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      3.0725,
+      9.095,
+      8.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiWallAc_Bracket_01",
+     "loc": [
+      4.82,
+      9.34,
+      7.0
+     ],
+     "rot_z": 3.141593
+    }
+   ]
+  },
+  {
+   "name": "PF_Narrow_GarageWide364_BalWin_ShedR_White_01",
+   "lot": [
+    4.5,
+    10.0
+   ],
+   "tris": 4028,
+   "parts": [
+    {
+     "mesh": "SM_Floor_NarrowGarageWide_364_01",
+     "loc": [
+      0.43,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Door07423_WoodOrange_01",
+     "loc": [
+      3.5,
+      1.505,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Garage25_Open_01",
+     "loc": [
+      1.86,
+      1.505,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperBalcony_White_364_Back_01",
+     "loc": [
+      0.43,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window16520_01",
+     "loc": [
+      2.25,
+      0.905,
+      3.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_BalconyShort16520_AluPanel_01",
+     "loc": [
+      2.25,
+      0.905,
+      3.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperWindow_White_364_Back_01",
+     "loc": [
+      0.43,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window16511_01",
+     "loc": [
+      2.25,
+      0.905,
+      7.03
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Roof_NarrowShedRight_White_364_01",
+     "loc": [
+      0.43,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DownpipeFoot_R_01",
+     "loc": [
+      4.07,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_R_01",
+     "loc": [
+      4.07,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_R_01",
+     "loc": [
+      4.07,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_GutterShedSide_R_01",
+     "loc": [
+      4.07,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_ElecMeter_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_WaterHeater_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      2.9625,
+      0.652,
+      3.1
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_ServiceBoxFront_R_01",
+     "loc": [
+      4.07,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_VentCap150_01",
+     "loc": [
+      0.43,
+      4.105,
+      5.2
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_VentCap100_01",
+     "loc": [
+      4.07,
+      3.305,
+      5.2
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      1.68,
+      9.095,
+      4.23
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      2.495,
+      9.095,
+      5.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Opening_Window03613_BlackFrost_01",
+     "loc": [
+      1.43,
+      9.095,
+      6.83
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      2.0825,
+      9.095,
+      8.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiWallAc_Bracket_01",
+     "loc": [
+      3.28,
+      9.34,
+      7.0
+     ],
+     "rot_z": 3.141593
+    }
+   ]
+  },
+  {
+   "name": "PF_Narrow_GarageWide455_WinBal_ShedR_Yellow_Planter3Flower_01",
+   "lot": [
+    5.5,
+    10.0
+   ],
+   "tris": 5990,
+   "parts": [
+    {
+     "mesh": "SM_Floor_NarrowGarageWide_455_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Door08423_WoodOrange_01",
+     "loc": [
+      3.945,
+      1.505,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Lot_FunctionPost_Bronze_Recess_01",
+     "loc": [
+      3.945,
+      1.505,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperWindow_Yellow_455_Back_01",
+     "loc": [
+      0.475,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window25611_01",
+     "loc": [
+      2.75,
+      0.905,
+      4.03
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Canopy25611_01",
+     "loc": [
+      2.75,
+      0.905,
+      4.03
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperBalcony_Yellow_455_Back_01",
+     "loc": [
+      0.475,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window25620_01",
+     "loc": [
+      2.75,
+      0.905,
+      6.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_BalconyShort25620_Yellow_01",
+     "loc": [
+      2.75,
+      0.905,
+      6.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Roof_NarrowShedRight_Yellow_455_01",
+     "loc": [
+      0.475,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DownpipeFoot_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_GutterShedSide_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_ElecMeter_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_WaterHeater_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      0.222,
+      1.2975,
+      0.0
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      3.9175,
+      0.652,
+      6.1
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AntennaYagi_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_VentCap150_01",
+     "loc": [
+      0.475,
+      4.105,
+      5.2
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_RailPlanterShort25620_Box_Flower_01",
+     "loc": [
+      2.75,
+      0.905,
+      6.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window03613_BlackFrost_01",
+     "loc": [
+      1.875,
+      9.095,
+      3.83
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      2.5275,
+      9.095,
+      5.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      2.225,
+      9.095,
+      7.23
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      3.04,
+      9.095,
+      8.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiWallAc_Bracket_01",
+     "loc": [
+      4.025,
+      9.34,
+      4.0
+     ],
+     "rot_z": 3.141593
+    }
+   ]
+  },
+  {
+   "name": "PF_Narrow_GarageWide455_ScSc_Strip_White_01",
+   "lot": [
+    5.5,
+    10.0
+   ],
+   "tris": 3698,
+   "parts": [
+    {
+     "mesh": "SM_Floor_NarrowGarageWide_455_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Door08423_Black_01",
+     "loc": [
+      3.945,
+      1.505,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Garage25_Closed_01",
+     "loc": [
+      1.985,
+      0.825,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperScatterLow_White_455_Back_01",
+     "loc": [
+      0.475,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window03613_Black_01",
+     "loc": [
+      2.475,
+      0.905,
+      3.83
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window03613_Black_01",
+     "loc": [
+      3.74,
+      0.905,
+      3.83
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperScatterHigh_White_455_Back_01",
+     "loc": [
+      0.475,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window03603_Black_01",
+     "loc": [
+      1.615,
+      0.905,
+      7.83
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window03613_Black_01",
+     "loc": [
+      3.45,
+      0.905,
+      6.83
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Roof_NarrowFlatStrip_White_455_01",
+     "loc": [
+      0.475,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DownpipeFoot_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DrainFlat_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_ElecMeter_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_WaterHeater_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      0.222,
+      1.2975,
+      0.0
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_ServiceBoxFront_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AntennaPanel_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_VentCap100_01",
+     "loc": [
+      5.025,
+      3.305,
+      5.2
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      2.225,
+      9.095,
+      4.23
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      3.04,
+      9.095,
+      5.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Opening_Window03613_BlackFrost_01",
+     "loc": [
+      1.875,
+      9.095,
+      6.83
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      2.5275,
+      9.095,
+      8.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiWallAc_Bracket_01",
+     "loc": [
+      4.025,
+      9.34,
+      7.0
+     ],
+     "rot_z": 3.141593
+    }
+   ]
+  },
+  {
+   "name": "PF_Narrow_LivingBlock364_WinBal_Flat_White_EndR_01",
+   "lot": [
+    4.5,
+    10.0
+   ],
+   "tris": 6352,
+   "parts": [
+    {
+     "mesh": "SM_Floor_NarrowLiving_364_01",
+     "loc": [
+      0.43,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Door08423_Black_01",
+     "loc": [
+      3.27,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_CanopyD08423_01",
+     "loc": [
+      3.27,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      1.56,
+      0.905,
+      1.63
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Canopy06909_01",
+     "loc": [
+      1.56,
+      0.905,
+      1.63
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperWindowEndR_White_364_Back_01",
+     "loc": [
+      0.43,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window16511_Shutter_01",
+     "loc": [
+      2.25,
+      0.905,
+      4.03
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperBalconyEndR_White_364_Back_01",
+     "loc": [
+      0.43,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window16520_Shutter_01",
+     "loc": [
+      2.25,
+      0.905,
+      6.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_BalconyShort16520_Charcoal_01",
+     "loc": [
+      2.25,
+      0.905,
+      6.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Roof_NarrowFlatPlain_White_364_01",
+     "loc": [
+      0.43,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DownpipeFoot_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DrainFlat_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_ElecMeter_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      0.177,
+      1.2975,
+      0.0
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      4.323,
+      1.2975,
+      1.8
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcBracket_01",
+     "loc": [
+      4.323,
+      1.2975,
+      1.8
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_ServiceBoxFront_R_01",
+     "loc": [
+      4.07,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AntennaYagi_R_01",
+     "loc": [
+      4.07,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_VentCap150_01",
+     "loc": [
+      0.43,
+      4.105,
+      5.2
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window11907_01",
+     "loc": [
+      4.07,
+      5.505,
+      4.43
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window03603_Black_01",
+     "loc": [
+      4.07,
+      7.205,
+      4.83
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_VentCap100_01",
+     "loc": [
+      4.07,
+      6.555,
+      5.2
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window03613_Black_01",
+     "loc": [
+      4.07,
+      5.105,
+      6.83
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window03609_Black_01",
+     "loc": [
+      4.07,
+      7.205,
+      7.23
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_RangeHood_R_01",
+     "loc": [
+      4.07,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      4.323,
+      8.4725,
+      0.0
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcCover_EndR_01",
+     "loc": [
+      4.07,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Lot_FrontWall_Block_450_01",
+     "loc": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window03613_BlackFrost_01",
+     "loc": [
+      1.43,
+      9.095,
+      3.83
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      2.0825,
+      9.095,
+      5.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      1.68,
+      9.095,
+      7.23
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiWallAc_Bracket_01",
+     "loc": [
+      3.28,
+      9.34,
+      4.0
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_NarrowWaterHeater_01",
+     "loc": [
+      1.18,
+      9.095,
+      0.0
+     ],
+     "rot_z": 3.141593
+    }
+   ]
+  },
+  {
+   "name": "PF_Narrow_Living364_BalWin_ShedF_Cream_01",
+   "lot": [
+    4.5,
+    10.0
+   ],
+   "tris": 4306,
+   "parts": [
+    {
+     "mesh": "SM_Floor_NarrowLiving_364_01",
+     "loc": [
+      0.43,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Door08423_WoodBrown_01",
+     "loc": [
+      3.27,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_CanopyD08423_01",
+     "loc": [
+      3.27,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      1.56,
+      0.905,
+      1.63
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperBalcony_Cream_364_Back_01",
+     "loc": [
+      0.43,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window16520_Shutter_01",
+     "loc": [
+      2.25,
+      0.905,
+      3.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_BalconyShort16520_AluBars_01",
+     "loc": [
+      2.25,
+      0.905,
+      3.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperWindow_Cream_364_Back_01",
+     "loc": [
+      0.43,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window16511_Shutter_01",
+     "loc": [
+      2.25,
+      0.905,
+      7.03
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Roof_NarrowShedFront_Cream_364_01",
+     "loc": [
+      0.43,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DownpipeFoot_R_01",
+     "loc": [
+      4.07,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_R_01",
+     "loc": [
+      4.07,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_R_01",
+     "loc": [
+      4.07,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_GutterShedFront_364_01",
+     "loc": [
+      0.43,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_ElecMeter_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      0.177,
+      1.2975,
+      0.0
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_ServiceBoxSide_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AntennaPanel_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_VentCap150_01",
+     "loc": [
+      0.43,
+      4.105,
+      5.2
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      1.68,
+      9.095,
+      4.23
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      2.495,
+      9.095,
+      5.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Opening_Window03613_BlackFrost_01",
+     "loc": [
+      1.43,
+      9.095,
+      6.83
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      2.0825,
+      9.095,
+      8.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiWallAc_Bracket_01",
+     "loc": [
+      3.28,
+      9.34,
+      7.0
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_NarrowWaterHeater_01",
+     "loc": [
+      1.18,
+      9.095,
+      0.0
+     ],
+     "rot_z": 3.141593
+    }
+   ]
+  },
+  {
+   "name": "PF_Narrow_LivingPlaster364_BalWin_ShedL_Cream_01",
+   "lot": [
+    4.5,
+    10.0
+   ],
+   "tris": 4580,
+   "parts": [
+    {
+     "mesh": "SM_Floor_NarrowLiving_364_01",
+     "loc": [
+      0.43,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Door08423_WoodOrange_01",
+     "loc": [
+      3.27,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_CanopyD08423_01",
+     "loc": [
+      3.27,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      1.56,
+      0.905,
+      1.63
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperBalcony_Cream_364_Back_01",
+     "loc": [
+      0.43,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window16520_Shutter_01",
+     "loc": [
+      2.25,
+      0.905,
+      3.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_BalconyShort16520_Charcoal_01",
+     "loc": [
+      2.25,
+      0.905,
+      3.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperWindow_Cream_364_Back_01",
+     "loc": [
+      0.43,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window16511_Shutter_01",
+     "loc": [
+      2.25,
+      0.905,
+      7.03
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Roof_NarrowShedLeft_Cream_364_01",
+     "loc": [
+      0.43,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DownpipeFoot_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_GutterShedSide_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_ElecMeter_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      4.323,
+      1.2975,
+      1.8
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcBracket_01",
+     "loc": [
+      4.323,
+      1.2975,
+      1.8
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_ServiceBoxSide_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Lot_FrontWall_Plaster_450_01",
+     "loc": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      1.68,
+      9.095,
+      4.23
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      2.495,
+      9.095,
+      5.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Opening_Window03613_BlackFrost_01",
+     "loc": [
+      1.43,
+      9.095,
+      6.83
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      2.0825,
+      9.095,
+      8.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiWallAc_Bracket_01",
+     "loc": [
+      3.28,
+      9.34,
+      7.0
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_NarrowWaterHeater_01",
+     "loc": [
+      1.18,
+      9.095,
+      0.0
+     ],
+     "rot_z": 3.141593
+    }
+   ]
+  },
+  {
+   "name": "PF_Narrow_LivingBlock364_BalWin_Flat_White_01",
+   "lot": [
+    4.5,
+    10.0
+   ],
+   "tris": 4754,
+   "parts": [
+    {
+     "mesh": "SM_Floor_NarrowLiving_364_01",
+     "loc": [
+      0.43,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Door08423_WoodBrown_01",
+     "loc": [
+      3.27,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_CanopyD08423_01",
+     "loc": [
+      3.27,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      1.56,
+      0.905,
+      1.63
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperBalcony_White_364_Back_01",
+     "loc": [
+      0.43,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window16520_01",
+     "loc": [
+      2.25,
+      0.905,
+      3.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_BalconyShort16520_White_01",
+     "loc": [
+      2.25,
+      0.905,
+      3.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperWindow_White_364_Back_01",
+     "loc": [
+      0.43,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window16511_01",
+     "loc": [
+      2.25,
+      0.905,
+      7.03
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Roof_NarrowFlatPlain_White_364_01",
+     "loc": [
+      0.43,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DownpipeFoot_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DrainFlat_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_ElecMeter_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      0.177,
+      1.2975,
+      0.0
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      4.323,
+      1.2975,
+      1.8
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcBracket_01",
+     "loc": [
+      4.323,
+      1.2975,
+      1.8
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AntennaPanel_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_VentCap150_01",
+     "loc": [
+      0.43,
+      4.105,
+      5.2
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Lot_FrontWall_Block_450_01",
+     "loc": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      1.68,
+      9.095,
+      4.23
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      2.495,
+      9.095,
+      5.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Opening_Window03613_BlackFrost_01",
+     "loc": [
+      1.43,
+      9.095,
+      6.83
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      2.0825,
+      9.095,
+      8.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiWallAc_Bracket_01",
+     "loc": [
+      3.28,
+      9.34,
+      7.0
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_NarrowWaterHeater_01",
+     "loc": [
+      1.18,
+      9.095,
+      0.0
+     ],
+     "rot_z": 3.141593
+    }
+   ]
+  },
+  {
+   "name": "PF_Narrow_Living364_BalSc_Strip_White_01",
+   "lot": [
+    4.5,
+    10.0
+   ],
+   "tris": 4196,
+   "parts": [
+    {
+     "mesh": "SM_Floor_NarrowLiving_364_01",
+     "loc": [
+      0.43,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Door08423_WoodBrown_01",
+     "loc": [
+      3.27,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_CanopyD08423_01",
+     "loc": [
+      3.27,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      1.56,
+      0.905,
+      1.63
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Canopy06909_01",
+     "loc": [
+      1.56,
+      0.905,
+      1.63
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperBalcony_White_364_Back_01",
+     "loc": [
+      0.43,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window16520_Shutter_01",
+     "loc": [
+      2.25,
+      0.905,
+      3.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_BalconyShort16520_Charcoal_01",
+     "loc": [
+      2.25,
+      0.905,
+      3.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperScatterHigh_White_364_Back_01",
+     "loc": [
+      0.43,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window03603_Black_01",
+     "loc": [
+      1.23,
+      0.905,
+      7.83
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window03613_Black_01",
+     "loc": [
+      2.74,
+      0.905,
+      6.83
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Roof_NarrowFlatStrip_White_364_01",
+     "loc": [
+      0.43,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DownpipeFoot_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DrainFlat_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_ElecMeter_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_WaterHeater_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      0.177,
+      1.2975,
+      0.0
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcCover_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      4.323,
+      1.2975,
+      1.8
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcBracket_01",
+     "loc": [
+      4.323,
+      1.2975,
+      1.8
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_ServiceBoxSide_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AntennaPanel_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      1.68,
+      9.095,
+      4.23
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      2.495,
+      9.095,
+      5.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Opening_Window03613_BlackFrost_01",
+     "loc": [
+      1.43,
+      9.095,
+      6.83
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      2.0825,
+      9.095,
+      8.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiWallAc_Bracket_01",
+     "loc": [
+      3.28,
+      9.34,
+      7.0
+     ],
+     "rot_z": 3.141593
+    }
+   ]
+  },
+  {
+   "name": "PF_Narrow_Living364_Bal_Gable_Yellow_01",
+   "lot": [
+    4.5,
+    10.0
+   ],
+   "tris": 4834,
+   "parts": [
+    {
+     "mesh": "SM_Floor_NarrowLiving_364_01",
+     "loc": [
+      0.43,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Door08423_WoodBrown_01",
+     "loc": [
+      3.27,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_CanopyD08423_01",
+     "loc": [
+      3.27,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      1.56,
+      0.905,
+      1.63
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperBalcony_Yellow_364_Back_01",
+     "loc": [
+      0.43,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window16520_Shutter_01",
+     "loc": [
+      2.25,
+      0.905,
+      3.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_BalconyShort16520_Yellow_01",
+     "loc": [
+      2.25,
+      0.905,
+      3.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Roof_NarrowGable_Yellow_364_01",
+     "loc": [
+      0.43,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window11907_01",
+     "loc": [
+      2.25,
+      0.905,
+      6.31
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DownpipeFoot_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_GutterGable_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DownpipeFoot_R_01",
+     "loc": [
+      4.07,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_R_01",
+     "loc": [
+      4.07,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_GutterGable_R_01",
+     "loc": [
+      4.07,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_ElecMeter_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_WaterHeater_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      0.177,
+      1.2975,
+      0.0
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcCover_L_01",
+     "loc": [
+      0.43,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AntennaYagiGable_364_01",
+     "loc": [
+      0.43,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_VentCap150_01",
+     "loc": [
+      0.43,
+      4.105,
+      5.2
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      1.68,
+      9.095,
+      4.23
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      2.495,
+      9.095,
+      5.45
+     ],
+     "rot_z": 3.141593
+    }
+   ]
+  },
+  {
+   "name": "PF_Narrow_Living455_WinBal_ShedL_White_01",
+   "lot": [
+    5.5,
+    10.0
+   ],
+   "tris": 4638,
+   "parts": [
+    {
+     "mesh": "SM_Floor_NarrowLiving_455_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Door08423_WoodOrange_01",
+     "loc": [
+      4.225,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_CanopyD08423_01",
+     "loc": [
+      4.225,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Lot_FunctionPost_Black_R_01",
+     "loc": [
+      4.225,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      2.075,
+      0.905,
+      1.63
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Canopy06909_01",
+     "loc": [
+      2.075,
+      0.905,
+      1.63
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperWindow_White_455_Back_01",
+     "loc": [
+      0.475,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window25611_01",
+     "loc": [
+      2.75,
+      0.905,
+      4.03
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Canopy25611_01",
+     "loc": [
+      2.75,
+      0.905,
+      4.03
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperBalcony_White_455_Back_01",
+     "loc": [
+      0.475,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window25620_01",
+     "loc": [
+      2.75,
+      0.905,
+      6.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_BalconyShort25620_White_01",
+     "loc": [
+      2.75,
+      0.905,
+      6.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Roof_NarrowShedLeft_White_455_01",
+     "loc": [
+      0.475,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DownpipeFoot_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_GutterShedSide_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_ElecMeter_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      0.222,
+      1.2975,
+      0.0
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcCover_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      5.278,
+      1.2975,
+      0.0
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_ServiceBoxFront_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AntennaPanel_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_VentCap150_01",
+     "loc": [
+      0.475,
+      4.105,
+      5.2
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window03613_BlackFrost_01",
+     "loc": [
+      1.875,
+      9.095,
+      3.83
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      2.5275,
+      9.095,
+      5.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      2.225,
+      9.095,
+      7.23
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      3.04,
+      9.095,
+      8.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiWallAc_Bracket_01",
+     "loc": [
+      4.025,
+      9.34,
+      4.0
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_NarrowWaterHeater_01",
+     "loc": [
+      1.325,
+      9.095,
+      0.0
+     ],
+     "rot_z": 3.141593
+    }
+   ]
+  },
+  {
+   "name": "PF_Narrow_Living455_WinBal_ShedL_White_EndR_01",
+   "lot": [
+    5.5,
+    10.0
+   ],
+   "tris": 5748,
+   "parts": [
+    {
+     "mesh": "SM_Floor_NarrowLiving_455_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Door08423_WoodOrange_01",
+     "loc": [
+      4.225,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_CanopyD08423_01",
+     "loc": [
+      4.225,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Lot_FunctionPost_Black_R_01",
+     "loc": [
+      4.225,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      2.075,
+      0.905,
+      1.63
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Canopy06909_01",
+     "loc": [
+      2.075,
+      0.905,
+      1.63
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperWindowEndR_White_455_Back_01",
+     "loc": [
+      0.475,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window25611_01",
+     "loc": [
+      2.75,
+      0.905,
+      4.03
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Canopy25611_01",
+     "loc": [
+      2.75,
+      0.905,
+      4.03
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperBalconyEndR_White_455_Back_01",
+     "loc": [
+      0.475,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window25620_01",
+     "loc": [
+      2.75,
+      0.905,
+      6.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_BalconyShort25620_White_01",
+     "loc": [
+      2.75,
+      0.905,
+      6.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Roof_NarrowShedLeft_White_455_01",
+     "loc": [
+      0.475,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DownpipeFoot_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_GutterShedSide_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_ElecMeter_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      0.222,
+      1.2975,
+      0.0
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcCover_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      5.278,
+      1.2975,
+      0.0
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_ServiceBoxFront_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AntennaPanel_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_VentCap150_01",
+     "loc": [
+      0.475,
+      4.105,
+      5.2
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window11907_01",
+     "loc": [
+      5.025,
+      5.505,
+      4.43
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window03603_Black_01",
+     "loc": [
+      5.025,
+      7.205,
+      4.83
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_VentCap100_01",
+     "loc": [
+      5.025,
+      6.555,
+      5.2
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window03613_Black_01",
+     "loc": [
+      5.025,
+      5.105,
+      6.83
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window03609_Black_01",
+     "loc": [
+      5.025,
+      7.205,
+      7.23
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_RangeHood_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      5.278,
+      8.4725,
+      0.0
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcCover_EndR_01",
+     "loc": [
+      5.025,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window03613_BlackFrost_01",
+     "loc": [
+      1.875,
+      9.095,
+      3.83
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      2.5275,
+      9.095,
+      5.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      2.225,
+      9.095,
+      7.23
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiWallAc_Bracket_01",
+     "loc": [
+      4.025,
+      9.34,
+      4.0
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_NarrowWaterHeater_01",
+     "loc": [
+      1.325,
+      9.095,
+      0.0
+     ],
+     "rot_z": 3.141593
+    }
+   ]
+  },
+  {
+   "name": "PF_Narrow_Living455_BalWin_ShedR_Yellow_01",
+   "lot": [
+    5.5,
+    10.0
+   ],
+   "tris": 3860,
+   "parts": [
+    {
+     "mesh": "SM_Floor_NarrowLiving_455_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Door08423_Black_01",
+     "loc": [
+      4.225,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_CanopyD08423_01",
+     "loc": [
+      4.225,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      2.075,
+      0.905,
+      1.63
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperBalcony_Yellow_455_Back_01",
+     "loc": [
+      0.475,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window25620_Shutter_01",
+     "loc": [
+      2.75,
+      0.905,
+      3.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_BalconyShort25620_Charcoal_01",
+     "loc": [
+      2.75,
+      0.905,
+      3.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperWindow_Yellow_455_Back_01",
+     "loc": [
+      0.475,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window25611_Shutter_01",
+     "loc": [
+      2.75,
+      0.905,
+      7.03
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Roof_NarrowShedRight_Yellow_455_01",
+     "loc": [
+      0.475,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DownpipeFoot_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_GutterShedSide_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_ElecMeter_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_WaterHeater_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      0.222,
+      1.2975,
+      0.0
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_ServiceBoxSide_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      2.225,
+      9.095,
+      4.23
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      3.04,
+      9.095,
+      5.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Opening_Window03613_BlackFrost_01",
+     "loc": [
+      1.875,
+      9.095,
+      6.83
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      2.5275,
+      9.095,
+      8.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiWallAc_Bracket_01",
+     "loc": [
+      4.025,
+      9.34,
+      7.0
+     ],
+     "rot_z": 3.141593
+    }
+   ]
+  },
+  {
+   "name": "PF_Narrow_Living455_Bal_Gable_Yellow_01",
+   "lot": [
+    5.5,
+    10.0
+   ],
+   "tris": 4556,
+   "parts": [
+    {
+     "mesh": "SM_Floor_NarrowLiving_455_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Door08423_WoodOrange_01",
+     "loc": [
+      4.225,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_CanopyD08423_01",
+     "loc": [
+      4.225,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Lot_FunctionPost_Silver_L_01",
+     "loc": [
+      4.225,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      2.075,
+      0.905,
+      1.63
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperBalcony_Yellow_455_Back_01",
+     "loc": [
+      0.475,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window25620_01",
+     "loc": [
+      2.75,
+      0.905,
+      3.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_BalconyShort25620_Yellow_01",
+     "loc": [
+      2.75,
+      0.905,
+      3.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Roof_NarrowGable_Yellow_455_01",
+     "loc": [
+      0.475,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window11907_01",
+     "loc": [
+      2.75,
+      0.905,
+      6.31
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DownpipeFoot_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_GutterGable_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DownpipeFoot_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_GutterGable_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_ElecMeter_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      0.222,
+      1.2975,
+      0.0
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AntennaPanel_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_VentCap150_01",
+     "loc": [
+      0.475,
+      4.105,
+      5.2
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_VentCap100_01",
+     "loc": [
+      5.025,
+      3.305,
+      5.2
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      2.225,
+      9.095,
+      4.23
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      3.04,
+      9.095,
+      5.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_NarrowWaterHeater_01",
+     "loc": [
+      1.325,
+      9.095,
+      0.0
+     ],
+     "rot_z": 3.141593
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,628 @@
+{
+ "pivot": "Blender Z-up, metres, rot_z radians; parts relative to the prefab pivot at the lot corner",
+ "prefabs": [
+  {
+   "name": "PF_Shop_Glass546_Liquor_WinBal_Flat_Cream_EndL_01",
+   "lot": [
+    6.5,
+    10.0
+   ],
+   "tris": 5364,
+   "parts": [
+    {
+     "mesh": "SM_Floor_ShopGround_546_DoorR_Tile_01",
+     "loc": [
+      0.52,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Door08423_WoodBrown_01",
+     "loc": [
+      5.32,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_ShopFrontS39_SlideR_Silver_01",
+     "loc": [
+      2.69,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_ShopFrontS39_SlideR_Decal_01",
+     "loc": [
+      2.69,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_ShopShutterS39_Open_01",
+     "loc": [
+      2.69,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_ShopFasciaS39_High_Liquor_01",
+     "loc": [
+      2.69,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperWindowEndL_Cream_546_Back_01",
+     "loc": [
+      0.52,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window25611_Shutter_01",
+     "loc": [
+      3.25,
+      0.905,
+      4.03
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperBalconyEndL_Cream_546_Back_01",
+     "loc": [
+      0.52,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window25620_Shutter_01",
+     "loc": [
+      3.25,
+      0.905,
+      6.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_BalconyShort25620_Cream_01",
+     "loc": [
+      3.25,
+      0.905,
+      6.17
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Roof_NarrowFlatPlain_Cream_546_01",
+     "loc": [
+      0.52,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DownpipeFoot_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DrainFlat_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      9.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_ElecMeter_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_WaterHeater_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      0.267,
+      1.2975,
+      0.0
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      6.233,
+      1.2975,
+      1.8
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcBracket_01",
+     "loc": [
+      6.233,
+      1.2975,
+      1.8
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AntennaPanel_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_VentCap100_01",
+     "loc": [
+      5.98,
+      3.305,
+      5.2
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window11907_01",
+     "loc": [
+      0.52,
+      5.505,
+      4.43
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window03603_Black_01",
+     "loc": [
+      0.52,
+      7.205,
+      4.83
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_VentCap100_01",
+     "loc": [
+      0.52,
+      6.555,
+      5.2
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window03613_Black_01",
+     "loc": [
+      0.52,
+      5.105,
+      6.83
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window03609_Black_01",
+     "loc": [
+      0.52,
+      7.205,
+      7.23
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_RangeHood_L_01",
+     "loc": [
+      0.52,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      0.267,
+      8.4725,
+      0.0
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcCover_EndL_01",
+     "loc": [
+      0.52,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window03613_BlackFrost_01",
+     "loc": [
+      2.42,
+      9.095,
+      3.83
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      3.0725,
+      9.095,
+      5.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Opening_Window06909_Grille_01",
+     "loc": [
+      2.82,
+      9.095,
+      7.23
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiWallAc_Bracket_01",
+     "loc": [
+      4.82,
+      9.34,
+      4.0
+     ],
+     "rot_z": 3.141593
+    }
+   ]
+  },
+  {
+   "name": "PF_Shop_Diner455_Ramen_Win_Gable_Yellow_EndR_01",
+   "lot": [
+    5.5,
+    10.0
+   ],
+   "tris": 5968,
+   "parts": [
+    {
+     "mesh": "SM_Floor_ShopGround_455_DoorR_Wood_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Door08423_WoodBrown_01",
+     "loc": [
+      4.375,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Lot_FunctionPost_Black_R_01",
+     "loc": [
+      4.375,
+      0.905,
+      0.27
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_ShopDinerS30_R_01",
+     "loc": [
+      2.195,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_ShopDinerS30_R_Noren_01",
+     "loc": [
+      2.195,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Chochin_01",
+     "loc": [
+      1.8,
+      0.952,
+      2.08
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_ShopShutterS30_Open_01",
+     "loc": [
+      2.195,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_ShopFasciaS30_High_Ramen_01",
+     "loc": [
+      2.195,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Floor_NarrowUpperWindowEndR_Yellow_455_Back_01",
+     "loc": [
+      0.475,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window25611_01",
+     "loc": [
+      2.75,
+      0.905,
+      4.03
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Canopy25611_01",
+     "loc": [
+      2.75,
+      0.905,
+      4.03
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Roof_NarrowGable_Yellow_455_01",
+     "loc": [
+      0.475,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window11907_01",
+     "loc": [
+      2.75,
+      0.905,
+      6.31
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DownpipeFoot_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_GutterGable_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_DownpipeFoot_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_Downpipe_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_GutterGable_R_01",
+     "loc": [
+      5.025,
+      0.905,
+      6.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_ElecMeter_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      0.222,
+      1.2975,
+      0.0
+     ],
+     "rot_z": -1.570796
+    },
+    {
+     "mesh": "SM_Fixture_ServiceBoxSide_L_01",
+     "loc": [
+      0.475,
+      0.905,
+      3.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Fixture_VentCap100_01",
+     "loc": [
+      5.025,
+      3.305,
+      5.2
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window11907_01",
+     "loc": [
+      5.025,
+      5.505,
+      4.43
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Opening_Window03603_Black_01",
+     "loc": [
+      5.025,
+      7.205,
+      4.83
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_VentCap100_01",
+     "loc": [
+      5.025,
+      6.555,
+      5.2
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcOutdoor_01",
+     "loc": [
+      5.278,
+      8.4725,
+      0.0
+     ],
+     "rot_z": 1.570796
+    },
+    {
+     "mesh": "SM_Fixture_AcCover_EndR_01",
+     "loc": [
+      5.025,
+      0.905,
+      0.0
+     ],
+     "rot_z": 0.0
+    },
+    {
+     "mesh": "SM_Opening_Window03613_BlackFrost_01",
+     "loc": [
+      1.875,
+      9.095,
+      3.83
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiVentHood_01",
+     "loc": [
+      2.5275,
+      9.095,
+      5.45
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_GetabakiWallAc_Bracket_01",
+     "loc": [
+      4.025,
+      9.34,
+      4.0
+     ],
+     "rot_z": 3.141593
+    },
+    {
+     "mesh": "SM_Fixture_NarrowWaterHeater_01",
+     "loc": [
+      1.325,
+      9.095,
+      0.0
+     ],
+     "rot_z": 3.141593
+    }
+   ]
+  }
+ ]
+}
