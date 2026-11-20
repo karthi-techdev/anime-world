@@ -7,7 +7,6 @@
 // 6. Bakes the retargeted clips into public/assets/3d/animations/vrm-json/${id}.json
 
 import fs from "fs";
-import path from "path";
 import * as THREE from "three";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 import { retargetMixamoAsset } from "../src/lib/mixamoRetarget";
@@ -120,41 +119,56 @@ for (const jumpId of ["Jumping", "Walking_Jump", "Running_Jump"]) {
     ty.push(Math.min(tl.getWorldPosition(tv).y, tr.getWorldPosition(tv).y));
     hh.push(hips.getWorldPosition(tv).y);
   }
-  const ground = Math.min(...ty), air = ty.map((y) => y > ground + 0.05);
-  let it = air.indexOf(true), il = air.lastIndexOf(true);
-  if (it < 0 || il - it < 6) {
-    it = Math.floor(M * 0.1);
-    il = Math.floor(M * 0.7);
+
+  let it: number, il: number;
+  let g: number, v0: number, rise: number, flight: number;
+
+  if (jumpId === "Walking_Jump") {
+    // Walking jump is a forward stride leap: takeoff at 0.09s, full landing step compression at 0.781s
+    it = Math.round(0.09 / dtc);
+    il = Math.round(0.781 / dtc);
+    flight = (il - it) * dtc;
+    rise = +(Math.max(...hh) - hh[0]).toFixed(3); // 0.444m actual clip rise
+    g = +(8 * rise / (flight * flight)).toFixed(2); // 7.44 m/s^2
+    v0 = +(g * flight / 2).toFixed(3); // 2.57 m/s
+  } else {
+    const ground = Math.min(...ty), air = ty.map((y) => y > ground + 0.05);
+    it = air.indexOf(true);
+    il = air.lastIndexOf(true);
+    if (it < 0 || il - it < 6) {
+      it = Math.floor(M * 0.1);
+      il = Math.floor(M * 0.7);
+    }
+    flight = (il - it) * dtc;
+
+    let s = [0, 0, 0, 0, 0], r = [0, 0, 0];
+    for (let k = it; k <= il; k++) {
+      const t = (k - it) * dtc, y = hh[k];
+      for (let p = 0; p < 5; p++) s[p] += t ** p;
+      for (let p = 0; p < 3; p++) r[p] += y * t ** p;
+    }
+    const A = [[s[4], s[3], s[2]], [s[3], s[2], s[1]], [s[2], s[1], s[0]]];
+    const det = (m: number[][]) =>
+      m[0][0] * (m[1][1] * m[2][2] - m[1][2] * m[2][1]) -
+      m[0][1] * (m[1][0] * m[2][2] - m[1][2] * m[2][0]) +
+      m[0][2] * (m[1][0] * m[2][1] - m[1][1] * m[2][0]);
+    const D = det(A);
+    const col = (c: number) => A.map((row, i) => row.map((v, j) => (j === c ? [r[2], r[1], r[0]][i] : v)));
+    const [qa] = [det(col(0)) / D];
+    const rawG = -2 * qa;
+    g = +(rawG > 4 && rawG < 25 ? rawG : (jumpId === "Running_Jump" ? 10.5 : 12.0)).toFixed(2);
+    v0 = +(g * flight / 2).toFixed(3);
+    rise = +((g * flight * flight) / 8).toFixed(3);
   }
-  const n = il - it + 1;
-  let s = [0, 0, 0, 0, 0], r = [0, 0, 0];
-  for (let k = it; k <= il; k++) {
-    const t = (k - it) * dtc, y = hh[k];
-    for (let p = 0; p < 5; p++) s[p] += t ** p;
-    for (let p = 0; p < 3; p++) r[p] += y * t ** p;
-  }
-  const A = [[s[4], s[3], s[2]], [s[3], s[2], s[1]], [s[2], s[1], s[0]]];
-  const det = (m: number[][]) =>
-    m[0][0] * (m[1][1] * m[2][2] - m[1][2] * m[2][1]) -
-    m[0][1] * (m[1][0] * m[2][2] - m[1][2] * m[2][0]) +
-    m[0][2] * (m[1][0] * m[2][1] - m[1][1] * m[2][0]);
-  const D = det(A);
-  const col = (c: number) => A.map((row, i) => row.map((v, j) => (j === c ? [r[2], r[1], r[0]][i] : v)));
-  const [qa, qb] = [det(col(0)) / D, det(col(1)) / D];
-  const flight = (il - it) * dtc;
-  const rawG = -2 * qa;
-  const g = rawG > 4 && rawG < 25 ? rawG : (jumpId === "Running_Jump" ? 10.5 : 12.0);
-  const v0 = g * flight / 2;
-  const rise = (g * flight * flight) / 8;
 
   jumps[jumpId] = {
     takeoff: +(it * dtc).toFixed(3),
     land: +(il * dtc).toFixed(3),
     flight: +flight.toFixed(3),
     dur: +dur.toFixed(3),
-    g: +g.toFixed(2),
-    v: +v0.toFixed(3),
-    rise: +rise.toFixed(3),
+    g,
+    v: v0,
+    rise,
   };
   console.log(`Jump Profile [${jumpId}]:`, jumps[jumpId]);
 }
@@ -182,6 +196,18 @@ for (const f of files) {
     },
     f
   );
+
+  // For Sitting_Ground, elevate hips by +0.10m so the character's pelvis/butt sits
+  // cleanly on top of the ground and the legs rest naturally without sinking
+  if (id === "Sitting_Ground") {
+    for (const track of rig.clip.tracks) {
+      if (track.name.endsWith("Hips.position")) {
+        for (let i = 0; i < track.values.length; i += 3) {
+          track.values[i + 1] += 0.10;
+        }
+      }
+    }
+  }
 
   const mixer = new THREE.AnimationMixer(model);
   const act = mixer.clipAction(rig.clip);

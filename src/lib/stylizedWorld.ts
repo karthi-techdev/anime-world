@@ -16,6 +16,7 @@ import { buildLegacyFlora, inLegacyZone } from "./legacyFlora";
 import type { LegacyFlora } from "./legacyFlora";
 import { loadPeakMaterials } from "./peakMaterials";
 import { createPeakWater } from "./peakWater";
+import { loadSchoolBuilding } from "./schoolBuilding";
 import type { AssetLibrary } from "./islandFlora";
 import { sampleRoadPath } from "./worldTypes";
 import type { RoadSample, WorldCollider, WorldContact, WorldLandmark, WorldSupport } from "./worldTypes";
@@ -146,7 +147,7 @@ function buildRoads(root: THREE.Group, layout: IslandLayout, batches: WorldBatch
   colliders.push({ id: "town-fountain", center: new THREE.Vector3(0, ground + 1.45, 0), size: new THREE.Vector3(5.8, 2.9, 5.8), yaw: 0, kind: "furniture" });
 }
 
-async function buildCivicLots(root: THREE.Group, assets: AssetLibrary, layout: IslandLayout, colliders: WorldCollider[]) {
+async function buildCivicLots(root: THREE.Group, assets: AssetLibrary, layout: IslandLayout, colliders: WorldCollider[], supports?: WorldSupport[]) {
   const wall = new THREE.MeshStandardMaterial({ color: 0xd8d0bd, roughness: 0.92 });
   const roof = new THREE.MeshStandardMaterial({ color: 0x4c5e63, roughness: 0.86 });
   const glass = new THREE.MeshStandardMaterial({ color: 0x83b7be, roughness: 0.24, metalness: 0.08 });
@@ -164,32 +165,30 @@ async function buildCivicLots(root: THREE.Group, assets: AssetLibrary, layout: I
       return mesh;
     };
     if (lot.kind === "school") {
-      const sw = 42, sd = 24, sh = 13.5;
-      const schoolRoof = new THREE.MeshStandardMaterial({ color: 0x3b6e8c, roughness: 0.8 });
-      const clockMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.4 });
-      const stairMat = new THREE.MeshStandardMaterial({ color: 0xa8a29e, roughness: 0.9 });
-      addBox(wall, 0, sh / 2, 0, sw, sh, sd);
-      addBox(schoolRoof, 0, sh + 1.2, 0, sw + 1.6, 2.4, sd + 1.6);
-      const tw = 8, td = 8, th = 6.5;
-      addBox(wall, 0, sh + th / 2, 0, tw, th, td);
-      addBox(schoolRoof, 0, sh + th + 1.2, 0, tw + 1.4, 2.2, td + 1.4);
-      addBox(clockMat, 0, sh + th * 0.65, td / 2 + 0.1, 2.4, 2.4, 0.2);
-      addBox(trim, 0, sh + th * 0.65, td / 2 + 0.15, 0.2, 1.0, 0.15);
-      for (let floor = 0; floor < 3; floor++) {
-        const fy = 2.4 + floor * 3.8;
-        for (const x of [-16, -11, -6, 6, 11, 16]) {
-          addBox(glass, x, fy, sd / 2 + 0.15, 3.2, 2.2, 0.15);
-          addBox(trim, x, fy, sd / 2 + 0.2, 3.4, 0.18, 0.12);
-          addBox(glass, x, fy, -sd / 2 - 0.15, 3.2, 2.2, 0.15);
+      try {
+        const school = await loadSchoolBuilding("/assets/3d/environment/school_building_new.glb", lot.y);
+        site.add(school.group);
+        if (supports) {
+          school.supports.forEach((s) => {
+            supports.push({
+              ...s,
+              id: `${site.name}-${s.id}`,
+              center: s.center.clone().applyEuler(new THREE.Euler(0, lot.ry, 0)).add(new THREE.Vector3(lot.x, 0, lot.z)),
+              yaw: s.yaw + lot.ry,
+            });
+          });
         }
+        school.colliders.forEach((c) => {
+          colliders.push({
+            ...c,
+            id: `${site.name}-${c.id}`,
+            center: c.center.clone().applyEuler(new THREE.Euler(0, lot.ry, 0)).add(new THREE.Vector3(lot.x, 0, lot.z)),
+            yaw: c.yaw + lot.ry,
+          });
+        });
+      } catch (err) {
+        console.error("Failed to load school_building_new.glb:", err);
       }
-      addBox(wall, 0, 2.5, sd / 2 + 2.5, 9, 5, 5);
-      addBox(schoolRoof, 0, 5.3, sd / 2 + 2.5, 10, 0.6, 5.8);
-      for (let step = 0; step < 4; step++) {
-        addBox(stairMat, 0, 0.25 + step * 0.3, sd / 2 + 5.2 + step * 0.6, 7.5 - step * 0.3, 0.3, 0.7);
-      }
-      makeCivicSign(site, "HIGHSCHOOL", 0, 5.8, sd / 2 + 5.1, 12);
-      colliders.push({ id: site.name, center: new THREE.Vector3(lot.x, lot.y + sh / 2, lot.z), size: new THREE.Vector3(sw, sh, sd), yaw: lot.ry, kind: "wall" });
       continue;
     }
     if (lot.kind === "park") {
@@ -490,7 +489,7 @@ export async function createStylizedWorld(
     buildRoads(details, layout, batches, colliders, supports);
     buildFields(details, layout, batches, quality);
     const lighthouse = buildHarbour(details, layout, batches, colliders, supports);
-    await buildCivicLots(details, assets, layout, colliders); check();
+    await buildCivicLots(details, assets, layout, colliders, supports); check();
     assets.own(details);
     onProgress?.("Fitting textured awnings, power poles and street details…");
     await buildStreetDetails(details, assets, layout, batches, colliders, quality); check(); assets.own(details);

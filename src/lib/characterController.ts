@@ -342,7 +342,32 @@ export class ThirdPersonController {
     this.velocity.y = this.takeV;
   }
 
+  public triggerJump(kind: "Jumping" | "Walking_Jump" | "Running_Jump" = "Jumping"): void {
+    if (this.isSitting || this.isSittingGround || this.isSleeping) {
+      this.isSitting = false;
+      this.isSittingGround = false;
+      this.isSleeping = false;
+    }
+    this.jumpKind = kind;
+    this.landTimer = 0;
+    const p = this.jumpProfile(kind);
+    this.windupTotal = Math.min(p.takeoff, MAX_WINDUP);
+    if (this.windupTotal > 0) {
+      this.windupTimer = this.windupTotal;
+    } else {
+      this.launch();
+    }
+  }
+
   public setManualAnimationOverride(animId: string): void {
+    if (animId === "Jumping" || animId === "Walking_Jump" || animId === "Running_Jump") {
+      this.isSitting = false;
+      this.isSittingGround = false;
+      this.isSleeping = false;
+      this.manualOverrideActive = false;
+      this.triggerJump(animId as "Jumping" | "Walking_Jump" | "Running_Jump");
+      return;
+    }
     if (animId === "Sitting") {
       this.isSitting = true;
       this.isSittingGround = false;
@@ -367,10 +392,7 @@ export class ThirdPersonController {
     if (
       animId === "Idle" ||
       animId === "Walking" ||
-      animId === "Running" ||
-      animId === "Jumping" ||
-      animId === "Walking_Jump" ||
-      animId === "Running_Jump"
+      animId === "Running"
     ) {
       this.isSitting = false;
       this.isSittingGround = false;
@@ -651,7 +673,7 @@ export class ThirdPersonController {
           const fast = Math.hypot(this.velocity.x, this.velocity.z) > 1.0;
           const lp = this.jumpProfile(this.jumpKind);
           this.landDuration = Math.min(
-            fast && impact <= HARD_LAND_SPEED ? LAND_MOVING : LAND_STILL,
+            fast && impact <= HARD_LAND_SPEED ? Math.max(0.08, lp.dur - lp.land) : LAND_STILL,
             Math.max(0, lp.dur - lp.land)
           );
           this.landTimer = this.landDuration;

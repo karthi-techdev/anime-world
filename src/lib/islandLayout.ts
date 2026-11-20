@@ -161,7 +161,7 @@ export function createIslandLayout(): IslandLayout {
 
   // Public buildings sit near, not on, their access roads; candidates are tried in stable order.
   for (const [kind, candidates, yaw, radius] of [
-    ["school", [[-145, -205], [-115, -190], [-175, -180], [120, 90]], 0, 32],
+    ["school", [[-145, -205], [-115, -190], [-175, -180], [120, 90]], 0, 56],
     ["supermarket", [[85, -120], [155, -80], [-70, 105], [260, 220]], Math.PI / 2, 24],
     ["apartment", [[-30, -130], [90, 120], [300, 280], [-200, 400]], Math.PI, 17],
   ] as const) {

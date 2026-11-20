@@ -139,6 +139,8 @@ export async function buildLegacyFlora(
 
   const heroBarkTex = new THREE.TextureLoader().load(`${ENV}/stylized_tree_bark.jpg`);
   heroBarkTex.colorSpace = THREE.SRGBColorSpace;
+  heroBarkTex.wrapS = THREE.RepeatWrapping;
+  heroBarkTex.wrapT = THREE.RepeatWrapping;
 
   for (const p of hero) {
     p.geo.deleteAttribute("color");
@@ -152,11 +154,16 @@ export async function buildLegacyFlora(
       windify(m, { bend: 0.0025, flutter: 0.04, puff: geoCenter(p.geo) });
     } else {
       const m = p.mat as THREE.MeshStandardMaterial;
+      const bTex = m.map || heroBarkTex;
+      if (bTex) {
+        bTex.wrapS = THREE.RepeatWrapping;
+        bTex.wrapT = THREE.RepeatWrapping;
+      }
       const trunkMat = new THREE.MeshStandardMaterial({
-        map: m.map || heroBarkTex,
-        roughness: 0.88,
-        metalness: 0.02,
-        color: new THREE.Color(0xdad6cd),
+        map: bTex,
+        roughness: 0.92,
+        metalness: 0.0,
+        color: new THREE.Color(0x4a3728),
         emissive: new THREE.Color(0x000000),
       });
       p.mat = trunkMat;

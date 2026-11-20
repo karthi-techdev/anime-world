@@ -386,7 +386,7 @@ export function ThreeCanvas({
         const offset = preset === "drone" ? new THREE.Vector3(100, 160, 180)
           : preset === "mountains" ? new THREE.Vector3(-170, 65, 180)
           : preset === "lake" ? new THREE.Vector3(80, 26, 100)
-          : preset === "school" ? new THREE.Vector3(30, 24, 48)
+          : preset === "school" ? new THREE.Vector3(45, 30, 75)
           : preset === "supermarket" ? new THREE.Vector3(48, 20, 20)
           : preset === "apartment" ? new THREE.Vector3(30, 20, -48)
           : preset === "park" ? new THREE.Vector3(35, 22, 38)
