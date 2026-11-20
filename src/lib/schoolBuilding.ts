@@ -36,6 +36,15 @@ export async function loadSchoolBuilding(
     scene.traverse((obj) => {
       const mesh = obj as THREE.Mesh;
       if (mesh.isMesh && mesh.geometry) {
+        const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+
+        // Filter out 2D billboard cutout trees and the 2D billboard character in the courtyard
+        const is2dTree = mats.some((m) => /uncle_mugen_tree|green_green\b/i.test(m?.name || ""));
+        const is2dCharacter = mats.some((m) => m?.name === "*3" || /\*3\b/i.test(m?.name || "")) || mesh.name === "empty_29577";
+        if (is2dTree || is2dCharacter) {
+          return;
+        }
+
         let geo = mesh.geometry.clone();
         geo.applyMatrix4(mesh.matrixWorld);
 
@@ -52,7 +61,6 @@ export async function loadSchoolBuilding(
           }
         }
 
-        const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
         for (const mat of mats) {
           if (!matGroups.has(mat)) {
             matGroups.set(mat, []);
