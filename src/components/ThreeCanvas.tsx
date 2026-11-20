@@ -14,6 +14,7 @@ import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPa
 import { OutputPass } from "three/examples/jsm/postprocessing/OutputPass.js";
 import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass.js";
 import { FXAAShader } from "three/examples/jsm/shaders/FXAAShader.js";
+import { ColorBoostShader } from "@/lib/colorBoostShader";
 import { createStylizedWorld, getWorldHeight, StylizedWorld } from "@/lib/stylizedWorld";
 import {
   ThirdPersonController,
@@ -111,6 +112,7 @@ export function ThreeCanvas({
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const composerRef = useRef<EffectComposer | null>(null);
   const bloomRef = useRef<UnrealBloomPass | null>(null);
+  const colorBoostRef = useRef<ShaderPass | null>(null);
   const fxaaRef = useRef<ShaderPass | null>(null);
   const maxPixelRatioRef = useRef(1);
   const adaptiveScaleRef = useRef(1);
@@ -319,9 +321,15 @@ export function ThreeCanvas({
     const bloom = bloomRef.current;
     if (bloom) {
       bloom.enabled = graphicsQuality !== "low";
-      bloom.strength = graphicsQuality === "high" ? 0.20 : 0.14;
+      bloom.strength = graphicsQuality === "high" ? 0.14 : 0.10;
       bloom.threshold = 0.85;
       bloom.radius = 0.65;
+    }
+
+    const colorBoost = colorBoostRef.current;
+    if (colorBoost) {
+      colorBoost.enabled = graphicsQuality !== "low";
+      colorBoost.uniforms["saturation"].value = 1.30;
     }
 
     const fxaa = fxaaRef.current;
@@ -558,6 +566,7 @@ export function ThreeCanvas({
     let composer: EffectComposer | null = null;
     let bloom: UnrealBloomPass | undefined;
     let output: OutputPass | undefined;
+    let colorBoost: ShaderPass | undefined;
     let fxaa: ShaderPass | undefined;
 
     try {
@@ -569,7 +578,7 @@ export function ThreeCanvas({
       composer.addPass(new RenderPass(scene, camera));
       bloom = new UnrealBloomPass(
         new THREE.Vector2(width, height),
-        graphicsQualityRef.current === "high" ? 0.20 : 0.14,
+        graphicsQualityRef.current === "high" ? 0.14 : 0.10,
         0.65,
         0.85
       );
@@ -577,6 +586,10 @@ export function ThreeCanvas({
       composer.addPass(bloom);
       output = new OutputPass();
       composer.addPass(output);
+
+      colorBoost = new ShaderPass(ColorBoostShader);
+      colorBoost.enabled = graphicsQualityRef.current !== "low";
+      composer.addPass(colorBoost);
 
       fxaa = new ShaderPass(FXAAShader);
       const pr = maxPixelRatioRef.current;
@@ -588,6 +601,7 @@ export function ThreeCanvas({
       composer.setSize(width, height);
       composerRef.current = composer;
       bloomRef.current = bloom;
+      colorBoostRef.current = colorBoost;
       fxaaRef.current = fxaa;
     } catch (e) {
       console.warn("EffectComposer initialization skipped, falling back to direct render:", e);
@@ -1013,6 +1027,8 @@ export function ThreeCanvas({
       controls.dispose();
       bloom?.dispose();
       output?.dispose();
+      colorBoost?.dispose();
+      colorBoostRef.current = null;
       fxaa?.dispose();
       fxaaRef.current = null;
       composer?.dispose();
