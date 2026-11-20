@@ -436,7 +436,7 @@ export async function createStylizedWorld(
     if (scene.fog === fog) scene.fog = oldFog;
     lights.traverse(o => { if (o instanceof THREE.DirectionalLight) o.shadow.dispose(); });
   };
-  const fog = new THREE.FogExp2(0xb8d8e8, quality === "low" ? 0.00018 : 0.00011);
+  const fog = new THREE.FogExp2(0xa8cee0, quality === "low" ? 0.00014 : 0.00008);
   signal?.addEventListener("abort", dispose, { once: true });
   try {
     onProgress?.("Reading the reference coastline and mountain height field…");
@@ -469,7 +469,7 @@ export async function createStylizedWorld(
     waters = createIslandWaters(hTex, sunDir, quality !== "low"); world.add(waters);
     if (quality !== "low") peakWater = createPeakWater(waters, renderer, scene);
     scene.add(world, lights, sky); scene.fog = fog;
-    const hemi = new THREE.HemisphereLight(0xdceeff, 0x86a654, 1.5), sun = new THREE.DirectionalLight(0xfff2e0, 2.4);
+    const hemi = new THREE.HemisphereLight(0xdceeff, 0x86a654, 1.4), sun = new THREE.DirectionalLight(0xfff0db, 2.1);
     const moon = new THREE.DirectionalLight(0x94b6eb, 0);
     moon.castShadow = false;
     sun.castShadow = true;

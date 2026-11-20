@@ -745,12 +745,12 @@ export function createIslandGrass(count: number, hTex: THREE.Texture, peak = fal
       shader.fragmentShader = shader.fragmentShader.replace("#include <common>", "#include <common>\nvarying float vBladeT,vBladeShade,vBladeAlive;uniform float uDay;")
         .replace("#include <map_fragment>", /* glsl */ `
           if(vBladeAlive<.5)discard;
-          vec3 tip=mix(vec3(.28,.62,.12),vec3(.48,.78,.18),vBladeShade);
-          diffuseColor.rgb*=mix(vec3(.10,.28,.05),tip,smoothstep(0.,1.,vBladeT));`)
+          vec3 tip=mix(vec3(.18,.56,.08),vec3(.34,.74,.14),vBladeShade);
+          diffuseColor.rgb*=mix(vec3(.06,.24,.03),tip,smoothstep(0.,1.,vBladeT));`)
         .replace("#include <normal_fragment_begin>", "float faceDirection=gl_FrontFacing?1.:-1.;vec3 normal=normalize(vNormal);vec3 nonPerturbedNormal=normal;");
       if (peak) shader.fragmentShader = shader.fragmentShader
-        .replace("vec3(.28,.62,.12),vec3(.48,.78,.18)", "vec3(.24,.54,.10),vec3(.44,.70,.16)")
-        .replace("vec3(.10,.28,.05)", "vec3(.08,.24,.04)");
+        .replace("vec3(.18,.56,.08),vec3(.34,.74,.14)", "vec3(.15,.50,.07),vec3(.30,.68,.12)")
+        .replace("vec3(.06,.24,.03)", "vec3(.05,.20,.025)");
     };
     const mesh = new THREE.Mesh(geometry, material); mesh.frustumCulled = false; mesh.receiveShadow = true;
     // Identical deformation in the shadow pass: shadows move with the curved blades.

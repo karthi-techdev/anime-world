@@ -321,15 +321,15 @@ export function ThreeCanvas({
     const bloom = bloomRef.current;
     if (bloom) {
       bloom.enabled = graphicsQuality !== "low";
-      bloom.strength = graphicsQuality === "high" ? 0.14 : 0.10;
-      bloom.threshold = 0.85;
-      bloom.radius = 0.65;
+      bloom.strength = graphicsQuality === "high" ? 0.045 : 0.03;
+      bloom.threshold = 0.92;
+      bloom.radius = 0.50;
     }
 
     const colorBoost = colorBoostRef.current;
     if (colorBoost) {
       colorBoost.enabled = graphicsQuality !== "low";
-      colorBoost.uniforms["saturation"].value = 1.30;
+      colorBoost.uniforms["saturation"].value = 1.45;
     }
 
     const fxaa = fxaaRef.current;
@@ -558,7 +558,7 @@ export function ThreeCanvas({
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFShadowMap;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.0;
+    renderer.toneMappingExposure = 0.96;
     container.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
@@ -578,9 +578,9 @@ export function ThreeCanvas({
       composer.addPass(new RenderPass(scene, camera));
       bloom = new UnrealBloomPass(
         new THREE.Vector2(width, height),
-        graphicsQualityRef.current === "high" ? 0.14 : 0.10,
-        0.65,
-        0.85
+        graphicsQualityRef.current === "high" ? 0.045 : 0.03,
+        0.50,
+        0.92
       );
       bloom.enabled = graphicsQualityRef.current !== "low";
       composer.addPass(bloom);
