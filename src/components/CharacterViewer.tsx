@@ -389,7 +389,7 @@ export function CharacterViewer() {
             {/* Live Control Pill + Play / Speed Controls */}
             <div className="flex items-center gap-2">
               <span className="hidden md:inline-block font-mono text-[10px] text-zinc-400 bg-zinc-950/70 px-2.5 py-1 rounded-lg border border-zinc-800/70">
-                WASD Move • Shift Sprint • Space Jump • C Crouch
+                WASD Move • Shift Sprint • Space Jump • C Crouch • K Sit • L Sleep
               </span>
 
               <button
@@ -466,10 +466,11 @@ export function CharacterViewer() {
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 font-mono text-[11px] pt-1">
                 <div><span className="text-blue-400 font-bold">WASD / Arrows:</span> Move</div>
                 <div><span className="text-blue-400 font-bold">Shift + Move:</span> Sprint</div>
-                <div><span className="text-blue-400 font-bold">Space:</span> Jump</div>
+                <div><span className="text-blue-400 font-bold">Space:</span> Jump (Idle/Walk/Run)</div>
                 <div><span className="text-blue-400 font-bold">C:</span> Toggle Crouch</div>
-                <div><span className="text-white font-bold">E:</span> Door nearby: open/close · else: dance</div>
-                <div><span className="text-white font-bold">I:</span> Idle Stance</div>
+                <div><span className="text-blue-400 font-bold">K:</span> Sit / Rest</div>
+                <div><span className="text-blue-400 font-bold">L:</span> Lie Down / Sleep</div>
+                <div><span className="text-white font-bold">E:</span> Door / Dance</div>
                 <div><span className="text-white font-bold">P:</span> Play/Pause</div>
               </div>
             </div>

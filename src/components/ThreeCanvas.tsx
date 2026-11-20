@@ -635,7 +635,7 @@ export function ThreeCanvas({
       initialYaw: Math.PI,
       worldHalfExtent: 2500,
       onLocomotionChange: (locomotion, timeScale = 1, jump) => {
-        const isJump = locomotion === "Jumping" || locomotion === "Running_Jump";
+        const isJump = locomotion === "Jumping" || locomotion === "Walking_Jump" || locomotion === "Running_Jump";
         playAnimation(locomotion, isJump ? 0.06 : 0.14);
         const act = activeActionRef.current;
         const jp = jumpProfilesRef.current[locomotion];
@@ -848,7 +848,9 @@ export function ThreeCanvas({
         // Parallel load essential locomotion clips first so the world becomes ready immediately
         const primaryAnims = ANIMATIONS.filter(a =>
           a.id === "Idle" || a.id === "Walking" || a.id === "Running" ||
-          a.id === "Jumping" || a.id === "Running_Jump" || a.id === "Crouch_Idle" || a.id === "Crouched_Walking"
+          a.id === "Jumping" || a.id === "Walking_Jump" || a.id === "Running_Jump" ||
+          a.id === "Sitting" || a.id === "Sleeping" ||
+          a.id === "Crouch_Idle" || a.id === "Crouched_Walking"
         );
         const secondaryAnims = ANIMATIONS.filter(a => !primaryAnims.includes(a));
 

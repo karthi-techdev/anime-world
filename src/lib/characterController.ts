@@ -8,7 +8,10 @@ export type LocomotionState =
   | "Walking"
   | "Running"
   | "Jumping"
+  | "Walking_Jump"
   | "Running_Jump"
+  | "Sitting"
+  | "Sleeping"
   | "Crouch_Idle"
   | "Crouched_Walking"
   | "Prone_Idle"
@@ -17,10 +20,10 @@ export type LocomotionState =
 // Speed the animation was authored for (m/s at 2.0 m height). Used to scale
 // playback so feet do not slide.
 const ANIM_STRIDE: Partial<Record<LocomotionState, number>> = {
-  Walking: 1.9,
-  Running: 4.9,
-  Crouched_Walking: 1.4,
-  Prone_Crawl: 0.7,
+  Walking: 1.62,
+  Running: 5.43,
+  Crouched_Walking: 1.20,
+  Prone_Crawl: 0.58,
 };
 
 export interface PlayerTelemetry {
@@ -104,13 +107,15 @@ export class ThirdPersonController {
   private isGrounded = true;
   private isCrouching = false;
   private isProne = false;
+  private isSitting = false;
+  private isSleeping = false;
   private strides: Partial<Record<string, number>> = {};
   private coyoteTimer = 0;
   private jumpBuffer = 0;
   private landTimer = 0;
   private landDuration = 0;
   private jumpProfiles: Record<string, JumpProfile> = {};
-  private jumpKind: "Jumping" | "Running_Jump" = "Jumping";
+  private jumpKind: "Jumping" | "Walking_Jump" | "Running_Jump" = "Jumping";
   private windupTimer = 0;
   private windupTotal = 0;
   private gravity = FALLBACK_JUMP.g;
@@ -233,12 +238,36 @@ export class ThirdPersonController {
     if (code === "KeyC" && !e.repeat) {
       this.isCrouching = !this.isCrouching;
       this.isProne = false;
+      this.isSitting = false;
+      this.isSleeping = false;
       this.manualOverrideActive = false;
     }
 
     if (code === "KeyX" && !e.repeat) {
       this.isProne = !this.isProne;
       this.isCrouching = false;
+      this.isSitting = false;
+      this.isSleeping = false;
+      this.manualOverrideActive = false;
+    }
+
+    if (code === "KeyK" && !e.repeat) {
+      this.isSitting = !this.isSitting;
+      if (this.isSitting) {
+        this.isSleeping = false;
+        this.isCrouching = false;
+        this.isProne = false;
+      }
+      this.manualOverrideActive = false;
+    }
+
+    if (code === "KeyL" && !e.repeat) {
+      this.isSleeping = !this.isSleeping;
+      if (this.isSleeping) {
+        this.isSitting = false;
+        this.isCrouching = false;
+        this.isProne = false;
+      }
       this.manualOverrideActive = false;
     }
 
@@ -283,10 +312,23 @@ export class ThirdPersonController {
 
   /** Start a jump: crouch wind-up first (grounded), or push off at once. */
   private beginJump(allowWindup: boolean): void {
+    if (this.isSitting || this.isSleeping) {
+      this.isSitting = false;
+      this.isSleeping = false;
+      return;
+    }
     const horiz = Math.hypot(this.velocity.x, this.velocity.z);
-    this.jumpKind = horiz > RUN_JUMP_SPEED ? "Running_Jump" : "Jumping";
+    if (horiz > 3.6 || this.getIsSprinting()) {
+      this.jumpKind = "Running_Jump";
+    } else if (horiz > 0.45) {
+      this.jumpKind = "Walking_Jump";
+    } else {
+      this.jumpKind = "Jumping";
+    }
     this.isCrouching = false;
     this.isProne = false;
+    this.isSitting = false;
+    this.isSleeping = false;
     this.landTimer = 0;
     const p = this.jumpProfile(this.jumpKind);
     this.windupTotal = allowWindup ? Math.min(p.takeoff, MAX_WINDUP) : 0;
@@ -301,6 +343,8 @@ export class ThirdPersonController {
     const p = this.jumpProfile(this.jumpKind);
     this.isCrouching = false;
     this.isProne = false;
+    this.isSitting = false;
+    this.isSleeping = false;
     this.isGrounded = false;
     this.coyoteTimer = 0;
     this.landTimer = 0;
@@ -314,8 +358,22 @@ export class ThirdPersonController {
   }
 
   public setManualAnimationOverride(animId: string): void {
+    if (animId === "Sitting") {
+      this.isSitting = true;
+      this.isSleeping = false;
+      this.manualOverrideActive = false;
+      return;
+    }
+    if (animId === "Sleeping") {
+      this.isSleeping = true;
+      this.isSitting = false;
+      this.manualOverrideActive = false;
+      return;
+    }
     if (animId === "Crouch_Idle" || animId === "Crouched_Walking") {
       this.isCrouching = true;
+      this.isSitting = false;
+      this.isSleeping = false;
       this.manualOverrideActive = false;
       return;
     }
@@ -323,9 +381,13 @@ export class ThirdPersonController {
       animId === "Idle" ||
       animId === "Walking" ||
       animId === "Running" ||
-      animId === "Jumping"
+      animId === "Jumping" ||
+      animId === "Walking_Jump" ||
+      animId === "Running_Jump"
     ) {
       this.isCrouching = false;
+      this.isSitting = false;
+      this.isSleeping = false;
       this.manualOverrideActive = false;
       return;
     }
@@ -427,9 +489,16 @@ export class ThirdPersonController {
     const shiftHeld = this.keys.has("ShiftLeft") || this.keys.has("ShiftRight");
     const isSprinting = hasInput && shiftHeld;
 
-    if (isSprinting && (this.isCrouching || this.isProne)) {
+    if (hasInput && (this.isSitting || this.isSleeping)) {
+      this.isSitting = false;
+      this.isSleeping = false;
+    }
+
+    if (isSprinting && (this.isCrouching || this.isProne || this.isSitting || this.isSleeping)) {
       this.isCrouching = false;
       this.isProne = false;
+      this.isSitting = false;
+      this.isSleeping = false;
     }
 
     if (this.landTimer > 0) this.landTimer = Math.max(0, this.landTimer - safeDt);
@@ -461,7 +530,7 @@ export class ThirdPersonController {
     }
 
     let targetSpeed: number;
-    if (!hasInput) targetSpeed = 0;
+    if (!hasInput || this.isSitting || this.isSleeping) targetSpeed = 0;
     else if (this.isProne) targetSpeed = this.speedFor("Prone_Crawl", PRONE_SPEED);
     else if (this.isCrouching) targetSpeed = this.speedFor("Crouched_Walking", CROUCH_SPEED);
     else if (isSprinting) targetSpeed = this.speedFor("Running", SPRINT_SPEED);
@@ -628,8 +697,12 @@ export class ThirdPersonController {
     let nextLocomotion: LocomotionState;
     if (!this.isGrounded || this.windupTimer > 0) {
       nextLocomotion = this.jumpKind;
-    } else if (this.landTimer > 0 && !this.isProne) {
+    } else if (this.landTimer > 0 && !this.isProne && !this.isSitting && !this.isSleeping) {
       nextLocomotion = this.jumpKind; // landing recovery
+    } else if (this.isSleeping) {
+      nextLocomotion = "Sleeping";
+    } else if (this.isSitting) {
+      nextLocomotion = "Sitting";
     } else if (this.isProne) {
       nextLocomotion = moving ? "Prone_Crawl" : "Prone_Idle";
     } else if (this.isCrouching) {
@@ -650,7 +723,7 @@ export class ThirdPersonController {
       this.currentLocomotion = nextLocomotion;
     }
     let jump: JumpAnim | undefined;
-    if (nextLocomotion === "Jumping" || nextLocomotion === "Running_Jump") {
+    if (nextLocomotion === "Jumping" || nextLocomotion === "Walking_Jump" || nextLocomotion === "Running_Jump") {
       if (!this.isGrounded) {
         jump = { stage: "air", t: this.airPhase(groundY), windup: 0 };
       } else if (this.windupTimer > 0) {
@@ -667,11 +740,15 @@ export class ThirdPersonController {
       this.onLocomotionChange(nextLocomotion, timeScale, jump);
     }
 
-    const desiredPivotHeight = this.isProne
-      ? 0.55
-      : this.isCrouching
-        ? CAMERA_PIVOT_CROUCH_HEIGHT
-        : CAMERA_PIVOT_HEIGHT;
+    const desiredPivotHeight = this.isSleeping
+      ? 0.45
+      : this.isSitting
+        ? 0.85
+        : this.isProne
+          ? 0.55
+          : this.isCrouching
+            ? CAMERA_PIVOT_CROUCH_HEIGHT
+            : CAMERA_PIVOT_HEIGHT;
     this.currentPivotHeight +=
       (desiredPivotHeight - this.currentPivotHeight) *
       (1 - Math.exp(-10 * safeDt));
