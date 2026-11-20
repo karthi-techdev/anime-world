@@ -713,12 +713,12 @@ export function createIslandGrass(count: number, hTex: THREE.Texture, peak = fal
         float distance=length(tile-uC.xz);vec2 hm=islandHM(tile);
         float gg=greenGround(tile,hm.r);float full=smoothstep(.66,.94,hm.g);float density=gg*lawnFine(tile);
         float fade=(1.-smoothstep(radius*.79,radius,distance))*${innerRadius ? `smoothstep(${innerRadius - 8}.,${innerRadius + 12}.,distance)` : "1."};
-        float alive=step(aBlade.w*.3,density)*step(.05,density)*step(.015,fade)*step(.6,hm.r);
-        float t=position.y,hr=fract(aBlade.x*127.1+aBlade.y*311.7+aBlade.w*74.7),height=(.35+1.6*hr)*(.8+.4*tnoise(tile*.07))*mix(.62,1.,density)*mix(.55,1.,full)*fade*alive;
+        float alive=step(aBlade.w*.2,density)*step(.03,density)*step(.015,fade)*step(.6,hm.r);
+        float t=position.y,hr=fract(aBlade.x*127.1+aBlade.y*311.7+aBlade.w*74.7),height=(.35+1.6*hr)*(.8+.4*tnoise(tile*.07))*mix(.62,1.,density)*mix(.55,1.,full)*fade*alive*0.40;
         float angle=aBlade.z*6.283185;vec2 side=vec2(cos(angle),sin(angle));
         float wind=sin(uTime*1.4+dot(tile,vec2(.035,.028)))+.38*sin(uTime*2.7+tile.x*.12);
         vec2 bend=vec2(.18,.12)*wind+vec2(-side.y,side.x)*(.12+aBlade.w*.12);
-        float width=${(radius > 100 ? 3.5 : radius > 40 ? 1.9 : 1).toFixed(2)}*(.0045+aBlade.w*.006)*(1.-pow(t,1.6))*alive;
+        float width=${(radius > 100 ? 3.8 : radius > 40 ? 2.2 : 1.25).toFixed(2)}*(.0045+aBlade.w*.006)*(1.-pow(t,1.6))*alive;
         p=vec3(tile.x,hm.r-.025+t*height,tile.y);
         p.xz+=side*position.x*width+bend*t*t*height;
         vec3 tangent=normalize(vec3(bend.x*2.*t,1.,bend.y*2.*t));

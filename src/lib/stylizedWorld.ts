@@ -465,7 +465,7 @@ export async function createStylizedWorld(
     spatial = new WorldSpatial({ terrain: getIslandHeight, water: sampleIslandWater, halfExtent: HALF });
     terrain = createIslandTerrain(hTex, peakMaterials?.terrain); world.add(terrain);
     lawnMask = new LawnMask(layout); lawnMask.update(0, 0);
-    grass = createIslandGrass(quality === "high" ? 420000 : quality === "medium" ? 260000 : 90000, hTex, quality === "high", lawnMask); world.add(grass.mesh);
+    grass = createIslandGrass(quality === "high" ? 540000 : quality === "medium" ? 360000 : 150000, hTex, quality === "high", lawnMask); world.add(grass.mesh);
     waters = createIslandWaters(hTex, sunDir, quality !== "low"); world.add(waters);
     if (quality !== "low") peakWater = createPeakWater(waters, renderer, scene);
     scene.add(world, lights, sky); scene.fog = fog;

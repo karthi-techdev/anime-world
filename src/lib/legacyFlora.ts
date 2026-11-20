@@ -137,12 +137,31 @@ export async function buildLegacyFlora(
   const treeOk = (pad: number) => (x: number, z: number) =>
     dry(x, z) && free(x, z, pad) && normalY(x, z) > 0.8 && fbm(x * 0.018, z * 0.018) > -0.05;
 
+  const heroBarkTex = new THREE.TextureLoader().load(`${ENV}/stylized_tree_bark.jpg`);
+  heroBarkTex.colorSpace = THREE.SRGBColorSpace;
+
   for (const p of hero) {
     p.geo.deleteAttribute("color");
-    const m = p.mat as THREE.MeshStandardMaterial;
-    m.vertexColors = false; m.color.set(0xffffff); m.emissive?.set(0x000000); m.roughness = 1; m.metalness = 0;
-    if (m.alphaTest > 0 || /leaves/i.test(m.name)) { foliage(m); windify(m, { bend: 0.0025, flutter: 0.04, puff: geoCenter(p.geo) }); }
-    else windify(m, { bend: 0.0025, flutter: 0 });
+    const isLeaves = isLeaf(p) || /leaves/i.test(p.mat.name) || (p.mat as THREE.MeshStandardMaterial).alphaTest > 0;
+    if (isLeaves) {
+      const m = p.mat as THREE.MeshStandardMaterial;
+      m.vertexColors = false;
+      m.color.set(0xffffff);
+      m.emissive?.set(0x000000);
+      foliage(m);
+      windify(m, { bend: 0.0025, flutter: 0.04, puff: geoCenter(p.geo) });
+    } else {
+      const m = p.mat as THREE.MeshStandardMaterial;
+      const trunkMat = new THREE.MeshStandardMaterial({
+        map: m.map || heroBarkTex,
+        roughness: 0.88,
+        metalness: 0.02,
+        color: new THREE.Color(0xdad6cd),
+        emissive: new THREE.Color(0x000000),
+      });
+      p.mat = trunkMat;
+      windify(p.mat, { bend: 0.0025, flutter: 0 });
+    }
   }
   const houseDist = createHouseDistance(layout);
   // crown reach from the trunk at scale 1 (m), measured from the GLB bounds
