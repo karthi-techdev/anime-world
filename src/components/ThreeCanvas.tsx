@@ -849,8 +849,7 @@ export function ThreeCanvas({
         const primaryAnims = ANIMATIONS.filter(a =>
           a.id === "Idle" || a.id === "Walking" || a.id === "Running" ||
           a.id === "Jumping" || a.id === "Walking_Jump" || a.id === "Running_Jump" ||
-          a.id === "Sitting" || a.id === "Sleeping" ||
-          a.id === "Crouch_Idle" || a.id === "Crouched_Walking"
+          a.id === "Sitting" || a.id === "Sitting_Ground" || a.id === "Sleeping"
         );
         const secondaryAnims = ANIMATIONS.filter(a => !primaryAnims.includes(a));
 

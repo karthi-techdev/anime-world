@@ -83,15 +83,12 @@ const LOOPS = new Set([
   "Idle",
   "Walking",
   "Running",
-  "Crouch_Idle",
-  "Crouched_Walking",
-  "Prone_Idle",
-  "Prone_Crawl",
   "Sitting",
+  "Sitting_Ground",
   "Sleeping",
   "Hip_Hop_Dancing",
 ]);
-const MOVING = new Set(["Walking", "Running", "Crouched_Walking", "Prone_Crawl"]);
+const MOVING = new Set(["Walking", "Running"]);
 const JUMPS = new Set(["Jumping", "Walking_Jump", "Running_Jump"]);
 
 const dir = "public/assets/3d/animations/mixamo";

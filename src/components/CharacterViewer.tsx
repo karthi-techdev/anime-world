@@ -38,7 +38,8 @@ export function CharacterViewer() {
     speed: 0,
     isGrounded: true,
     isSprinting: false,
-    isCrouching: false,
+    isSitting: false,
+    isSleeping: false,
     locomotion: "Idle",
   });
   const [nearbyDoor, setNearbyDoor] = useState<{ houseId: string; open: boolean } | null>(null);
@@ -143,18 +144,22 @@ export function CharacterViewer() {
                   ? "bg-amber-500/20 text-amber-300 border-amber-500/30"
                   : telemetry.isSprinting
                     ? "bg-purple-500/20 text-purple-300 border-purple-500/30"
-                    : telemetry.isCrouching
-                      ? "bg-cyan-500/20 text-cyan-300 border-cyan-500/30"
-                      : "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
+                    : telemetry.isSitting
+                      ? "bg-indigo-500/20 text-indigo-300 border-indigo-500/30"
+                      : telemetry.isSleeping
+                        ? "bg-blue-500/20 text-blue-300 border-blue-500/30"
+                        : "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
               }`}
             >
               {!telemetry.isGrounded
                 ? "AIRBORNE"
                 : telemetry.isSprinting
-                  ? "SPRINT"
-                  : telemetry.isCrouching
-                    ? "CROUCH"
-                    : "GROUNDED"}
+                  ? "RUNNING"
+                  : telemetry.isSitting
+                    ? "SITTING"
+                    : telemetry.isSleeping
+                      ? "SLEEPING"
+                      : "GROUNDED"}
             </span>
             <span className="text-zinc-300 font-mono text-[11px]">
               [{telemetry.x.toFixed(1)}, {telemetry.y.toFixed(2)}, {telemetry.z.toFixed(1)}]
@@ -389,7 +394,7 @@ export function CharacterViewer() {
             {/* Live Control Pill + Play / Speed Controls */}
             <div className="flex items-center gap-2">
               <span className="hidden md:inline-block font-mono text-[10px] text-zinc-400 bg-zinc-950/70 px-2.5 py-1 rounded-lg border border-zinc-800/70">
-                WASD Move • Shift Sprint • Space Jump • C Crouch • K Sit • L Sleep
+                WASD Move • Shift Run • Space Jump • K Sit (Chair) • J Sit (Ground) • L Sleep
               </span>
 
               <button
@@ -465,10 +470,10 @@ export function CharacterViewer() {
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 font-mono text-[11px] pt-1">
                 <div><span className="text-blue-400 font-bold">WASD / Arrows:</span> Move</div>
-                <div><span className="text-blue-400 font-bold">Shift + Move:</span> Sprint</div>
+                <div><span className="text-blue-400 font-bold">Shift + Move:</span> Run / Jog</div>
                 <div><span className="text-blue-400 font-bold">Space:</span> Jump (Idle/Walk/Run)</div>
-                <div><span className="text-blue-400 font-bold">C:</span> Toggle Crouch</div>
-                <div><span className="text-blue-400 font-bold">K:</span> Sit / Rest</div>
+                <div><span className="text-blue-400 font-bold">K:</span> Sit (Chair)</div>
+                <div><span className="text-blue-400 font-bold">J:</span> Sit (Ground)</div>
                 <div><span className="text-blue-400 font-bold">L:</span> Lie Down / Sleep</div>
                 <div><span className="text-white font-bold">E:</span> Door / Dance</div>
                 <div><span className="text-white font-bold">P:</span> Play/Pause</div>

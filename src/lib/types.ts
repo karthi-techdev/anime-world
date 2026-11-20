@@ -49,9 +49,8 @@ export const ANIM_FALLBACK: Record<string, string> = {
   Walking_Jump: "Jumping",
   Running_Jump: "Walking_Jump",
   Sitting: "Idle",
-  Sleeping: "Prone_Idle",
-  Prone_Idle: "Crouch_Idle",
-  Prone_Crawl: "Crouched_Walking",
+  Sitting_Ground: "Sitting",
+  Sleeping: "Idle",
 };
 
 export const ANIMATIONS: AnimationInfo[] = [
@@ -74,7 +73,7 @@ export const ANIMATIONS: AnimationInfo[] = [
   },
   {
     id: "Running",
-    name: "Sprint / Run",
+    name: "Run / Jog",
     category: "locomotion",
     jsonPath: "/assets/3d/animations/vrm-json/Running.json",
     loop: true,
@@ -106,39 +105,28 @@ export const ANIMATIONS: AnimationInfo[] = [
   },
   {
     id: "Sitting",
-    name: "Sitting",
+    name: "Sit (Chair)",
     category: "locomotion",
     jsonPath: "/assets/3d/animations/vrm-json/Sitting.json",
     loop: true,
     hotkey: "K",
   },
   {
+    id: "Sitting_Ground",
+    name: "Sit (Ground)",
+    category: "locomotion",
+    jsonPath: "/assets/3d/animations/vrm-json/Sitting_Ground.json",
+    loop: true,
+    hotkey: "J",
+  },
+  {
     id: "Sleeping",
-    name: "Sleeping",
+    name: "Sleep / Rest",
     category: "locomotion",
     jsonPath: "/assets/3d/animations/vrm-json/Sleeping.json",
     loop: true,
     hotkey: "L",
   },
-  {
-    id: "Crouch_Idle",
-    name: "Crouch Idle",
-    category: "locomotion",
-    jsonPath: "/assets/3d/animations/vrm-json/Crouch_Idle.json",
-    loop: true,
-    hotkey: "C",
-  },
-  {
-    id: "Crouched_Walking",
-    name: "Crouch Walk",
-    category: "locomotion",
-    jsonPath: "/assets/3d/animations/vrm-json/Crouched_Walking.json",
-    loop: true,
-    hotkey: "C+WASD",
-  },
-
-  { id: "Prone_Idle", name: "Prone Idle", category: "locomotion", jsonPath: "/assets/3d/animations/vrm-json/Prone_Idle.json", loop: true, hotkey: "X" },
-  { id: "Prone_Crawl", name: "Prone Crawl", category: "locomotion", jsonPath: "/assets/3d/animations/vrm-json/Prone_Crawl.json", loop: true },
   // Special
   {
     id: "Hip_Hop_Dancing",

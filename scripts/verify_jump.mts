@@ -1,4 +1,4 @@
-﻿// @ts-nocheck
+// @ts-nocheck
 // Offline jump check: npx tsx scripts/verify_jump.mts
 import * as THREE from "three";
 import fs from "node:fs";
@@ -16,7 +16,7 @@ function run(fps: number, mode: "idle" | "walk" | "run") {
     onLocomotionChange: (s: string, _ts: number, j: any) => { if (j) log.push({ s, st: j.stage, t: j.stage === "windup" ? j.windup > 0 ? j.t : 0 : j.t }); },
   });
   c.setJumpProfiles(jumps, S);
-  c.setStrideSpeeds({ Running: 5.43, Walking: 1.62 });
+  c.setStrideSpeeds({ Running: 4.24, Walking: 1.62 });
   const cam = new THREE.PerspectiveCamera(); cam.position.set(0, 3, 10);
   const ctl: any = { target: new THREE.Vector3(0, 1.4, 8.5), update() {} };
   const g = new THREE.Group();
