@@ -119,14 +119,31 @@ export function createIslandLayout(): IslandLayout {
   });
   const segments = roads.flatMap(road => {
     const samples = sampleRoadPath(road.points, 0.5);
-    return samples.slice(1).map((b, i) => ({ a: samples[i], b, width: road.width }));
+    return samples.slice(1).map((b, i) => {
+      const a = samples[i], width = road.width;
+      return { a, b, width, minX: Math.min(a.x, b.x) - width / 2, maxX: Math.max(a.x, b.x) + width / 2,
+        minZ: Math.min(a.z, b.z) - width / 2, maxZ: Math.max(a.z, b.z) + width / 2 };
+    });
   });
+  const roadCells = new Map<string, typeof segments>();
+  const roadCellSize = 64;
+  for (const segment of segments) {
+    for (let cx = Math.floor(segment.minX / roadCellSize); cx <= Math.floor(segment.maxX / roadCellSize); cx++) {
+      for (let cz = Math.floor(segment.minZ / roadCellSize); cz <= Math.floor(segment.maxZ / roadCellSize); cz++) {
+        const key = `${cx},${cz}`, list = roadCells.get(key) ?? [];
+        list.push(segment); roadCells.set(key, list);
+      }
+    }
+  }
   const distanceToRoad = (x: number, z: number) => {
+    const cellX = Math.floor(x / roadCellSize), cellZ = Math.floor(z / roadCellSize);
     let best = Infinity;
-    for (const { a, b, width } of segments) {
-      const dx = b.x - a.x, dz = b.z - a.z;
-      const t = THREE.MathUtils.clamp(((x - a.x) * dx + (z - a.z) * dz) / (dx * dx + dz * dz || 1), 0, 1);
-      best = Math.min(best, Math.hypot(x - a.x - t * dx, z - a.z - t * dz) - width / 2);
+    for (let dxCell = -1; dxCell <= 1; dxCell++) for (let dzCell = -1; dzCell <= 1; dzCell++) {
+      for (const { a, b, width } of roadCells.get(`${cellX + dxCell},${cellZ + dzCell}`) ?? []) {
+        const dx = b.x - a.x, dz = b.z - a.z;
+        const t = THREE.MathUtils.clamp(((x - a.x) * dx + (z - a.z) * dz) / (dx * dx + dz * dz || 1), 0, 1);
+        best = Math.min(best, Math.hypot(x - a.x - t * dx, z - a.z - t * dz) - width / 2);
+      }
     }
     return best;
   };

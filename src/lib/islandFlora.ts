@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { Cache } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { ENV, NATURE, fbm, rng, uTime, windify } from "./worldShared";
 import type { Part } from "./worldShared";
@@ -15,16 +16,22 @@ export interface AssetLibrary {
   dispose(): void;
 }
 
-/** Per-world promise cache and resource ownership; late loads cannot survive cancellation. */
+const SHARED_GLTF_SCENES = new Map<string, Promise<THREE.Group>>();
+
+/** Share decoded source models; each world gets its own mutable geometry and materials. */
 export function createAssetLibrary(signal?: AbortSignal): AssetLibrary {
+  Cache.enabled = true;
   const loader = new GLTFLoader(), cache = new Map<string, Promise<Part[]>>();
   const geometries = new Set<THREE.BufferGeometry>(), materials = new Set<THREE.Material>(), textures = new Set<THREE.Texture>();
+  const cacheKeys = new Set<string>();
   let disposed = false;
   const ownMaterial = (material: THREE.Material) => {
     materials.add(material);
-    for (const value of Object.values(material)) if (value instanceof THREE.Texture) textures.add(value);
+    for (const value of Object.values(material)) {
+      if (value instanceof THREE.Texture && !value.userData.sharedAssetTexture) textures.add(value);
+    }
     if (material instanceof THREE.ShaderMaterial) for (const uniform of Object.values(material.uniforms)) {
-      if (uniform.value instanceof THREE.Texture) textures.add(uniform.value);
+      if (uniform.value instanceof THREE.Texture && !uniform.value.userData.sharedAssetTexture) textures.add(uniform.value);
     }
   };
   const own = (root: THREE.Object3D) => root.traverse(object => {
@@ -36,31 +43,50 @@ export function createAssetLibrary(signal?: AbortSignal): AssetLibrary {
     for (const geo of geometries) geo.dispose();
     for (const mat of materials) mat.dispose();
     for (const tex of textures) tex.dispose();
-    geometries.clear(); materials.clear(); textures.clear(); cache.clear();
+    geometries.clear(); materials.clear(); textures.clear();
+    for (const url of cacheKeys) cache.delete(url);
+    cacheKeys.clear();
     disposed = true;
+  };
+  const loadScene = (url: string) => {
+    let promise = SHARED_GLTF_SCENES.get(url);
+    if (!promise) {
+      promise = loader.loadAsync(url).then(gltf => {
+        gltf.scene.traverse(object => {
+          if (!(object instanceof THREE.Mesh)) return;
+          const source = Array.isArray(object.material) ? object.material : [object.material];
+          for (const material of source) for (const value of Object.values(material)) {
+            if (value instanceof THREE.Texture) value.userData.sharedAssetTexture = true;
+          }
+        });
+        return gltf.scene;
+      }).catch(error => {
+        if (SHARED_GLTF_SCENES.get(url) === promise) SHARED_GLTF_SCENES.delete(url);
+        throw error;
+      });
+      SHARED_GLTF_SCENES.set(url, promise);
+    }
+    return promise;
   };
   return {
     own,
     load(url) {
       const cached = cache.get(url);
       if (cached) return cached;
-      const promise = loader.loadAsync(url).then(gltf => {
-        own(gltf.scene);
-        if (disposed || signal?.aborted) {
-          dispose();
-          throw new DOMException("Island loading cancelled", "AbortError");
-        }
-        gltf.scene.updateMatrixWorld(true);
+      const promise = loadScene(url).then(sourceScene => {
+        if (disposed || signal?.aborted) throw new DOMException("Island loading cancelled", "AbortError");
+        const source = sourceScene.clone(true);
+        sourceScene.updateMatrixWorld(true);
+        source.updateMatrixWorld(true);
         const parts: Part[] = [];
-        gltf.scene.traverse(object => {
+        source.traverse(object => {
           if (!(object instanceof THREE.Mesh)) return;
           const geo = object.geometry.clone().applyMatrix4(object.matrixWorld);
           geometries.add(geo);
-          const source = Array.isArray(object.material) ? object.material : [object.material];
-          if (source.length === 1) {
-            const mat = source[0].clone(); ownMaterial(mat); parts.push({ geo, mat });
+          const sourceMaterials = Array.isArray(object.material) ? object.material : [object.material];
+          if (sourceMaterials.length === 1) {
+            const mat = sourceMaterials[0].clone(); ownMaterial(mat); parts.push({ geo, mat });
           } else {
-            // Preserve glTF material groups instead of painting the whole model with material zero.
             for (const group of geo.groups) {
               const subset = geo.index ? geo.toNonIndexed() : geo.clone();
               for (const name of Object.keys(subset.attributes)) {
@@ -70,13 +96,14 @@ export function createAssetLibrary(signal?: AbortSignal): AssetLibrary {
                 subset.setAttribute(name, new THREE.BufferAttribute(array, attribute.itemSize, attribute.normalized));
               }
               subset.clearGroups(); geometries.add(subset);
-              const mat = source[group.materialIndex ?? 0].clone(); ownMaterial(mat); parts.push({ geo: subset, mat });
+              const mat = sourceMaterials[group.materialIndex ?? 0].clone(); ownMaterial(mat); parts.push({ geo: subset, mat });
             }
           }
         });
         return parts;
       });
       cache.set(url, promise);
+      cacheKeys.add(url);
       return promise;
     },
     dispose,
@@ -90,7 +117,7 @@ export interface IslandNature {
   colliders: WorldCollider[];
   treeCount: number;
   rockCount: number;
-  update(camera: THREE.Camera, player: THREE.Vector3): void;
+  update(camera: THREE.Camera, player: THREE.Vector3, dt?: number): void;
   peakEnabled: boolean;
   addPeakGround?(points: { x: number; y: number; z: number; scale: number; yaw: number }[], kind: "bush" | "flowers"): void;
   dispose(): void;
@@ -139,7 +166,7 @@ export async function buildIslandNature(
   const addBatches = (parts: Part[], points: Placement[], detailed: boolean, far: number, cast: boolean, tintLeaves = false) => {
     const chunks = new Map<string, Placement[]>();
     for (const p of points) {
-      const key = `${Math.floor(p.x / 128)},${Math.floor(p.z / 128)}`;
+      const key = `${Math.floor(p.x / 384)},${Math.floor(p.z / 384)}`;
       const list = chunks.get(key) ?? []; list.push(p); chunks.set(key, list);
     }
     for (const points of chunks.values()) {
@@ -157,7 +184,7 @@ export async function buildIslandNature(
         mesh.instanceMatrix.needsUpdate = true;
         mesh.computeBoundingSphere();
         if (mesh.boundingSphere) mesh.boundingSphere.radius += 3;
-        mesh.castShadow = cast; mesh.receiveShadow = true; mesh.frustumCulled = true;
+        mesh.castShadow = false; mesh.receiveShadow = true; mesh.frustumCulled = true;
         chunk.add(mesh);
       }
       root.add(chunk); batches.push({ group: chunk, centre, detailed, far, shadow: cast });
@@ -222,7 +249,6 @@ export async function buildIslandNature(
       parts.forEach(p => p.geo.translate(-centre.x, -box.min.y, -centre.z));
       const height = Math.max(box.max.y - box.min.y, 0.05), points: Placement[] = [];
       for (let tries = 0; points.length < perVariant && tries < perVariant * 50; tries++) {
-        // Half of flowers cluster around inhabitable roads/town, half across the island.
         const near = minHeight < 0.5 && tries % 2 === 0;
         const x = (rand() * 2 - 1) * (near ? 350 : HALF), z = (rand() * 2 - 1) * (near ? 350 : HALF);
         if (!canGrow(x, z, margin) || fbm(x * 0.024 + index * 9, z * 0.024) < 0.03) continue;
@@ -233,8 +259,8 @@ export async function buildIslandNature(
     });
     if (peak) peak.addGround(highPoints, minHeight < 0.5 ? "flowers" : "bush");
   };
-  scatter(bushes, quality === "high" ? 550 : quality === "medium" ? 350 : 80, 0.55, 1.7, detailDistance + 110, 1.5);
-  scatter(flowers, quality === "high" ? 1100 : quality === "medium" ? 700 : 140, 0.15, 0.4, quality === "high" ? 120 : 85, 0.3);
+  scatter(bushes, quality === "high" ? 550 : quality === "medium" ? 350 : 120, 0.55, 1.7, detailDistance + 110, 1.5);
+  scatter(flowers, quality === "high" ? 1100 : quality === "medium" ? 700 : 250, 0.15, 0.4, quality === "high" ? 120 : 85, 0.3);
 
   const rockParts = await assets.load(`${ENV}/free_pack_rocks_stylized_gltf/scene.gltf`); check();
   const rockLists: Placement[][] = rockParts.map(() => []);
@@ -262,12 +288,15 @@ export async function buildIslandNature(
   }
   rockLists.forEach((points, i) => addBatches([rockParts[i]], points, true, quality === "high" ? 1100 : 750, quality === "high"));
   assets.own(root);
-  let lastCamX = 1e9, lastCamZ = 1e9;
+  let lastCamX = 1e9, lastCamZ = 1e9, cullTimer = 0;
   return {
     group: root, colliders, treeCount: allTrees.length, rockCount,
     peakEnabled: Boolean(peak),
     addPeakGround(points, kind) { peak?.addGround(points, kind); },
-    update(camera, player) {
+    update(camera, player, dt = 0) {
+      cullTimer += dt;
+      if (cullTimer < (quality === "low" ? 0.12 : 0.06)) return;
+      cullTimer %= quality === "low" ? 0.12 : 0.06;
       peak?.update(camera, player);
       const camX = camera.position.x, camZ = camera.position.z;
       const moved = (camX - lastCamX) * (camX - lastCamX) + (camZ - lastCamZ) * (camZ - lastCamZ);
@@ -286,7 +315,9 @@ export async function buildIslandNature(
           if (batch.detailed && batch.group.visible) {
             const nearShadow = batch.centre.distanceToSquared(player) < 150 * 150 && batch.shadow;
             for (const child of batch.group.children) {
-              if (child instanceof THREE.Mesh) child.castShadow = nearShadow;
+              if (child instanceof THREE.Mesh && child.castShadow !== nearShadow) {
+                child.castShadow = nearShadow;
+              }
             }
           }
         }

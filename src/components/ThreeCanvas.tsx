@@ -37,6 +37,16 @@ export type CameraPreset =
   | "apartment";
 export type GraphicsQuality = "low" | "medium" | "high";
 
+function getPixelRatioCap(quality: GraphicsQuality): number {
+  const dpr = window.devicePixelRatio || 1;
+  const memory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory;
+  const constrained = (navigator.hardwareConcurrency || 8) <= 4 ||
+    (memory !== undefined && memory <= 4) || window.matchMedia("(max-width: 768px)").matches;
+  const cap = quality === "low" ? (constrained ? 0.85 : 1) :
+    quality === "medium" ? (constrained ? 1 : 1.25) : (constrained ? 1.1 : 1.5);
+  return Math.min(dpr, cap);
+}
+
 const FOLLOW_CAMERA_PRESETS: ReadonlySet<CameraPreset> = new Set([
   "full",
   "upper",
@@ -97,6 +107,10 @@ export function ThreeCanvas({
   const controlsRef = useRef<OrbitControls | null>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
+  const composerRef = useRef<EffectComposer | null>(null);
+  const bloomRef = useRef<UnrealBloomPass | null>(null);
+  const maxPixelRatioRef = useRef(1);
+  const adaptiveScaleRef = useRef(1);
 
   const charactersMapRef = useRef<Map<string, LoadedCharacter>>(new Map());
   const characterRef = useRef<LoadedCharacter | null>(null);
@@ -112,6 +126,8 @@ export function ThreeCanvas({
   }, [lightingMood]);
   const [loadingProgress, setLoadingProgress] = useState<number>(0);
   const [loadingText, setLoadingText] = useState<string>("Initializing Stylized World...");
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const [reloadToken, setReloadToken] = useState(0);
 
   // Mutable refs for state accessed inside animation frame loop & async callbacks
   const isPlayingRef = useRef(isPlaying);
@@ -286,19 +302,29 @@ export function ThreeCanvas({
   // Dynamic renderer quality tuning for low-end / mobile GPU support
   useEffect(() => {
     const renderer = rendererRef.current;
+    const composer = composerRef.current;
     if (!renderer) return;
 
-    if (graphicsQuality === "low") {
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.0));
-      renderer.shadowMap.enabled = false;
-    } else if (graphicsQuality === "medium") {
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
-      renderer.shadowMap.enabled = true;
-      renderer.shadowMap.type = THREE.PCFShadowMap;
-    } else {
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-      renderer.shadowMap.enabled = true;
-      renderer.shadowMap.type = THREE.PCFShadowMap;
+    const pixelRatio = getPixelRatioCap(graphicsQuality);
+    maxPixelRatioRef.current = pixelRatio;
+    renderer.setPixelRatio(pixelRatio);
+    composer?.setPixelRatio(pixelRatio);
+
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = graphicsQuality === "high" ? THREE.PCFSoftShadowMap : THREE.PCFShadowMap;
+
+    const bloom = bloomRef.current;
+    if (bloom) {
+      bloom.enabled = graphicsQuality !== "low";
+      bloom.strength = graphicsQuality === "high" ? 0.22 : 0.16;
+    }
+
+    const container = containerRef.current;
+    if (container) {
+      const width = Math.max(container.clientWidth || window.innerWidth || 800, 1);
+      const height = Math.max(container.clientHeight || window.innerHeight || 600, 1);
+      renderer.setSize(width, height);
+      composer?.setSize(width, height);
     }
     updateLights(lightingMoodRef.current, graphicsQuality);
   }, [graphicsQuality, updateLights]);
@@ -477,6 +503,8 @@ export function ThreeCanvas({
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
+    setLoadError(null);
+    setLoadingProgress(10);
 
     const width = Math.max(container.clientWidth || window.innerWidth || 800, 1);
     const height = Math.max(container.clientHeight || window.innerHeight || 600, 1);
@@ -505,50 +533,45 @@ export function ThreeCanvas({
       alpha: false,
       powerPreference: "high-performance",
     });
+    maxPixelRatioRef.current = getPixelRatioCap(graphicsQualityRef.current);
+    renderer.setPixelRatio(maxPixelRatioRef.current);
     renderer.setSize(width, height);
-    if (graphicsQualityRef.current === "low") {
-      renderer.setPixelRatio(1.0);
-      renderer.shadowMap.enabled = false;
-    } else {
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, graphicsQualityRef.current === "high" ? 1.5 : 1.25));
-      renderer.shadowMap.enabled = true;
-      renderer.shadowMap.type = THREE.PCFShadowMap;
-    }
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = graphicsQualityRef.current === "high" ? THREE.PCFSoftShadowMap : THREE.PCFShadowMap;
     renderer.toneMapping = THREE.NeutralToneMapping;
-    renderer.toneMappingExposure = 1.0;
+    renderer.toneMappingExposure = 1.05;
     container.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
-    // Soft HDR pipeline: only allocate composer on medium/high
+    // Keep the post-processing pipeline available across quality switches.
     let composer: EffectComposer | null = null;
     let bloom: UnrealBloomPass | undefined;
     let output: OutputPass | undefined;
 
-    if (graphicsQualityRef.current !== "low") {
-      try {
-        let renderTarget: THREE.WebGLRenderTarget;
-        try {
-          renderTarget = new THREE.WebGLRenderTarget(width, height, {
-            type: THREE.HalfFloatType,
-            samples: 4,
-          });
-        } catch {
-          renderTarget = new THREE.WebGLRenderTarget(width, height, {
-            samples: 2,
-          });
-        }
-        composer = new EffectComposer(renderer, renderTarget);
-        composer.addPass(new RenderPass(scene, camera));
-        bloom = new UnrealBloomPass(new THREE.Vector2(width, height), 0.22, 0.7, 0.92);
-        composer.addPass(bloom);
-        output = new OutputPass();
-        composer.addPass(output);
-        composer.setPixelRatio(renderer.getPixelRatio());
-        composer.setSize(width, height);
-      } catch (e) {
-        console.warn("EffectComposer initialization skipped, falling back to direct render:", e);
-        composer = null;
-      }
+    try {
+      const renderTarget = new THREE.WebGLRenderTarget(width, height, {
+        type: THREE.HalfFloatType,
+        samples: graphicsQualityRef.current === "high" ? 4 : graphicsQualityRef.current === "medium" ? 2 : 0,
+      });
+      composer = new EffectComposer(renderer, renderTarget);
+      composer.addPass(new RenderPass(scene, camera));
+      bloom = new UnrealBloomPass(
+        new THREE.Vector2(width, height),
+        graphicsQualityRef.current === "high" ? 0.22 : 0.16,
+        0.7,
+        0.92
+      );
+      bloom.enabled = graphicsQualityRef.current !== "low";
+      composer.addPass(bloom);
+      output = new OutputPass();
+      composer.addPass(output);
+      composer.setPixelRatio(maxPixelRatioRef.current);
+      composer.setSize(width, height);
+      composerRef.current = composer;
+      bloomRef.current = bloom;
+    } catch (e) {
+      console.warn("EffectComposer initialization skipped, falling back to direct render:", e);
+      composer = null;
     }
 
     // 4. OrbitControls
@@ -569,6 +592,7 @@ export function ThreeCanvas({
     updateLights(lightingMoodRef.current, graphicsQuality);
 
     // 6. Third-Person Character Movement & Camera Controller
+    let lastTelemetryAt = 0;
     const spawnX = 0;
     const spawnZ = 8.5;
     const controller = new ThirdPersonController({
@@ -607,7 +631,11 @@ export function ThreeCanvas({
         }
       },
       onTelemetry: (telemetry) => {
-        onTelemetryRef.current?.(telemetry);
+        const now = performance.now();
+        if (now - lastTelemetryAt >= 200) {
+          lastTelemetryAt = now;
+          onTelemetryRef.current?.(telemetry);
+        }
       },
       onInteract: () => {
         const world = worldRef.current;
@@ -634,7 +662,6 @@ export function ThreeCanvas({
     characterRef.current = null;
     charactersMapRef.current.clear();
     activeActionRef.current = null;
-    setLoadingProgress(10);
     setLoadingText("Initializing 3D World & Terrain…");
 
     async function loadAssets() {
@@ -839,13 +866,21 @@ export function ThreeCanvas({
     // 8. Animation & Render Loop
     let lastTime = performance.now();
     let animationFrameId: number;
-    let doorCheckTimer = 0;
+    let doorCheckTimer = 0, maintenanceTimer = 0;
+
+    const handleVisibility = () => {
+      lastTime = performance.now();
+      if (document.hidden) cancelAnimationFrame(animationFrameId);
+      else animationFrameId = requestAnimationFrame(animate);
+    };
 
     const animate = () => {
+      if (document.hidden) return;
       animationFrameId = requestAnimationFrame(animate);
 
       const now = performance.now();
-      const delta = (now - lastTime) / 1000;
+      const frameMs = Math.min(now - lastTime, 100);
+      const delta = frameMs / 1000;
       lastTime = now;
 
       const char = characterRef.current;
@@ -868,7 +903,11 @@ export function ThreeCanvas({
 
       controls.update();
       if (FOLLOW_CAMERA_PRESETS.has(cameraPresetRef.current)) controller.constrainCamera(camera, controls);
-      worldRef.current?.update(Math.min(delta, 0.1), camera, controls.target, controller.position);
+      maintenanceTimer += delta;
+      if (maintenanceTimer >= 0.033) {
+        worldRef.current?.update(maintenanceTimer, camera, controls.target, controller.position);
+        maintenanceTimer = 0;
+      }
 
       doorCheckTimer += delta;
       if (doorCheckTimer >= 0.1 || pendingDoorToggleRef.current) {
@@ -885,7 +924,7 @@ export function ThreeCanvas({
       }
 
       renderer.info.reset();
-      if (composer && graphicsQualityRef.current !== "low") {
+      if (composer) {
         composer.render(delta);
       } else {
         renderer.render(scene, camera);
@@ -911,12 +950,14 @@ export function ThreeCanvas({
     };
 
     window.addEventListener("resize", handleResize);
+    document.addEventListener("visibilitychange", handleVisibility);
 
     return () => {
       isCancelled = true;
       abortController.abort();
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener("resize", handleResize);
+      document.removeEventListener("visibilitychange", handleVisibility);
       controller.dispose();
       controllerRef.current = null;
       loadedWorld?.dispose();
@@ -949,6 +990,7 @@ export function ThreeCanvas({
       bloom?.dispose();
       output?.dispose();
       composer?.dispose();
+      if (composerRef.current === composer) composerRef.current = null;
       renderer.dispose();
       sceneRef.current = null;
       cameraRef.current = null;

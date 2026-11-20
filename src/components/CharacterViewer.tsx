@@ -28,7 +28,7 @@ export function CharacterViewer() {
   const [showSkeleton, setShowSkeleton] = useState<boolean>(false);
   const [lightingMood, setLightingMood] = useState<LightingMood>("tactical");
   const [cameraPreset, setCameraPreset] = useState<CameraPreset>("full");
-  const [graphicsQuality, setGraphicsQuality] = useState<GraphicsQuality>("low");
+  const [graphicsQuality, setGraphicsQuality] = useState<GraphicsQuality>("medium");
   const [showHelp, setShowHelp] = useState<boolean>(false);
   const [showPlaces, setShowPlaces] = useState<boolean>(false);
   const [telemetry, setTelemetry] = useState<PlayerTelemetry>({

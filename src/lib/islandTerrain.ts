@@ -758,14 +758,15 @@ export function createIslandGrass(count: number, hTex: THREE.Texture, peak = fal
     const depth = new THREE.MeshDepthMaterial({ depthPacking: THREE.RGBADepthPacking, side: THREE.DoubleSide });
     depth.customProgramCacheKey = () => `island-grass-depth-${radius}-${segments}-${peak ? "peak" : "base"}`;
     depth.onBeforeCompile = shader => { bendShader(shader, false); };
-    mesh.customDepthMaterial = depth; mesh.castShadow = count > 50000 && innerRadius === 0;
+    mesh.customDepthMaterial = depth; mesh.castShadow = !low && count > 50000 && innerRadius === 0;
     geometries.push(geometry); mats.push(material, depth); group.add(mesh);
   };
   const factor = count <= 50000 ? 1.5 : 2.6;
   const total = Math.max(0, Math.floor(count * factor)); // dense, thin, tall blades
-  make(Math.ceil(total * 0.3), 4, 26, 0, 741);
-  make(Math.floor(total * 0.36), 3, 64, 20, 577);
-  make(Math.floor(total * 0.56), 3, 150, 56, 913);
+  const low = count <= 50000;
+  make(Math.ceil(total * 0.3), low ? 3 : 4, 26, 0, 741);
+  make(Math.floor(total * 0.36), low ? 2 : 3, 64, 20, 577);
+  make(Math.floor(total * 0.56), low ? 2 : 3, 150, 56, 913);
   let disposed = false;
   return { mesh: group, group, centre, dispose() {
     if (disposed) return; disposed = true;

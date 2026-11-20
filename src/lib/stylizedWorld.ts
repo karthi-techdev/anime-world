@@ -147,15 +147,6 @@ function buildRoads(root: THREE.Group, layout: IslandLayout, batches: WorldBatch
 }
 
 async function buildCivicLots(root: THREE.Group, assets: AssetLibrary, layout: IslandLayout, colliders: WorldCollider[]) {
-  const schoolParts = await assets.load("/assets/3d/environment/school_building_new.glb");
-  const schoolBounds = new THREE.Box3();
-  for (const part of schoolParts) {
-    part.geo.computeBoundingBox();
-    if (part.geo.boundingBox) schoolBounds.union(part.geo.boundingBox);
-  }
-  const schoolSize = schoolBounds.getSize(new THREE.Vector3());
-  const schoolScale = 43 / Math.max(schoolSize.x, schoolSize.z, 1);
-  const schoolCenter = schoolBounds.getCenter(new THREE.Vector3());
   const wall = new THREE.MeshStandardMaterial({ color: 0xd8d0bd, roughness: 0.92 });
   const roof = new THREE.MeshStandardMaterial({ color: 0x4c5e63, roughness: 0.86 });
   const glass = new THREE.MeshStandardMaterial({ color: 0x83b7be, roughness: 0.24, metalness: 0.08 });
@@ -167,15 +158,38 @@ async function buildCivicLots(root: THREE.Group, assets: AssetLibrary, layout: I
     site.position.set(lot.x, lot.y, lot.z); site.rotation.y = lot.ry;
     site.name = `civic-${lot.kind}-${lot.seed}`;
     root.add(site);
+    const addBox = (material: THREE.Material, x: number, y: number, z: number, w: number, h: number, d: number) => {
+      const mesh = new THREE.Mesh(cube, material);
+      mesh.position.set(x, y, z); mesh.scale.set(w, h, d); mesh.castShadow = true; mesh.receiveShadow = true; site.add(mesh);
+      return mesh;
+    };
     if (lot.kind === "school") {
-      for (const part of schoolParts) {
-        part.geo.scale(schoolScale, schoolScale, schoolScale);
-        part.geo.translate(-schoolCenter.x * schoolScale, -schoolBounds.min.y * schoolScale, -schoolCenter.z * schoolScale);
-        const mesh = new THREE.Mesh(part.geo, part.mat);
-        mesh.castShadow = true; mesh.receiveShadow = true; site.add(mesh);
+      const sw = 42, sd = 24, sh = 13.5;
+      const schoolRoof = new THREE.MeshStandardMaterial({ color: 0x3b6e8c, roughness: 0.8 });
+      const clockMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.4 });
+      const stairMat = new THREE.MeshStandardMaterial({ color: 0xa8a29e, roughness: 0.9 });
+      addBox(wall, 0, sh / 2, 0, sw, sh, sd);
+      addBox(schoolRoof, 0, sh + 1.2, 0, sw + 1.6, 2.4, sd + 1.6);
+      const tw = 8, td = 8, th = 6.5;
+      addBox(wall, 0, sh + th / 2, 0, tw, th, td);
+      addBox(schoolRoof, 0, sh + th + 1.2, 0, tw + 1.4, 2.2, td + 1.4);
+      addBox(clockMat, 0, sh + th * 0.65, td / 2 + 0.1, 2.4, 2.4, 0.2);
+      addBox(trim, 0, sh + th * 0.65, td / 2 + 0.15, 0.2, 1.0, 0.15);
+      for (let floor = 0; floor < 3; floor++) {
+        const fy = 2.4 + floor * 3.8;
+        for (const x of [-16, -11, -6, 6, 11, 16]) {
+          addBox(glass, x, fy, sd / 2 + 0.15, 3.2, 2.2, 0.15);
+          addBox(trim, x, fy, sd / 2 + 0.2, 3.4, 0.18, 0.12);
+          addBox(glass, x, fy, -sd / 2 - 0.15, 3.2, 2.2, 0.15);
+        }
       }
-      makeCivicSign(site, "SCHOOL", 0, 5.2, 22, 13);
-      colliders.push({ id: site.name, center: new THREE.Vector3(lot.x, lot.y + 5, lot.z), size: new THREE.Vector3(43, 10, 36), yaw: lot.ry, kind: "wall" });
+      addBox(wall, 0, 2.5, sd / 2 + 2.5, 9, 5, 5);
+      addBox(schoolRoof, 0, 5.3, sd / 2 + 2.5, 10, 0.6, 5.8);
+      for (let step = 0; step < 4; step++) {
+        addBox(stairMat, 0, 0.25 + step * 0.3, sd / 2 + 5.2 + step * 0.6, 7.5 - step * 0.3, 0.3, 0.7);
+      }
+      makeCivicSign(site, "HIGHSCHOOL", 0, 5.8, sd / 2 + 5.1, 12);
+      colliders.push({ id: site.name, center: new THREE.Vector3(lot.x, lot.y + sh / 2, lot.z), size: new THREE.Vector3(sw, sh, sd), yaw: lot.ry, kind: "wall" });
       continue;
     }
     if (lot.kind === "park") {
@@ -189,11 +203,6 @@ async function buildCivicLots(root: THREE.Group, assets: AssetLibrary, layout: I
       }
       continue;
     }
-    const addBox = (material: THREE.Material, x: number, y: number, z: number, w: number, h: number, d: number) => {
-      const mesh = new THREE.Mesh(cube, material);
-      mesh.position.set(x, y, z); mesh.scale.set(w, h, d); mesh.castShadow = true; mesh.receiveShadow = true; site.add(mesh);
-      return mesh;
-    };
     if (lot.kind === "supermarket") {
       const w = 27, d = 20, h = 7.8, front = d / 2;
       addBox(wall, 0, h / 2, -d / 2, w, h, 0.35);
@@ -456,15 +465,15 @@ export async function createStylizedWorld(
     spatial = new WorldSpatial({ terrain: getIslandHeight, water: sampleIslandWater, halfExtent: HALF });
     terrain = createIslandTerrain(hTex, peakMaterials?.terrain); world.add(terrain);
     lawnMask = new LawnMask(layout); lawnMask.update(0, 0);
-    grass = createIslandGrass(quality === "high" ? 460000 : quality === "medium" ? 280000 : 24000, hTex, quality === "high", lawnMask); world.add(grass.mesh);
-    waters = createIslandWaters(hTex, sunDir, quality === "high"); world.add(waters);
-    if (quality === "high") peakWater = createPeakWater(waters, renderer, scene);
+    grass = createIslandGrass(quality === "high" ? 420000 : quality === "medium" ? 260000 : 90000, hTex, quality === "high", lawnMask); world.add(grass.mesh);
+    waters = createIslandWaters(hTex, sunDir, quality !== "low"); world.add(waters);
+    if (quality !== "low") peakWater = createPeakWater(waters, renderer, scene);
     scene.add(world, lights, sky); scene.fog = fog;
     const hemi = new THREE.HemisphereLight(0xd9edff, 0x8ba457, 1.6), sun = new THREE.DirectionalLight(0xffebcb, 3.05);
     const moon = new THREE.DirectionalLight(0x94b6eb, 0);
     moon.castShadow = false;
-    sun.castShadow = quality !== "low";
-    const shadowSize = quality === "high" ? 4096 : 2048;
+    sun.castShadow = true;
+    const shadowSize = quality === "high" ? 2048 : quality === "medium" ? 1024 : 512;
     sun.shadow.mapSize.set(shadowSize, shadowSize); sun.shadow.bias = -0.00025; sun.shadow.normalBias = 0.065; sun.shadow.radius = 4;
     sun.shadow.camera.near = 1; sun.shadow.camera.far = 950;
     lights.add(hemi, sun, sun.target, moon, moon.target);
@@ -505,7 +514,7 @@ export async function createStylizedWorld(
   let shadowHalf = 0, elapsed = 0, mood: LightingMood = "tactical";
   let daylight = initialCelestial.daylight, celestialTime = 0;
   let celestial = initialCelestial;
-  let lastBatchCamX = 1e9, lastBatchCamZ = 1e9;
+  let lastBatchCamX = 1e9, lastBatchCamZ = 1e9, peakWaterTime = 0;
     const loadedLawn = lawnMask, contact = spatial, loadedTerrain = terrain, loadedGrass = grass, loadedHouses = houses, loadedNature = nature;
     const metrics = { houses: houses.houses.length, trees: nature.treeCount + legacy.treeCount, rocks: nature.rockCount + legacy.rockCount, colliders: spatial.stats.colliders, supports: spatial.stats.supports };
     const result: StylizedWorld = {
@@ -521,36 +530,45 @@ export async function createStylizedWorld(
           celestialTime %= 1;
           celestial = getCelestialState(new Date());
         }
-        sunDir.copy(celestial.sun);
-        moonDir.copy(celestial.moon);
-        daylight += (celestial.daylight - daylight) * (1 - Math.exp(-delta * 1.1));
-        const dayFactor = mood === "tactical" ? daylight : mood === "cyber" ? 0 : 1;
+        if (mood === "tactical") {
+          sunDir.set(0.46, 0.82, 0.36).normalize();
+          daylight = 1.0;
+        } else {
+          sunDir.copy(celestial.sun);
+          moonDir.copy(celestial.moon);
+          daylight += (celestial.daylight - daylight) * (1 - Math.exp(-delta * 1.1));
+        }
+        const dayFactor = mood === "tactical" ? 1.0 : mood === "cyber" ? 0 : 1;
         skyUniforms.uDay.value = THREE.MathUtils.lerp(0.05, 1, dayFactor);
-        skyUniforms.uMoonlight.value = mood === "tactical" ? celestial.moonlight : mood === "cyber" ? 0.58 : 0;
+        skyUniforms.uMoonlight.value = mood === "tactical" ? 0 : mood === "cyber" ? 0.58 : 0;
         skyUniforms.uMoonVisible.value = mood === "studio" ? 0 : 1;
-        uDay.value = mood === "tactical" ? daylight : mood === "cyber" ? 0.16 : 1;
-        const moonFactor = mood === "tactical" ? celestial.moonlight : mood === "cyber" ? 0.58 : 0;
-        hemi.intensity = THREE.MathUtils.lerp(0.1, 1.65, dayFactor) + moonFactor * 0.18;
+        uDay.value = mood === "tactical" ? 1.0 : mood === "cyber" ? 0.16 : 1;
+        const moonFactor = mood === "cyber" ? 0.58 : 0;
+        hemi.intensity = THREE.MathUtils.lerp(0.1, 1.85, dayFactor) + moonFactor * 0.18;
         hemi.color.set(mood === "cyber" ? 0x44557a : 0xd9edff);
         hemi.groundColor.set(mood === "cyber" ? 0x111827 : 0x8ba457);
-        sun.intensity = 3.05 * dayFactor;
-        sun.color.set(daylight < 0.28 ? 0xffa269 : 0xffebcb);
+        sun.intensity = 3.3 * dayFactor;
+        sun.color.set(0xffebcb);
         moon.intensity = 0.52 * moonFactor;
-        scene.environmentIntensity = 0.08 + 0.52 * dayFactor + 0.08 * moonFactor;
-        fog.color.set(mood === "tactical" ? new THREE.Color(0x15243a).lerp(new THREE.Color(0xb4d4df), daylight) : mood === "cyber" ? 0x0a0f1d : 0x18181b);
+        scene.environmentIntensity = 0.1 + 0.65 * dayFactor;
+        fog.color.set(mood === "tactical" ? new THREE.Color(0xb4d4df) : mood === "cyber" ? 0x0a0f1d : 0x18181b);
         sky.position.copy(camera.position);
         loadedGrass.centre.copy(camera.position.distanceTo(target) < 300 ? camera.position : player);
         loadedLawn?.update(loadedGrass.centre.x, loadedGrass.centre.z);
         loadedTerrain.update(camera.position);
-        loadedHouses.update(delta, player, camera.position); loadedNature.update(camera, player);
-        peakWater?.update(delta, camera);
+        loadedHouses.update(delta, player, camera.position); loadedNature.update(camera, player, delta);
+        peakWaterTime += delta;
+        if (peakWaterTime >= 0.12) {
+          peakWater?.update(peakWaterTime, camera);
+          peakWaterTime %= 0.12;
+        }
         const camX = camera.position.x, camZ = camera.position.z;
         const moved = (camX - lastBatchCamX) * (camX - lastBatchCamX) + (camZ - lastBatchCamZ) * (camZ - lastBatchCamZ);
         if (moved > 2.25) {
           lastBatchCamX = camX; lastBatchCamZ = camZ;
           for (const batch of batches) {
             const distance = Math.hypot(batch.centre.x - camX, batch.centre.z - camZ);
-            const maxDist = quality === "low" ? Math.min(batch.distance, 450) : batch.distance;
+            const maxDist = quality === "low" ? Math.min(batch.distance, 650) : batch.distance;
             batch.group.visible = distance < maxDist;
           }
         }
@@ -558,7 +576,11 @@ export async function createStylizedWorld(
           for (const batch of batches) {
             if (batch.group.visible && batch.shadow) {
               const nearShadow = batch.centre.distanceToSquared(player) < 160 * 160;
-              for (const child of batch.group.children) if (child instanceof THREE.Mesh) child.castShadow = nearShadow;
+              for (const child of batch.group.children) {
+                if (child instanceof THREE.Mesh && child.castShadow !== nearShadow) {
+                  child.castShadow = nearShadow;
+                }
+              }
             }
           }
         }
@@ -567,7 +589,7 @@ export async function createStylizedWorld(
         if (Math.abs(half - shadowHalf) > half * 0.08) {
           shadowHalf = half; const c = sun.shadow.camera; c.left = c.bottom = -half; c.right = c.top = half; c.updateProjectionMatrix();
         }
-        sun.castShadow = quality !== "low" && distance < 500 && dayFactor > 0.12;
+        sun.castShadow = distance < 500 && dayFactor > 0.12;
         const snap = (shadowHalf * 2) / shadowSize * 4;
         sun.target.position.set(Math.round(player.x / snap) * snap, player.y, Math.round(player.z / snap) * snap);
         sun.position.copy(sun.target.position).addScaledVector(sunDir, 430);
