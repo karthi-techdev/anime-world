@@ -92,8 +92,11 @@ export async function buildLegacyFlora(
   const k = quality === "high" ? 1 : quality === "medium" ? 0.75 : 0.3; // density per quality
   const cast = quality !== "low";
   const rand = rng(42);
-  // "?legacy" gives this module its own geometry/material copies (the island nature mutates shared ones)
-  const load = (url: string) => assets.load(`${url}?legacy`);
+  // In-memory material clone reuses cached geometry without duplicate HTTP downloads of 20+ glTFs and heavy textures.
+  const load = async (url: string) => {
+    const parts = await assets.load(url);
+    return parts.map(p => ({ geo: p.geo, mat: p.mat.clone() }));
+  };
   const dry = (x: number, z: number) => getIslandHeight(x, z) > 1.4 && !sampleIslandWater(x, z);
   const free = (x: number, z: number, pad: number) => !layout.isReserved(x, z, pad);
   const green = (x: number, z: number) => grassMask(x, z) > 0.4;

@@ -262,19 +262,33 @@ export async function buildIslandNature(
   }
   rockLists.forEach((points, i) => addBatches([rockParts[i]], points, true, quality === "high" ? 1100 : 750, quality === "high"));
   assets.own(root);
+  let lastCamX = 1e9, lastCamZ = 1e9;
   return {
     group: root, colliders, treeCount: allTrees.length, rockCount,
     peakEnabled: Boolean(peak),
     addPeakGround(points, kind) { peak?.addGround(points, kind); },
     update(camera, player) {
       peak?.update(camera, player);
-      for (const batch of batches) {
-        const distance = batch.detailed ? batch.centre.distanceTo(camera.position)
-          : Math.hypot(batch.centre.x - camera.position.x, batch.centre.z - camera.position.z);
-        const viewDistance = batch.centre.distanceTo(camera.position);
-        batch.group.visible = distance < batch.far + 100 && (batch.detailed || viewDistance > detailDistance - 80);
-        if (batch.detailed && batch.group.visible) for (const child of batch.group.children) {
-          if (child instanceof THREE.Mesh) child.castShadow = quality !== "low" && batch.centre.distanceToSquared(player) < 150 * 150 && batch.shadow;
+      const camX = camera.position.x, camZ = camera.position.z;
+      const moved = (camX - lastCamX) * (camX - lastCamX) + (camZ - lastCamZ) * (camZ - lastCamZ);
+      if (moved > 2.25) {
+        lastCamX = camX;
+        lastCamZ = camZ;
+        for (const batch of batches) {
+          const distance = batch.detailed ? batch.centre.distanceTo(camera.position)
+            : Math.hypot(batch.centre.x - camX, batch.centre.z - camZ);
+          const viewDistance = batch.centre.distanceTo(camera.position);
+          batch.group.visible = distance < batch.far + 100 && (batch.detailed || viewDistance > detailDistance - 80);
+        }
+      }
+      if (quality !== "low") {
+        for (const batch of batches) {
+          if (batch.detailed && batch.group.visible) {
+            const nearShadow = batch.centre.distanceToSquared(player) < 150 * 150 && batch.shadow;
+            for (const child of batch.group.children) {
+              if (child instanceof THREE.Mesh) child.castShadow = nearShadow;
+            }
+          }
         }
       }
     },

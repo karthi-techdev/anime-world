@@ -193,25 +193,6 @@ export function ThreeCanvas({
     graphicsQualityRef.current = graphicsQuality;
   }, [graphicsQuality]);
 
-  // Dynamic renderer quality tuning for low-end / mobile GPU support
-  useEffect(() => {
-    const renderer = rendererRef.current;
-    if (!renderer) return;
-
-    if (graphicsQuality === "low") {
-      renderer.setPixelRatio(1.0);
-      renderer.shadowMap.enabled = false;
-    } else if (graphicsQuality === "medium") {
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
-      renderer.shadowMap.enabled = true;
-      renderer.shadowMap.type = THREE.PCFShadowMap;
-    } else {
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-      renderer.shadowMap.enabled = true;
-      renderer.shadowMap.type = THREE.PCFShadowMap;
-    }
-  }, [graphicsQuality]);
-
   // Atmospheric Lighting updater optimized for smooth FPS
   const updateLights = useCallback((mood: LightingMood, quality: GraphicsQuality) => {
     const lg = lightsGroupRef.current;
@@ -301,6 +282,26 @@ export function ThreeCanvas({
       lg.add(fill);
     }
   }, []);
+
+  // Dynamic renderer quality tuning for low-end / mobile GPU support
+  useEffect(() => {
+    const renderer = rendererRef.current;
+    if (!renderer) return;
+
+    if (graphicsQuality === "low") {
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.0));
+      renderer.shadowMap.enabled = false;
+    } else if (graphicsQuality === "medium") {
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFShadowMap;
+    } else {
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFShadowMap;
+    }
+    updateLights(lightingMoodRef.current, graphicsQuality);
+  }, [graphicsQuality, updateLights]);
 
   // Camera preset handler
   const setCameraView = useCallback((preset: CameraPreset) => {
@@ -477,6 +478,9 @@ export function ThreeCanvas({
     const container = containerRef.current;
     if (!container) return;
 
+    const width = Math.max(container.clientWidth || window.innerWidth || 800, 1);
+    const height = Math.max(container.clientHeight || window.innerHeight || 600, 1);
+
     // 1. Scene
     const scene = new THREE.Scene();
     sceneRef.current = scene;
@@ -487,7 +491,7 @@ export function ThreeCanvas({
     // 2. Camera: Up to 8km far plane
     const camera = new THREE.PerspectiveCamera(
       45,
-      container.clientWidth / container.clientHeight,
+      width / height,
       0.2,
       16000
     );
@@ -497,17 +501,16 @@ export function ThreeCanvas({
 
     // 3. Renderer with high performance & mediump precision for low-end device compatibility
     const renderer = new THREE.WebGLRenderer({
-      antialias: false, // MSAA happens in the composer target
+      antialias: false,
       alpha: false,
       powerPreference: "high-performance",
-      precision: "highp",
     });
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    if (graphicsQuality === "low") {
+    renderer.setSize(width, height);
+    if (graphicsQualityRef.current === "low") {
       renderer.setPixelRatio(1.0);
       renderer.shadowMap.enabled = false;
     } else {
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, graphicsQuality === "high" ? 1.5 : 1.25));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, graphicsQualityRef.current === "high" ? 1.5 : 1.25));
       renderer.shadowMap.enabled = true;
       renderer.shadowMap.type = THREE.PCFShadowMap;
     }
@@ -516,24 +519,37 @@ export function ThreeCanvas({
     container.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
-    // Soft HDR pipeline: MSAA target, gentle bloom, tone mapping at output
-    const composer = new EffectComposer(
-      renderer,
-      new THREE.WebGLRenderTarget(container.clientWidth, container.clientHeight, {
-        type: THREE.HalfFloatType,
-        samples: graphicsQuality === "low" ? 0 : 4,
-      })
-    );
-    composer.addPass(new RenderPass(scene, camera));
+    // Soft HDR pipeline: only allocate composer on medium/high
+    let composer: EffectComposer | null = null;
     let bloom: UnrealBloomPass | undefined;
-    if (graphicsQuality !== "low") {
-      bloom = new UnrealBloomPass(new THREE.Vector2(container.clientWidth, container.clientHeight), 0.22, 0.7, 0.92);
-      composer.addPass(bloom);
+    let output: OutputPass | undefined;
+
+    if (graphicsQualityRef.current !== "low") {
+      try {
+        let renderTarget: THREE.WebGLRenderTarget;
+        try {
+          renderTarget = new THREE.WebGLRenderTarget(width, height, {
+            type: THREE.HalfFloatType,
+            samples: 4,
+          });
+        } catch {
+          renderTarget = new THREE.WebGLRenderTarget(width, height, {
+            samples: 2,
+          });
+        }
+        composer = new EffectComposer(renderer, renderTarget);
+        composer.addPass(new RenderPass(scene, camera));
+        bloom = new UnrealBloomPass(new THREE.Vector2(width, height), 0.22, 0.7, 0.92);
+        composer.addPass(bloom);
+        output = new OutputPass();
+        composer.addPass(output);
+        composer.setPixelRatio(renderer.getPixelRatio());
+        composer.setSize(width, height);
+      } catch (e) {
+        console.warn("EffectComposer initialization skipped, falling back to direct render:", e);
+        composer = null;
+      }
     }
-    const output = new OutputPass();
-    composer.addPass(output);
-    composer.setPixelRatio(renderer.getPixelRatio());
-    composer.setSize(container.clientWidth, container.clientHeight);
 
     // 4. OrbitControls
     const controls = new OrbitControls(camera, renderer.domElement);
@@ -618,18 +634,18 @@ export function ThreeCanvas({
     characterRef.current = null;
     charactersMapRef.current.clear();
     activeActionRef.current = null;
-    setLoadingProgress(0);
-        setLoadingText("Building the island…");
+    setLoadingProgress(10);
+    setLoadingText("Initializing 3D World & Terrain…");
 
     async function loadAssets() {
       try {
-        setLoadingProgress(15);
+        setLoadingProgress(20);
         setLoadingText("Synthesizing Island Heightmap & Textures...");
 
-        const world = await createStylizedWorld(scene, renderer, graphicsQuality, (t) => {
+        const world = await createStylizedWorld(scene, renderer, graphicsQualityRef.current, (t) => {
           if (!isCancelled) {
             setLoadingText(t);
-            setLoadingProgress((prev) => Math.min(prev + 8, 68));
+            setLoadingProgress((prev) => Math.min(prev + 10, 68));
           }
         }, abortController.signal);
 
@@ -710,58 +726,72 @@ export function ThreeCanvas({
 
         const strides: Record<string, number> = {};
         const unitScale = model.scale.x || 1;
-        // foot-plant speeds + jump timing measured by scripts/verify_anims.mts
         let baked: Record<string, number> = {};
         let jumps: Record<string, JumpProfile> = {};
-        try {
-          const r = await fetch("/assets/3d/animations/mixamo/strides.json");
-          if (r.ok) baked = await r.json();
-        } catch {}
-        try {
-          const r = await fetch("/assets/3d/animations/mixamo/jumps.json");
-          if (r.ok) jumps = await r.json();
-        } catch {}
+
+        // Parallel metadata load for strides & jumps
+        const [rStrides, rJumps] = await Promise.all([
+          fetch("/assets/3d/animations/mixamo/strides.json").catch(() => null),
+          fetch("/assets/3d/animations/mixamo/jumps.json").catch(() => null),
+        ]);
+        if (rStrides && rStrides.ok) baked = await rStrides.json().catch(() => ({}));
+        if (rJumps && rJumps.ok) jumps = await rJumps.json().catch(() => ({}));
         jumpProfilesRef.current = jumps;
-        for (const anim of ANIMATIONS) {
+
+        const loadClip = async (anim: (typeof ANIMATIONS)[number]) => {
           if (isCancelled) return;
           try {
             let clip: THREE.AnimationClip | null = null;
-            try {
-              const jp = jumps[anim.id];
-              const r = await loadMixamoClip(
-                `/assets/3d/animations/mixamo/${anim.id}.fbx`,
-                model,
-                {
-                  loop: anim.loop,
-                  jumpArc: jp ? { takeoff: jp.takeoff, land: jp.land, v: jp.v, g: jp.g } : undefined,
-                  unitScale,
-                  vrmMetaVersion: (vrm as unknown as { meta?: { metaVersion?: string } } | null)?.meta?.metaVersion,
-                }
-              );
-              clip = r.clip;
-              const plant = baked[anim.id];
-              if (typeof plant === "number" && plant > 0) strides[anim.id] = plant;
-              else if (r.strideSpeed > 0) strides[anim.id] = r.strideSpeed;
-            } catch (e) {
-              console.warn(`[anim] ${anim.id}: mixamo retarget failed, using baked json`, e);
-              // no mixamo FBX for this id: fall back to old baked json
-              const res = await fetch(`/assets/3d/animations/vrm-json/${anim.id}.json`);
-              if (res.ok) clip = THREE.AnimationClip.parse(await res.json());
+            // 1. Check pre-baked VRM animation JSON first (fast JSON parse in ~1ms vs 300ms heavy FBX retargeting)
+            const res = await fetch(`/assets/3d/animations/vrm-json/${anim.id}.json`).catch(() => null);
+            if (res && res.ok) {
+              try {
+                clip = THREE.AnimationClip.parse(await res.json());
+                const plant = baked[anim.id];
+                if (typeof plant === "number" && plant > 0) strides[anim.id] = plant;
+              } catch {}
             }
-            if (isCancelled) return;
-            if (clip) {
-              clip.name = anim.id;
-              const action = mixer.clipAction(clip);
-              if (!anim.loop) {
-                action.setLoop(THREE.LoopOnce, 1);
-                action.clampWhenFinished = true;
-              }
-              actions.set(anim.id, action);
+            // 2. Fall back to Mixamo FBX retargeting if VRM JSON is not available
+            if (!clip && anim.id !== "Hip_Hop_Dancing") {
+              try {
+                const jp = jumps[anim.id];
+                const r = await loadMixamoClip(
+                  `/assets/3d/animations/mixamo/${anim.id}.fbx`,
+                  model,
+                  {
+                    loop: anim.loop,
+                    jumpArc: jp ? { takeoff: jp.takeoff, land: jp.land, v: jp.v, g: jp.g } : undefined,
+                    unitScale,
+                    vrmMetaVersion: (vrm as unknown as { meta?: { metaVersion?: string } } | null)?.meta?.metaVersion,
+                  }
+                );
+                clip = r.clip;
+                const plant = baked[anim.id];
+                if (typeof plant === "number" && plant > 0) strides[anim.id] = plant;
+                else if (r.strideSpeed > 0) strides[anim.id] = r.strideSpeed;
+              } catch {}
             }
+            if (isCancelled || !clip) return;
+            clip.name = anim.id;
+            const action = mixer.clipAction(clip);
+            if (!anim.loop) {
+              action.setLoop(THREE.LoopOnce, 1);
+              action.clampWhenFinished = true;
+            }
+            actions.set(anim.id, action);
           } catch {
             // ignore individual clip error
           }
-        }
+        };
+
+        // Parallel load essential locomotion clips first so the world becomes ready immediately
+        const primaryAnims = ANIMATIONS.filter(a =>
+          a.id === "Idle" || a.id === "Walking" || a.id === "Running" ||
+          a.id === "Jumping" || a.id === "Running_Jump" || a.id === "Crouch_Idle" || a.id === "Crouched_Walking"
+        );
+        const secondaryAnims = ANIMATIONS.filter(a => !primaryAnims.includes(a));
+
+        await Promise.all(primaryAnims.map(loadClip));
         if (isCancelled) return;
         controller.setStrideSpeeds(strides);
         controller.setJumpProfiles(jumps, unitScale);
@@ -787,8 +817,20 @@ export function ThreeCanvas({
         playAnimation(currentAnimationIdRef.current);
 
         if (onLoadedRef.current) onLoadedRef.current();
+
+        // Stream in emotes (dance, prone) in background without delaying entrance to the island
+        if (secondaryAnims.length > 0) {
+          Promise.all(secondaryAnims.map(loadClip)).then(() => {
+            if (!isCancelled) {
+              controller.setStrideSpeeds(strides);
+            }
+          });
+        }
       } catch (err) {
-        console.error("Failed loading assets:", err);
+        if (!isCancelled) {
+          console.error("Failed loading assets:", err);
+          setLoadingText("Failed loading island: " + (err instanceof Error ? err.message : String(err)));
+        }
       }
     }
 
@@ -797,6 +839,7 @@ export function ThreeCanvas({
     // 8. Animation & Render Loop
     let lastTime = performance.now();
     let animationFrameId: number;
+    let doorCheckTimer = 0;
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
@@ -826,17 +869,27 @@ export function ThreeCanvas({
       controls.update();
       if (FOLLOW_CAMERA_PRESETS.has(cameraPresetRef.current)) controller.constrainCamera(camera, controls);
       worldRef.current?.update(Math.min(delta, 0.1), camera, controls.target, controller.position);
-      const nearbyDoor = worldRef.current?.nearestDoor(controller.position) ?? null;
-      const priorDoor = nearbyDoorRef.current;
-      const doorChanged = pendingDoorToggleRef.current ||
-        priorDoor?.houseId !== nearbyDoor?.houseId || priorDoor?.open !== nearbyDoor?.open;
-      if (doorChanged) {
-        pendingDoorToggleRef.current = false;
-        nearbyDoorRef.current = nearbyDoor ? { houseId: nearbyDoor.houseId, open: nearbyDoor.open } : null;
-        onNearbyDoorChangeRef.current?.(nearbyDoor ? { houseId: nearbyDoor.houseId, open: nearbyDoor.open } : null);
+
+      doorCheckTimer += delta;
+      if (doorCheckTimer >= 0.1 || pendingDoorToggleRef.current) {
+        doorCheckTimer = 0;
+        const nearbyDoor = worldRef.current?.nearestDoor(controller.position) ?? null;
+        const priorDoor = nearbyDoorRef.current;
+        const doorChanged = pendingDoorToggleRef.current ||
+          priorDoor?.houseId !== nearbyDoor?.houseId || priorDoor?.open !== nearbyDoor?.open;
+        if (doorChanged) {
+          pendingDoorToggleRef.current = false;
+          nearbyDoorRef.current = nearbyDoor ? { houseId: nearbyDoor.houseId, open: nearbyDoor.open } : null;
+          onNearbyDoorChangeRef.current?.(nearbyDoor ? { houseId: nearbyDoor.houseId, open: nearbyDoor.open } : null);
+        }
       }
+
       renderer.info.reset();
-      composer.render(delta);
+      if (composer && graphicsQualityRef.current !== "low") {
+        composer.render(delta);
+      } else {
+        renderer.render(scene, camera);
+      }
       const debug = debugWindow.__islandDebug;
       if (debug?.renderer === renderer) {
         debug.frameMs.push(delta * 1000);
@@ -849,12 +902,12 @@ export function ThreeCanvas({
     // 9. Resize Listener
     const handleResize = () => {
       if (!container || !camera || !renderer) return;
-      const width = container.clientWidth;
-      const height = container.clientHeight;
+      const width = Math.max(container.clientWidth || window.innerWidth || 800, 1);
+      const height = Math.max(container.clientHeight || window.innerHeight || 600, 1);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
       renderer.setSize(width, height);
-      composer.setSize(width, height);
+      composer?.setSize(width, height);
     };
 
     window.addEventListener("resize", handleResize);
@@ -893,8 +946,9 @@ export function ThreeCanvas({
       characterRef.current = null;
       activeActionRef.current = null;
       controls.dispose();
-      bloom?.dispose(); output.dispose();
-      composer.dispose();
+      bloom?.dispose();
+      output?.dispose();
+      composer?.dispose();
       renderer.dispose();
       sceneRef.current = null;
       cameraRef.current = null;
@@ -905,7 +959,7 @@ export function ThreeCanvas({
         container.removeChild(renderer.domElement);
       }
     };
-  }, [updateLights, playAnimation, graphicsQuality, setCameraView]);
+  }, []);
 
   // Handle active character switching
   useEffect(() => {

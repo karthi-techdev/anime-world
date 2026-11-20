@@ -456,7 +456,7 @@ export async function createStylizedWorld(
     spatial = new WorldSpatial({ terrain: getIslandHeight, water: sampleIslandWater, halfExtent: HALF });
     terrain = createIslandTerrain(hTex, peakMaterials?.terrain); world.add(terrain);
     lawnMask = new LawnMask(layout); lawnMask.update(0, 0);
-    grass = createIslandGrass(quality === "high" ? 460000 : quality === "medium" ? 280000 : 48000, hTex, quality === "high", lawnMask); world.add(grass.mesh);
+    grass = createIslandGrass(quality === "high" ? 460000 : quality === "medium" ? 280000 : 24000, hTex, quality === "high", lawnMask); world.add(grass.mesh);
     waters = createIslandWaters(hTex, sunDir, quality === "high"); world.add(waters);
     if (quality === "high") peakWater = createPeakWater(waters, renderer, scene);
     scene.add(world, lights, sky); scene.fog = fog;
@@ -505,6 +505,7 @@ export async function createStylizedWorld(
   let shadowHalf = 0, elapsed = 0, mood: LightingMood = "tactical";
   let daylight = initialCelestial.daylight, celestialTime = 0;
   let celestial = initialCelestial;
+  let lastBatchCamX = 1e9, lastBatchCamZ = 1e9;
     const loadedLawn = lawnMask, contact = spatial, loadedTerrain = terrain, loadedGrass = grass, loadedHouses = houses, loadedNature = nature;
     const metrics = { houses: houses.houses.length, trees: nature.treeCount + legacy.treeCount, rocks: nature.rockCount + legacy.rockCount, colliders: spatial.stats.colliders, supports: spatial.stats.supports };
     const result: StylizedWorld = {
@@ -543,10 +544,23 @@ export async function createStylizedWorld(
         loadedTerrain.update(camera.position);
         loadedHouses.update(delta, player, camera.position); loadedNature.update(camera, player);
         peakWater?.update(delta, camera);
-        for (const batch of batches) {
-          const distance = Math.hypot(batch.centre.x - camera.position.x, batch.centre.z - camera.position.z);
-          batch.group.visible = distance < batch.distance;
-          for (const child of batch.group.children) if (child instanceof THREE.Mesh) child.castShadow = batch.shadow && batch.centre.distanceToSquared(player) < 160 * 160;
+        const camX = camera.position.x, camZ = camera.position.z;
+        const moved = (camX - lastBatchCamX) * (camX - lastBatchCamX) + (camZ - lastBatchCamZ) * (camZ - lastBatchCamZ);
+        if (moved > 2.25) {
+          lastBatchCamX = camX; lastBatchCamZ = camZ;
+          for (const batch of batches) {
+            const distance = Math.hypot(batch.centre.x - camX, batch.centre.z - camZ);
+            const maxDist = quality === "low" ? Math.min(batch.distance, 450) : batch.distance;
+            batch.group.visible = distance < maxDist;
+          }
+        }
+        if (quality !== "low") {
+          for (const batch of batches) {
+            if (batch.group.visible && batch.shadow) {
+              const nearShadow = batch.centre.distanceToSquared(player) < 160 * 160;
+              for (const child of batch.group.children) if (child instanceof THREE.Mesh) child.castShadow = nearShadow;
+            }
+          }
         }
         // Tight player-following sun shadows, rather than a 5km low-resolution shadow map.
         const distance = camera.position.distanceTo(target), half = THREE.MathUtils.clamp(distance * 1.45, 55, 180);

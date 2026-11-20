@@ -612,8 +612,11 @@ export function createHouses(spots: readonly HouseSpot[], peakMaterials?: PeakMa
   const doorRange = 3.4;
   const nearestDoor = (playerPosition: THREE.Vector3, maxDistance = doorRange) => {
     let best: { runtime: HouseRuntime; distance: number } | null = null;
+    const px = playerPosition.x, pz = playerPosition.z;
     for (const runtime of runtimes) {
-      const distance = playerPosition.distanceTo(runtime.record.doorway);
+      const dw = runtime.record.doorway;
+      if (Math.abs(px - dw.x) > maxDistance || Math.abs(pz - dw.z) > maxDistance) continue;
+      const distance = playerPosition.distanceTo(dw);
       if (distance <= maxDistance && (!best || distance < best.distance)) best = { runtime, distance };
     }
     return best;
@@ -663,9 +666,11 @@ export function createHouses(spots: readonly HouseSpot[], peakMaterials?: PeakMa
       if (disposed) return;
       const doorBlend = 1 - Math.exp(-Math.max(0, dt) * 9);
       for (const runtime of runtimes) {
-        runtime.door.angle += (runtime.door.target - runtime.door.angle) * doorBlend;
-        runtime.door.hinges.forEach(hinge => { hinge.rotation.y = runtime.door.angle; });
-        runtime.updateDoorCollider?.();
+        if (Math.abs(runtime.door.target - runtime.door.angle) > 0.0008) {
+          runtime.door.angle += (runtime.door.target - runtime.door.angle) * doorBlend;
+          runtime.door.hinges.forEach(hinge => { hinge.rotation.y = runtime.door.angle; });
+          runtime.updateDoorCollider?.();
+        }
       }
       cullTime += Math.max(0, dt);
       // Cadence cap is independent of render FPS; a newly entered house cannot have hidden rooms.

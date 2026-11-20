@@ -14,18 +14,36 @@ export interface IslandMaterials {
 }
 
 /** Decode only local, reviewed images; never run any asset-generation scripts. */
-export async function readIslandImage(url: string): Promise<ImageData> {
-  const image = new Image();
-  image.decoding = "async";
-  image.src = url;
-  await image.decode();
-  const canvas = document.createElement("canvas");
-  canvas.width = image.naturalWidth;
-  canvas.height = image.naturalHeight;
-  const context = canvas.getContext("2d", { willReadFrequently: true });
-  if (!context) throw new Error("Island textures require a 2D canvas context");
-  context.drawImage(image, 0, 0);
-  return context.getImageData(0, 0, canvas.width, canvas.height);
+export function readIslandImage(url: string): Promise<ImageData> {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.crossOrigin = "anonymous";
+    image.decoding = "async";
+    const extract = () => {
+      try {
+        const canvas = document.createElement("canvas");
+        canvas.width = image.naturalWidth || image.width || 1;
+        canvas.height = image.naturalHeight || image.height || 1;
+        const context = canvas.getContext("2d", { willReadFrequently: true });
+        if (!context) {
+          reject(new Error("Island textures require a 2D canvas context"));
+          return;
+        }
+        context.drawImage(image, 0, 0);
+        resolve(context.getImageData(0, 0, canvas.width, canvas.height));
+      } catch (err) {
+        reject(err);
+      }
+    };
+    image.onload = () => extract();
+    image.onerror = (e) => reject(new Error(`Failed to load island texture: ${url}`));
+    image.src = url;
+    if (image.complete && image.naturalWidth > 0) {
+      extract();
+    } else if (typeof image.decode === "function") {
+      image.decode().then(extract).catch(() => {});
+    }
+  });
 }
 
 function layer(image: ImageData, low: THREE.Color, high: THREE.Color, relief: number): IslandLayer {

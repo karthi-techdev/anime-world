@@ -111,6 +111,7 @@ function abortError(): DOMException { return new DOMException("Island initializa
 /** Shared data load, independently cancellable by each caller; failed loads may be retried. */
 export async function loadIslandData(signal?: AbortSignal): Promise<void> {
   if (signal?.aborted) throw abortError();
+  if (sourceHeight && sourceSplat && materials && sourceTexture) return;
   if (!loading) {
     const generation = dataGeneration;
     loading = (async () => {
@@ -524,8 +525,11 @@ export function createIslandTerrain(hTex: THREE.Texture, peak?: TerrainDetail): 
     mesh.name = `Terrain ${cx},${cz}`; mesh.receiveShadow = true;
     group.add(mesh); chunks.push({ mesh, levels: new Map([[4, geometry]]), cx, cz, stride: 4 });
   }
+  const lastCameraPos = new THREE.Vector3(-1e9, -1e9, -1e9);
   group.update = camera => {
     const position = camera instanceof THREE.Vector3 ? camera : camera.position;
+    if (position.distanceToSquared(lastCameraPos) < 16) return;
+    lastCameraPos.copy(position);
     for (const chunk of chunks) {
       const x = -HALF + (chunk.cx + 0.5) * CHUNK_SIZE, z = -HALF + (chunk.cz + 0.5) * CHUNK_SIZE;
       const distance = Math.hypot(position.x - x, position.y - getIslandHeight(x, z), position.z - z);
@@ -754,10 +758,11 @@ export function createIslandGrass(count: number, hTex: THREE.Texture, peak = fal
     const depth = new THREE.MeshDepthMaterial({ depthPacking: THREE.RGBADepthPacking, side: THREE.DoubleSide });
     depth.customProgramCacheKey = () => `island-grass-depth-${radius}-${segments}-${peak ? "peak" : "base"}`;
     depth.onBeforeCompile = shader => { bendShader(shader, false); };
-    mesh.customDepthMaterial = depth; mesh.castShadow = innerRadius === 0;
+    mesh.customDepthMaterial = depth; mesh.castShadow = count > 50000 && innerRadius === 0;
     geometries.push(geometry); mats.push(material, depth); group.add(mesh);
   };
-  const total = Math.max(0, Math.floor(count * 2.6)); // dense, thin, tall blades
+  const factor = count <= 50000 ? 1.5 : 2.6;
+  const total = Math.max(0, Math.floor(count * factor)); // dense, thin, tall blades
   make(Math.ceil(total * 0.3), 4, 26, 0, 741);
   make(Math.floor(total * 0.36), 3, 64, 20, 577);
   make(Math.floor(total * 0.56), 3, 150, 56, 913);

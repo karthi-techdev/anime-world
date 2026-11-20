@@ -42,7 +42,7 @@ export function CharacterViewer() {
     locomotion: "Idle",
   });
   const [nearbyDoor, setNearbyDoor] = useState<{ houseId: string; open: boolean } | null>(null);
-  const [istClock, setIstClock] = useState(() => formatIST(new Date()));
+  const [istClock, setIstClock] = useState<string | null>(null);
 
   useEffect(() => {
     const tick = () => setIstClock(formatIST(new Date()));
@@ -126,7 +126,13 @@ export function CharacterViewer() {
             <span className="text-zinc-600">•</span>
             <span className="text-[11px] text-zinc-400 font-medium">Island Explorer · 5 × 5 km</span>
             <span className="text-zinc-600">•</span>
-            <time className="text-[11px] text-amber-200 font-mono tabular-nums" aria-label="Current India Standard Time">IST {istClock}</time>
+            <time
+              className="text-[11px] text-amber-200 font-mono tabular-nums"
+              aria-label="Current India Standard Time"
+              suppressHydrationWarning
+            >
+              {istClock ? `IST ${istClock}` : "IST --:--:--"}
+            </time>
           </div>
 
           {/* Live Player Coordinates & Speed Badge */}
