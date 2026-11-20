@@ -713,23 +713,23 @@ export function createIslandGrass(count: number, hTex: THREE.Texture, peak = fal
         float distance=length(tile-uC.xz);vec2 hm=islandHM(tile);
         float gg=greenGround(tile,hm.r);float full=smoothstep(.66,.94,hm.g);float density=gg*lawnFine(tile);
         float fade=(1.-smoothstep(radius*.79,radius,distance))*${innerRadius ? `smoothstep(${innerRadius - 8}.,${innerRadius + 12}.,distance)` : "1."};
-        float alive=step(aBlade.w*.2,density)*step(.03,density)*step(.015,fade)*step(.6,hm.r);
-        float t=position.y,hr=fract(aBlade.x*127.1+aBlade.y*311.7+aBlade.w*74.7),height=(.35+1.6*hr)*(.8+.4*tnoise(tile*.07))*mix(.62,1.,density)*mix(.55,1.,full)*fade*alive*0.40;
+        float alive=step(aBlade.w*.08,density)*step(.015,density)*step(.008,fade)*step(.55,hm.r);
+        float t=position.y,hr=fract(aBlade.x*127.1+aBlade.y*311.7+aBlade.w*74.7),height=(.35+1.6*hr)*(.8+.4*tnoise(tile*.07))*mix(.65,1.,density)*mix(.6,1.,full)*fade*alive*0.40;
         float angle=aBlade.z*6.283185;vec2 side=vec2(cos(angle),sin(angle));
         float wind=sin(uTime*1.4+dot(tile,vec2(.035,.028)))+.38*sin(uTime*2.7+tile.x*.12);
         vec2 bend=vec2(.18,.12)*wind+vec2(-side.y,side.x)*(.12+aBlade.w*.12);
-        float width=${(radius > 100 ? 3.8 : radius > 40 ? 2.2 : 1.25).toFixed(2)}*(.0045+aBlade.w*.006)*(1.-pow(t,1.6))*alive;
+        float width=${(radius > 100 ? 5.2 : radius > 40 ? 3.2 : 2.1).toFixed(2)}*(.0065+aBlade.w*.0085)*(1.-pow(t,1.4))*alive;
         p=vec3(tile.x,hm.r-.025+t*height,tile.y);
         p.xz+=side*position.x*width+bend*t*t*height;
         vec3 tangent=normalize(vec3(bend.x*2.*t,1.,bend.y*2.*t));
         vec3 ribbon=normalize(cross(vec3(side.x,0.,side.y),tangent));
-        n=normalize(vec3(ribbon.x*.45,.78,ribbon.z*.45));
+        n=normalize(vec3(ribbon.x*.22,.95,ribbon.z*.22));
         vBladeT=t;vBladeShade=tnoise(tile*.045);vBladeAlive=alive;
       }`;
     if (peak) declarations = declarations
       .replace("(.35+1.6*hr)", "(.3+1.45*hr)")
       .replace("sin(uTime*1.4+dot(tile,vec2(.035,.028)))+.38*sin(uTime*2.7+tile.x*.12)", "sin(uTime*1.1+dot(tile,vec2(.045,.032)))*(.45+.55*tnoise(tile*.016-uTime*.025))+.22*sin(uTime*2.7+tile.x*.12)")
-      .replace("(.0045+aBlade.w*.006)", "(.004+aBlade.w*.0055)");
+      .replace("(.0065+aBlade.w*.0085)", "(.0055+aBlade.w*.0075)");
     const bendShader = (shader: THREE.WebGLProgramParametersWithUniforms, withNormals: boolean) => {
       Object.assign(shader.uniforms, uniforms);
       shader.vertexShader = shader.vertexShader.replace("#include <common>", `#include <common>\n${declarations}`)
@@ -745,13 +745,12 @@ export function createIslandGrass(count: number, hTex: THREE.Texture, peak = fal
       shader.fragmentShader = shader.fragmentShader.replace("#include <common>", "#include <common>\nvarying float vBladeT,vBladeShade,vBladeAlive;uniform float uDay;")
         .replace("#include <map_fragment>", /* glsl */ `
           if(vBladeAlive<.5)discard;
-          vec3 tip=mix(vec3(.30,.68,.10),vec3(.58,.88,.20),vBladeShade);
-          diffuseColor.rgb*=mix(vec3(.07,.30,.04),tip,smoothstep(0.,1.,vBladeT));`)
+          vec3 tip=mix(vec3(.28,.62,.12),vec3(.48,.78,.18),vBladeShade);
+          diffuseColor.rgb*=mix(vec3(.10,.28,.05),tip,smoothstep(0.,1.,vBladeT));`)
         .replace("#include <normal_fragment_begin>", "float faceDirection=gl_FrontFacing?1.:-1.;vec3 normal=normalize(vNormal);vec3 nonPerturbedNormal=normal;");
       if (peak) shader.fragmentShader = shader.fragmentShader
-        .replace("vec3(.30,.47,.09),vec3(.48,.59,.16)", "vec3(.22,.46,.065),vec3(.49,.68,.17)")
-        .replace("vec3(.12,.24,.045)", "vec3(.065,.22,.035)")
-        .replace("#include <emissivemap_fragment>", "#include <emissivemap_fragment>\ntotalEmissiveRadiance+=diffuseColor.rgb*.065*uDay*pow(vBladeT,2.);");
+        .replace("vec3(.28,.62,.12),vec3(.48,.78,.18)", "vec3(.24,.54,.10),vec3(.44,.70,.16)")
+        .replace("vec3(.10,.28,.05)", "vec3(.08,.24,.04)");
     };
     const mesh = new THREE.Mesh(geometry, material); mesh.frustumCulled = false; mesh.receiveShadow = true;
     // Identical deformation in the shadow pass: shadows move with the curved blades.
@@ -761,12 +760,12 @@ export function createIslandGrass(count: number, hTex: THREE.Texture, peak = fal
     mesh.customDepthMaterial = depth; mesh.castShadow = !low && count > 50000 && innerRadius === 0;
     geometries.push(geometry); mats.push(material, depth); group.add(mesh);
   };
-  const factor = count <= 50000 ? 1.5 : 2.6;
-  const total = Math.max(0, Math.floor(count * factor)); // dense, thin, tall blades
+  const factor = count <= 50000 ? 1.8 : 3.4;
+  const total = Math.max(0, Math.floor(count * factor)); // dense, lush, thick carpet
   const low = count <= 50000;
-  make(Math.ceil(total * 0.3), low ? 3 : 4, 26, 0, 741);
-  make(Math.floor(total * 0.36), low ? 2 : 3, 64, 20, 577);
-  make(Math.floor(total * 0.56), low ? 2 : 3, 150, 56, 913);
+  make(Math.ceil(total * 0.42), low ? 3 : 4, 30, 0, 741);
+  make(Math.floor(total * 0.42), low ? 2 : 3, 72, 24, 577);
+  make(Math.floor(total * 0.58), low ? 2 : 3, 160, 64, 913);
   let disposed = false;
   return { mesh: group, group, centre, dispose() {
     if (disposed) return; disposed = true;

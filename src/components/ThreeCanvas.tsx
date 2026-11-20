@@ -12,6 +12,8 @@ import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 import { OutputPass } from "three/examples/jsm/postprocessing/OutputPass.js";
+import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass.js";
+import { FXAAShader } from "three/examples/jsm/shaders/FXAAShader.js";
 import { createStylizedWorld, getWorldHeight, StylizedWorld } from "@/lib/stylizedWorld";
 import {
   ThirdPersonController,
@@ -109,6 +111,7 @@ export function ThreeCanvas({
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const composerRef = useRef<EffectComposer | null>(null);
   const bloomRef = useRef<UnrealBloomPass | null>(null);
+  const fxaaRef = useRef<ShaderPass | null>(null);
   const maxPixelRatioRef = useRef(1);
   const adaptiveScaleRef = useRef(1);
 
@@ -311,12 +314,20 @@ export function ThreeCanvas({
     composer?.setPixelRatio(pixelRatio);
 
     renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = graphicsQuality === "high" ? THREE.PCFSoftShadowMap : THREE.PCFShadowMap;
+    renderer.shadowMap.type = THREE.PCFShadowMap;
 
     const bloom = bloomRef.current;
     if (bloom) {
       bloom.enabled = graphicsQuality !== "low";
-      bloom.strength = graphicsQuality === "high" ? 0.22 : 0.16;
+      bloom.strength = graphicsQuality === "high" ? 0.20 : 0.14;
+      bloom.threshold = 0.85;
+      bloom.radius = 0.65;
+    }
+
+    const fxaa = fxaaRef.current;
+    if (fxaa) {
+      fxaa.enabled = graphicsQuality !== "low";
+      fxaa.uniforms["resolution"].value.set(1 / (window.innerWidth * pixelRatio), 1 / (window.innerHeight * pixelRatio));
     }
 
     const container = containerRef.current;
@@ -527,9 +538,9 @@ export function ThreeCanvas({
     cameraRef.current = camera;
     (window as unknown as { __threeCamera: THREE.PerspectiveCamera }).__threeCamera = camera;
 
-    // 3. Renderer with high performance & mediump precision for low-end device compatibility
+    // 3. Renderer with high performance & smooth anime graphics
     const renderer = new THREE.WebGLRenderer({
-      antialias: false,
+      antialias: true,
       alpha: false,
       powerPreference: "high-performance",
     });
@@ -537,9 +548,9 @@ export function ThreeCanvas({
     renderer.setPixelRatio(maxPixelRatioRef.current);
     renderer.setSize(width, height);
     renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = graphicsQualityRef.current === "high" ? THREE.PCFSoftShadowMap : THREE.PCFShadowMap;
-    renderer.toneMapping = THREE.NeutralToneMapping;
-    renderer.toneMappingExposure = 1.05;
+    renderer.shadowMap.type = THREE.PCFShadowMap;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.0;
     container.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
@@ -547,6 +558,7 @@ export function ThreeCanvas({
     let composer: EffectComposer | null = null;
     let bloom: UnrealBloomPass | undefined;
     let output: OutputPass | undefined;
+    let fxaa: ShaderPass | undefined;
 
     try {
       const renderTarget = new THREE.WebGLRenderTarget(width, height, {
@@ -557,18 +569,26 @@ export function ThreeCanvas({
       composer.addPass(new RenderPass(scene, camera));
       bloom = new UnrealBloomPass(
         new THREE.Vector2(width, height),
-        graphicsQualityRef.current === "high" ? 0.22 : 0.16,
-        0.7,
-        0.92
+        graphicsQualityRef.current === "high" ? 0.20 : 0.14,
+        0.65,
+        0.85
       );
       bloom.enabled = graphicsQualityRef.current !== "low";
       composer.addPass(bloom);
       output = new OutputPass();
       composer.addPass(output);
+
+      fxaa = new ShaderPass(FXAAShader);
+      const pr = maxPixelRatioRef.current;
+      fxaa.uniforms["resolution"].value.set(1 / (width * pr), 1 / (height * pr));
+      fxaa.enabled = graphicsQualityRef.current !== "low";
+      composer.addPass(fxaa);
+
       composer.setPixelRatio(maxPixelRatioRef.current);
       composer.setSize(width, height);
       composerRef.current = composer;
       bloomRef.current = bloom;
+      fxaaRef.current = fxaa;
     } catch (e) {
       console.warn("EffectComposer initialization skipped, falling back to direct render:", e);
       composer = null;
@@ -947,6 +967,10 @@ export function ThreeCanvas({
       camera.updateProjectionMatrix();
       renderer.setSize(width, height);
       composer?.setSize(width, height);
+      if (fxaaRef.current) {
+        const pr = maxPixelRatioRef.current;
+        fxaaRef.current.uniforms["resolution"].value.set(1 / (width * pr), 1 / (height * pr));
+      }
     };
 
     window.addEventListener("resize", handleResize);
@@ -989,6 +1013,8 @@ export function ThreeCanvas({
       controls.dispose();
       bloom?.dispose();
       output?.dispose();
+      fxaa?.dispose();
+      fxaaRef.current = null;
       composer?.dispose();
       if (composerRef.current === composer) composerRef.current = null;
       renderer.dispose();

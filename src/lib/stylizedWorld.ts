@@ -436,7 +436,7 @@ export async function createStylizedWorld(
     if (scene.fog === fog) scene.fog = oldFog;
     lights.traverse(o => { if (o instanceof THREE.DirectionalLight) o.shadow.dispose(); });
   };
-  const fog = new THREE.FogExp2(0xb4d4df, quality === "low" ? 0.0002 : 0.00014);
+  const fog = new THREE.FogExp2(0xb8d8e8, quality === "low" ? 0.00018 : 0.00011);
   signal?.addEventListener("abort", dispose, { once: true });
   try {
     onProgress?.("Reading the reference coastline and mountain height field…");
@@ -465,21 +465,22 @@ export async function createStylizedWorld(
     spatial = new WorldSpatial({ terrain: getIslandHeight, water: sampleIslandWater, halfExtent: HALF });
     terrain = createIslandTerrain(hTex, peakMaterials?.terrain); world.add(terrain);
     lawnMask = new LawnMask(layout); lawnMask.update(0, 0);
-    grass = createIslandGrass(quality === "high" ? 540000 : quality === "medium" ? 360000 : 150000, hTex, quality === "high", lawnMask); world.add(grass.mesh);
+    grass = createIslandGrass(quality === "high" ? 750000 : quality === "medium" ? 500000 : 200000, hTex, quality === "high", lawnMask); world.add(grass.mesh);
     waters = createIslandWaters(hTex, sunDir, quality !== "low"); world.add(waters);
     if (quality !== "low") peakWater = createPeakWater(waters, renderer, scene);
     scene.add(world, lights, sky); scene.fog = fog;
-    const hemi = new THREE.HemisphereLight(0xd9edff, 0x8ba457, 1.6), sun = new THREE.DirectionalLight(0xffebcb, 3.05);
+    const hemi = new THREE.HemisphereLight(0xdceeff, 0x86a654, 1.5), sun = new THREE.DirectionalLight(0xfff2e0, 2.4);
     const moon = new THREE.DirectionalLight(0x94b6eb, 0);
     moon.castShadow = false;
     sun.castShadow = true;
     const shadowSize = quality === "high" ? 2048 : quality === "medium" ? 1024 : 512;
-    sun.shadow.mapSize.set(shadowSize, shadowSize); sun.shadow.bias = -0.00025; sun.shadow.normalBias = 0.065; sun.shadow.radius = 4;
+    sun.shadow.mapSize.set(shadowSize, shadowSize); sun.shadow.bias = -0.0003; sun.shadow.normalBias = 0.08; sun.shadow.radius = quality === "high" ? 8 : quality === "medium" ? 5 : 3;
+    (sun.shadow as any).blurSamples = quality === "high" ? 25 : 16;
     sun.shadow.camera.near = 1; sun.shadow.camera.far = 950;
     lights.add(hemi, sun, sun.target, moon, moon.target);
     const pmrem = new THREE.PMREMGenerator(renderer), envScene = new THREE.Scene(); envScene.add(sky.clone());
     try { envTarget = pmrem.fromScene(envScene, 0, 1, 24000); } finally { pmrem.dispose(); }
-    scene.environment = envTarget.texture; scene.environmentIntensity = 0.6;
+    scene.environment = envTarget.texture; scene.environmentIntensity = 0.75;
 
     onProgress?.("Building the dense town, harbour and road-linked homes…");
     houses = createHouses(layout.spots, peakMaterials); world.add(houses.group);
