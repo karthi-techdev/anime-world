@@ -15,6 +15,7 @@ import { OutputPass } from "three/examples/jsm/postprocessing/OutputPass.js";
 import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass.js";
 import { FXAAShader } from "three/examples/jsm/shaders/FXAAShader.js";
 import { ColorBoostShader } from "@/lib/colorBoostShader";
+import { SharpenShader } from "@/lib/sharpenShader";
 import { createStylizedWorld, getWorldHeight, StylizedWorld } from "@/lib/stylizedWorld";
 import {
   ThirdPersonController,
@@ -46,7 +47,7 @@ function getPixelRatioCap(quality: GraphicsQuality): number {
   const constrained = (navigator.hardwareConcurrency || 8) <= 4 ||
     (memory !== undefined && memory <= 4) || window.matchMedia("(max-width: 768px)").matches;
   const cap = quality === "low" ? (constrained ? 0.85 : 1) :
-    quality === "medium" ? (constrained ? 1 : 1.25) : (constrained ? 1.1 : 1.5);
+    quality === "medium" ? (constrained ? 1 : 1.35) : (constrained ? 1.25 : 1.75);
   return Math.min(dpr, cap);
 }
 
@@ -114,6 +115,7 @@ export function ThreeCanvas({
   const bloomRef = useRef<UnrealBloomPass | null>(null);
   const colorBoostRef = useRef<ShaderPass | null>(null);
   const fxaaRef = useRef<ShaderPass | null>(null);
+  const sharpenRef = useRef<ShaderPass | null>(null);
   const maxPixelRatioRef = useRef(1);
   const adaptiveScaleRef = useRef(1);
 
@@ -336,6 +338,13 @@ export function ThreeCanvas({
     if (fxaa) {
       fxaa.enabled = graphicsQuality !== "low";
       fxaa.uniforms["resolution"].value.set(1 / (window.innerWidth * pixelRatio), 1 / (window.innerHeight * pixelRatio));
+    }
+
+    const sharpen = sharpenRef.current;
+    if (sharpen) {
+      sharpen.enabled = true;
+      sharpen.uniforms["sharpness"].value = 0.20;
+      sharpen.uniforms["resolution"].value.set(1 / (window.innerWidth * pixelRatio), 1 / (window.innerHeight * pixelRatio));
     }
 
     const container = containerRef.current;
@@ -568,6 +577,7 @@ export function ThreeCanvas({
     let output: OutputPass | undefined;
     let colorBoost: ShaderPass | undefined;
     let fxaa: ShaderPass | undefined;
+    let sharpen: ShaderPass | undefined;
 
     try {
       const renderTarget = new THREE.WebGLRenderTarget(width, height, {
@@ -597,12 +607,19 @@ export function ThreeCanvas({
       fxaa.enabled = graphicsQualityRef.current !== "low";
       composer.addPass(fxaa);
 
+      sharpen = new ShaderPass(SharpenShader);
+      sharpen.uniforms["sharpness"].value = 0.20;
+      sharpen.uniforms["resolution"].value.set(1 / (width * pr), 1 / (height * pr));
+      sharpen.enabled = true;
+      composer.addPass(sharpen);
+
       composer.setPixelRatio(maxPixelRatioRef.current);
       composer.setSize(width, height);
       composerRef.current = composer;
       bloomRef.current = bloom;
       colorBoostRef.current = colorBoost;
       fxaaRef.current = fxaa;
+      sharpenRef.current = sharpen;
     } catch (e) {
       console.warn("EffectComposer initialization skipped, falling back to direct render:", e);
       composer = null;
@@ -986,6 +1003,10 @@ export function ThreeCanvas({
         const pr = maxPixelRatioRef.current;
         fxaaRef.current.uniforms["resolution"].value.set(1 / (width * pr), 1 / (height * pr));
       }
+      if (sharpenRef.current) {
+        const pr = maxPixelRatioRef.current;
+        sharpenRef.current.uniforms["resolution"].value.set(1 / (width * pr), 1 / (height * pr));
+      }
     };
 
     window.addEventListener("resize", handleResize);
@@ -1032,6 +1053,8 @@ export function ThreeCanvas({
       colorBoostRef.current = null;
       fxaa?.dispose();
       fxaaRef.current = null;
+      sharpen?.dispose();
+      sharpenRef.current = null;
       composer?.dispose();
       if (composerRef.current === composer) composerRef.current = null;
       renderer.dispose();
