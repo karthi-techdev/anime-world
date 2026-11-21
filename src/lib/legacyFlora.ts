@@ -156,15 +156,18 @@ export async function buildLegacyFlora(
       const m = p.mat as THREE.MeshStandardMaterial;
       const bTex = m.map || heroBarkTex;
       if (bTex) {
+        bTex.colorSpace = THREE.SRGBColorSpace;
         bTex.wrapS = THREE.RepeatWrapping;
         bTex.wrapT = THREE.RepeatWrapping;
+        bTex.needsUpdate = true;
       }
       const trunkMat = new THREE.MeshStandardMaterial({
         map: bTex,
-        roughness: 0.92,
+        roughness: 0.88,
         metalness: 0.0,
-        color: new THREE.Color(0x4a3728),
+        color: new THREE.Color(0xffffff),
         emissive: new THREE.Color(0x000000),
+        side: THREE.DoubleSide,
       });
       p.mat = trunkMat;
       windify(p.mat, { bend: 0.0025, flutter: 0 });
